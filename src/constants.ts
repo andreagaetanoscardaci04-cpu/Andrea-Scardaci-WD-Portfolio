@@ -42,10 +42,11 @@ export const PROJECTS: Project[] = [
   },
   {
     id: '6',
-    title: 'Sito web per Attività Locale',
+    title: 'Sito Web per Steakhouse',
     description: 'Perfetto per negozi o studi professionali che vogliono farsi trovare online.',
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop',
-    category: 'Attività Locale'
+    category: 'Attività Locale',
+    link: 'https://steakhouse-macello-tv38.vercel.app/'
   }
 ];
 
