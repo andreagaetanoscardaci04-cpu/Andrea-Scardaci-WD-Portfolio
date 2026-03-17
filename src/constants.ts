@@ -11,17 +11,19 @@ export const PROJECTS: Project[] = [
   },
   {
     id: '2',
-    title: 'Sito web per Studio Personal Training',
-    description: 'Elegante e professionale, focalizzato sulla presentazione dei coach e dei risultati.',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000&auto=format&fit=crop',
-    category: 'Personal Training'
-  },
-  {
-    id: '3',
     title: 'Sito web per Centro Fitness',
     description: 'Completo di tutte le informazioni su abbonamenti, servizi e tour virtuale.',
     image: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1000&auto=format&fit=crop',
-    category: 'Centro Fitness'
+    category: 'Centro Fitness',
+    link: 'https://elite-fitness-palermo-black-version.vercel.app/'
+  },
+  {
+    id: '3',
+    title: 'Sito Web per Studio PT',
+    description: 'Elegante e professionale, focalizzato sulla presentazione dei coach e dei risultati.',
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000&auto=format&fit=crop',
+    category: 'Personal Training',
+    link: 'https://fitness-life-studio.vercel.app/'
   },
   {
     id: '4',
@@ -32,10 +34,11 @@ export const PROJECTS: Project[] = [
   },
   {
     id: '5',
-    title: 'Sito web per Centro Sportivo',
-    description: 'Gestione di più attività, campi da gioco e eventi in un unico portale.',
-    image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1000&auto=format&fit=crop',
-    category: 'Centro Sportivo'
+    title: 'Sito Web per Studio Fiscale',
+    description: 'Un sito professionale per uno studio fiscale, con presentazione dei servizi e contatti.',
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1000&auto=format&fit=crop',
+    category: 'Studio Fiscale',
+    link: 'https://fisco3.it'
   },
   {
     id: '6',
