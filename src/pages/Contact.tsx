@@ -53,8 +53,10 @@ const Contact = () => {
                 <p className="text-emerald-800/70 mb-6">
                   Preferisci scrivermi su WhatsApp? È il modo più veloce per ricevere una risposta.
                 </p>
-                <a 
-                  href="#" 
+                <a
+                  href="https://wa.me/393922965248"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center bg-emerald-600 text-white px-8 py-3 rounded-full font-bold hover:bg-emerald-700 transition-all"
                 >
                   Scrivimi su WhatsApp
