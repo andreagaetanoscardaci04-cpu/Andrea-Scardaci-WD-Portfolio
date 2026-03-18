@@ -91,6 +91,22 @@ const Home = () => {
                 ))}
               </div>
 
+              {/* Mobile-only image */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="lg:hidden relative aspect-[3/4] rounded-3xl overflow-hidden mb-8 shadow-2xl"
+                style={{ boxShadow: '0 0 50px rgba(34,197,94,0.15), 0 30px 60px rgba(0,0,0,0.5)' }}
+              >
+                <img
+                  src="/imageme.png.png"
+                  alt="Andrea Scardaci"
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/50 via-transparent to-transparent" />
+              </motion.div>
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -153,7 +169,7 @@ const Home = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative block"
+              className="relative hidden lg:block"
             >
               {/* Main photo */}
               <div className="relative aspect-[3/4] lg:aspect-[4/5]">
