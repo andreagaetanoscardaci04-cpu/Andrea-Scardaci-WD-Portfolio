@@ -309,13 +309,13 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12 }}
                 whileHover={{ y: -6 }}
-                className="p-10 rounded-3xl border border-brand-dark/5 hover:border-brand-accent/25 hover:shadow-xl hover:shadow-brand-accent/5 transition-all group cursor-default"
+                className="p-10 rounded-3xl bg-brand-accent border border-brand-accent hover:bg-brand-accent/90 transition-all group cursor-default"
               >
-                <div className="w-12 h-12 rounded-2xl bg-brand-accent/10 group-hover:bg-brand-accent/20 flex items-center justify-center mb-8 transition-colors">
-                  <item.icon className="w-5 h-5 text-brand-accent" />
+                <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center mb-8">
+                  <item.icon className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-2xl text-brand-dark mb-3">{item.title}</h3>
-                <p className="text-brand-dark/40 text-lg leading-relaxed">{item.desc}</p>
+                <h3 className="text-2xl text-white mb-3">{item.title}</h3>
+                <p className="text-white/80 text-lg leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
