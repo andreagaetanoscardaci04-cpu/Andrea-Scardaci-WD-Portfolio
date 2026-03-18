@@ -31,7 +31,7 @@ export const PROJECTS: Project[] = [
     description: 'Un design zen e pulito per trasmettere calma e professionalità.',
     image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1000&auto=format&fit=crop',
     category: 'Yoga & Pilates',
-    link: 'https://modo-firenze-git-master-andreas-projects-8964a34b.vercel.app/'
+    link: 'https://modo-firenze.vercel.app/'
   },
   {
     id: '5',
