@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Instagram, Linkedin } from 'lucide-react';
+import { Phone, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -16,11 +16,8 @@ const Footer = () => {
               Alta qualità, design moderno e prezzi imbattibili.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all">
+              <a href="https://www.instagram.com/andrea.webdesign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all">
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all">
-                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
