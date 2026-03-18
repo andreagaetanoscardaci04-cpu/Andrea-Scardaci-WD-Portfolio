@@ -19,7 +19,7 @@ const Footer = () => {
               <a href="https://www.instagram.com/andrea.webdesign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="mailto:andreascardacibusiness@gmail.com" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all">
+              <a href="https://mail.google.com/mail/?view=cm&to=andreascardacibusiness@gmail.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all">
                 <Mail className="w-5 h-5" />
               </a>
             </div>
