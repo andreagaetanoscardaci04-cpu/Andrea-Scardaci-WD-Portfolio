@@ -111,7 +111,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.75 }}
-                className="text-lg lg:text-base text-white lg:text-white/40 mb-10 max-w-md leading-relaxed"
+                className="text-xl text-white lg:text-white/40 mb-10 max-w-md leading-relaxed"
               >
                 Aiuto palestre, studi fitness e attività locali italiane ad avere una presenza online moderna, elegante e professionale.
               </motion.p>
