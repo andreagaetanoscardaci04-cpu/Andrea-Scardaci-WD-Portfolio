@@ -315,7 +315,7 @@ const Home = () => {
                   <item.icon className="w-5 h-5 text-brand-accent" />
                 </div>
                 <h3 className="text-2xl text-brand-dark font-black mb-3">{item.title}</h3>
-                <p className="text-brand-dark text-lg leading-relaxed">{item.desc}</p>
+                <p className="text-brand-dark text-base leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
