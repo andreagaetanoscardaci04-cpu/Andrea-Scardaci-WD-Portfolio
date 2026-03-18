@@ -414,22 +414,17 @@ const Home = () => {
       {/* ── PORTFOLIO PREVIEW ─────────────────────────── */}
       <section className="section-padding bg-brand-accent-light/20">
         <div className="container-custom">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Portfolio</span>
-              <h2 className="text-4xl md:text-5xl text-brand-dark">
-                Esempi di siti web
-              </h2>
-            </motion.div>
-            <Link to="/esempi" className="inline-flex items-center gap-2 text-brand-dark text-sm font-medium group shrink-0">
-              Vedi tutti i lavori
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform text-brand-accent" />
-            </Link>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Portfolio</span>
+            <h2 className="text-4xl md:text-5xl text-brand-dark">
+              Esempi di siti web
+            </h2>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {PROJECTS.slice(0, 3).map((project, index) => (
@@ -444,6 +439,28 @@ const Home = () => {
               />
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex justify-center mt-14"
+          >
+            <Link
+              to="/esempi"
+              className="group relative inline-flex items-center gap-3 bg-brand-dark text-white px-10 py-5 rounded-full font-medium text-base overflow-hidden hover:bg-brand-accent transition-colors duration-300"
+              style={{ boxShadow: '0 4px 30px rgba(0,0,0,0.15)' }}
+            >
+              <motion.span
+                className="absolute inset-0 bg-brand-accent"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: '0%' }}
+                transition={{ duration: 0.35 }}
+              />
+              <span className="relative z-10">Vedi tutti i lavori</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
