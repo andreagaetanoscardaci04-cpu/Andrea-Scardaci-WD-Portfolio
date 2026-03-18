@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { MessageSquare, Layout, Globe } from 'lucide-react';
 import { PROJECTS } from '../constants';
 import ProjectCard from '../components/ProjectCard';
 
@@ -33,22 +34,42 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Testimonial Placeholder */}
+      {/* Come funziona */}
       <section className="section-padding bg-brand-accent-light/30">
-        <div className="container-custom text-center">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-12 text-brand-dark italic">
-              "Andrea ha capito perfettamente lo spirito della mia palestra. Il sito è bellissimo e i clienti mi fanno continuamente i complimenti per la semplicità con cui trovano le informazioni."
-            </h2>
-            <div className="flex items-center justify-center space-x-4">
-              <div className="w-16 h-16 rounded-full bg-gray-200 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop" alt="Client" referrerPolicy="no-referrer" />
-              </div>
-              <div className="text-left">
-                <p className="font-bold text-brand-dark">Marco Rossi</p>
-                <p className="text-brand-dark/60 text-sm">Titolare, FitLife Studio</p>
-              </div>
-            </div>
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Come funziona</span>
+            <h2 className="text-4xl md:text-5xl text-brand-dark">Dal primo contatto al sito online</h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { step: '01', icon: MessageSquare, title: 'Parliamo', desc: 'Capisco la tua attività, i tuoi obiettivi e cosa vuoi comunicare ai tuoi clienti.' },
+              { step: '02', icon: Layout, title: 'Progetto', desc: 'Realizzo un design moderno e professionale su misura per la tua identità visiva.' },
+              { step: '03', icon: Globe, title: 'Online', desc: 'Il tuo sito è live, ottimizzato per tutti i dispositivi e pronto ad acquisire clienti.' },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+                whileHover={{ y: -6 }}
+                className="relative p-10 rounded-3xl bg-white border border-brand-accent/10 hover:border-brand-accent/30 hover:shadow-xl hover:shadow-brand-accent/5 transition-all group overflow-hidden"
+              >
+                <span className="absolute top-6 right-8 text-brand-accent/15 text-6xl font-medium select-none">{item.step}</span>
+                <div className="w-12 h-12 rounded-2xl bg-brand-accent/10 group-hover:bg-brand-accent/20 flex items-center justify-center mb-8 transition-colors">
+                  <item.icon className="w-5 h-5 text-brand-accent" />
+                </div>
+                <h3 className="text-2xl text-brand-dark mb-3">{item.title}</h3>
+                <p className="text-brand-dark/45 text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
