@@ -153,7 +153,7 @@ const Home = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative hidden lg:block"
+              className="relative block"
             >
               {/* Main photo */}
               <div className="relative aspect-[4/5]">
