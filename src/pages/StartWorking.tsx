@@ -51,10 +51,10 @@ const StartWorking = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-3xl mb-20">
-            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-8 text-brand-dark">
+            <h1 className="text-3xl md:text-7xl font-serif font-bold mb-8 text-brand-dark">
               Iniziamo a lavorare insieme
             </h1>
-            <p className="text-xl text-brand-dark/60 leading-relaxed">
+            <p className="text-base md:text-xl text-brand-dark/60 leading-relaxed">
               Il processo è semplice e trasparente. Mi occupo di tutto io, così tu puoi concentrarti sulla tua attività.
             </p>
           </div>
@@ -73,7 +73,7 @@ const StartWorking = () => {
                   <step.icon className="w-10 h-10 text-brand-accent" />
                 </div>
                 <h3 className="text-2xl font-serif font-bold mb-4 text-brand-dark">{step.title}</h3>
-                <p className="text-brand-dark/60 text-lg leading-relaxed">{step.description}</p>
+                <p className="text-brand-dark/60 text-sm md:text-lg leading-relaxed">{step.description}</p>
                 
                 {index < 2 && (
                   <div className="hidden lg:block absolute top-10 left-full w-full border-t-2 border-dashed border-brand-accent/20 -z-10" />

@@ -13,10 +13,10 @@ const About = () => {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              <h1 className="text-5xl md:text-7xl font-serif font-bold mb-8 text-brand-dark">
+              <h1 className="text-3xl md:text-7xl font-serif font-bold mb-8 text-brand-dark">
                 Chi è Andrea Scardaci
               </h1>
-              <div className="space-y-6 text-xl text-brand-dark/70 leading-relaxed">
+              <div className="space-y-6 text-base md:text-xl text-brand-dark/70 leading-relaxed">
                 <p>
                   Mi chiamo <span className="text-brand-dark font-bold">Andrea Scardaci</span> e sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con eleganza e professionalità.
                 </p>
@@ -46,10 +46,10 @@ const About = () => {
       <section className="section-padding bg-brand-accent-light/30">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-brand-dark">
+            <h2 className="text-2xl md:text-5xl font-serif font-bold mb-6 text-brand-dark">
               Il mio approccio
             </h2>
-            <p className="text-xl text-brand-dark/60">
+            <p className="text-base md:text-xl text-brand-dark/60">
               Unire innovazione tecnologica e sensibilità artigianale.
             </p>
           </div>
@@ -104,10 +104,10 @@ const About = () => {
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8 text-brand-dark">
+              <h2 className="text-2xl md:text-5xl font-serif font-bold mb-8 text-brand-dark">
                 Perché aiuto attività fisiche
               </h2>
-              <div className="space-y-6 text-lg text-brand-dark/70 leading-relaxed">
+              <div className="space-y-6 text-sm md:text-lg text-brand-dark/70 leading-relaxed">
                 <p>
                   Credo fermamente che le palestre e i centri sportivi siano il cuore pulsante del benessere delle nostre comunità locali. 
                 </p>
@@ -126,7 +126,7 @@ const About = () => {
       {/* Come lavoro */}
       <section className="section-padding bg-brand-dark text-white">
         <div className="container-custom">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-16 text-center">
+          <h2 className="text-2xl md:text-5xl font-serif font-bold mb-16 text-center">
             Come lavoro con i miei clienti
           </h2>
           <div className="max-w-4xl mx-auto space-y-12">
@@ -162,7 +162,7 @@ const About = () => {
                 <span className="text-4xl font-serif font-bold text-brand-accent opacity-50">{item.step}</span>
                 <div>
                   <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
-                  <p className="text-white/60 text-lg leading-relaxed">{item.description}</p>
+                  <p className="text-white/60 text-sm md:text-lg leading-relaxed">{item.description}</p>
                 </div>
               </motion.div>
             ))}

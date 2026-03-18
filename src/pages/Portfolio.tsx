@@ -10,10 +10,10 @@ const Portfolio = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-3xl mb-20">
-            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-8 text-brand-dark">
+            <h1 className="text-3xl md:text-7xl font-serif font-bold mb-8 text-brand-dark">
               Esempi di siti web
             </h1>
-            <p className="text-xl text-brand-dark/60 leading-relaxed">
+            <p className="text-base md:text-xl text-brand-dark/60 leading-relaxed">
               Scopri come ho aiutato altre attività locali a migliorare la loro presenza online con design moderni e professionali.
             </p>
           </div>
@@ -44,7 +44,7 @@ const Portfolio = () => {
             className="text-center mb-16"
           >
             <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Come funziona</span>
-            <h2 className="text-4xl md:text-5xl text-brand-dark">Dal primo contatto al sito online</h2>
+            <h2 className="text-2xl md:text-5xl text-brand-dark">Dal primo contatto al sito online</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

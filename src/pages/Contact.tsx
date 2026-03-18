@@ -33,10 +33,10 @@ const Contact = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-3xl mb-20">
-            <h1 className="text-5xl md:text-7xl font-serif font-bold mb-8 text-brand-dark">
+            <h1 className="text-3xl md:text-7xl font-serif font-bold mb-8 text-brand-dark">
               Contattami
             </h1>
-            <p className="text-xl text-brand-dark/60 leading-relaxed">
+            <p className="text-base md:text-xl text-brand-dark/60 leading-relaxed">
               Se vuoi informazioni o un preventivo per il tuo sito web, scrivimi. Ti risponderò il prima possibile.
             </p>
           </div>
