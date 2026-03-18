@@ -21,9 +21,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, ca
       className="group relative overflow-hidden rounded-2xl bg-white shadow-lg"
     >
       <div className="aspect-[4/3] overflow-hidden">
-        <img 
-          src={image} 
-          alt={title} 
+        <img
+          src={image}
+          alt={title}
+          loading="lazy"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           referrerPolicy="no-referrer"
         />

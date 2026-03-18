@@ -28,21 +28,21 @@ const Home = () => {
           }}
         />
 
-        {/* Animated orbs */}
+        {/* Animated orbs — desktop only (too GPU-heavy on mobile) */}
         <motion.div
           animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-1/4 right-1/3 w-[650px] h-[650px] bg-brand-accent/25 rounded-full blur-[150px] pointer-events-none"
+          className="hidden lg:block absolute top-1/4 right-1/3 w-[650px] h-[650px] bg-brand-accent/25 rounded-full blur-[150px] pointer-events-none"
         />
         <motion.div
           animate={{ x: [0, -25, 0], y: [0, 35, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-          className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-brand-accent/15 rounded-full blur-[130px] pointer-events-none"
+          className="hidden lg:block absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-brand-accent/15 rounded-full blur-[130px] pointer-events-none"
         />
         <motion.div
           animate={{ x: [0, 20, 0], y: [0, -20, 0] }}
           transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
-          className="absolute -top-32 -left-32 w-[420px] h-[420px] bg-emerald-400/8 rounded-full blur-[100px] pointer-events-none"
+          className="hidden lg:block absolute -top-32 -left-32 w-[420px] h-[420px] bg-emerald-400/8 rounded-full blur-[100px] pointer-events-none"
         />
 
         {/* Dot grid pattern */}
@@ -186,6 +186,7 @@ const Home = () => {
                   <img
                     src="/imageme.png.png"
                     alt="Andrea Scardaci"
+                    loading="eager"
                     className="w-full h-full object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/50 via-transparent to-transparent" />
@@ -326,7 +327,7 @@ const Home = () => {
         <motion.div
           animate={{ x: [0, 25, 0], y: [0, -25, 0] }}
           transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-0 right-0 w-[550px] h-[550px] bg-brand-accent/10 rounded-full blur-[150px] pointer-events-none"
+          className="hidden lg:block absolute top-0 right-0 w-[550px] h-[550px] bg-brand-accent/10 rounded-full blur-[150px] pointer-events-none"
         />
         <div className="container-custom relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <motion.div
@@ -525,7 +526,7 @@ const Home = () => {
         <motion.div
           animate={{ x: [0, -20, 0], y: [0, 25, 0] }}
           transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-brand-accent/15 rounded-full blur-[130px] pointer-events-none"
+          className="hidden lg:block absolute bottom-0 left-0 w-[450px] h-[450px] bg-brand-accent/15 rounded-full blur-[130px] pointer-events-none"
         />
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
