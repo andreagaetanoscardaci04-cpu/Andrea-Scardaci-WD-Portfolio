@@ -547,7 +547,7 @@ const Home = () => {
                   <p className="text-white/30 text-xs uppercase tracking-widest mb-1">Agenzia Web Tradizionale</p>
                   <p className="text-white text-lg">Preventivo medio</p>
                 </div>
-                <p className="text-red-400 text-2xl">€€€€</p>
+                <p className="text-red-400 text-2xl font-semibold">€1.500</p>
               </div>
               <div className="bg-brand-accent/20 border border-brand-accent/30 rounded-2xl p-6 flex items-center justify-between relative overflow-hidden">
                 <div className="absolute top-3 right-3 bg-brand-accent text-white text-xs px-3 py-1 rounded-full">
@@ -556,8 +556,9 @@ const Home = () => {
                 <div>
                   <p className="text-brand-accent text-xs uppercase tracking-widest mb-1">Andrea Scardaci</p>
                   <p className="text-white text-lg">Qualità premium</p>
+                  <p className="text-white/35 text-xs mt-1">+ spese di gestione</p>
                 </div>
-                <p className="text-brand-accent text-2xl">€</p>
+                <p className="text-brand-accent text-2xl font-semibold">€497</p>
               </div>
             </motion.div>
           </div>
