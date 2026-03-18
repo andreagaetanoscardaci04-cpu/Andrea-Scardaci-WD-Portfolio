@@ -336,7 +336,7 @@ const Home = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-6 block">Chi sono</span>
+            <span className="text-brand-accent text-sm uppercase tracking-[0.2em] font-medium mb-6 block">Chi sono</span>
             <h2 className="text-4xl md:text-6xl mb-8 leading-tight text-white">
               Andrea Scardaci
             </h2>
