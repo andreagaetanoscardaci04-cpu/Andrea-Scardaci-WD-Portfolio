@@ -394,7 +394,7 @@ const Home = () => {
             className="text-center max-w-2xl mx-auto mb-20"
           >
             <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Come lavoro</span>
-            <h2 className="text-4xl md:text-5xl text-brand-dark">
+            <h2 className="text-3xl md:text-5xl text-brand-dark">
               Dal primo contatto al sito online
             </h2>
           </motion.div>
@@ -421,7 +421,7 @@ const Home = () => {
                   {item.icon}
                 </div>
                 <h3 className="text-2xl text-brand-dark mb-3">{item.title}</h3>
-                <p className="text-brand-dark/45 text-sm leading-relaxed">{item.desc}</p>
+                <p className="text-brand-dark/45 text-base leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -491,7 +491,7 @@ const Home = () => {
             className="text-center max-w-2xl mx-auto mb-20"
           >
             <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Perché investire online</span>
-            <h2 className="text-4xl md:text-5xl text-brand-dark">
+            <h2 className="text-3xl md:text-5xl text-brand-dark">
               Il tuo sito lavora per te, 24h su 24
             </h2>
           </motion.div>
@@ -512,8 +512,8 @@ const Home = () => {
                   <div className="w-11 h-11 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-6">
                     <Icon className="w-5 h-5 text-brand-accent" />
                   </div>
-                  <h3 className="text-lg text-brand-dark mb-3">{benefit.title}</h3>
-                  <p className="text-brand-dark/40 text-sm leading-relaxed">{benefit.description}</p>
+                  <h3 className="text-xl text-brand-dark mb-3">{benefit.title}</h3>
+                  <p className="text-brand-dark/40 text-base leading-relaxed">{benefit.description}</p>
                 </motion.div>
               );
             })}
