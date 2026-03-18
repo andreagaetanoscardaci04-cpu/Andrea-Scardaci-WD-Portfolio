@@ -546,6 +546,7 @@ const Home = () => {
                 <div>
                   <p className="text-white/30 text-xs uppercase tracking-widest mb-1">Agenzia Web Tradizionale</p>
                   <p className="text-white text-lg">Preventivo medio</p>
+                  <p className="text-white/35 text-xs mt-1">+ spese di gestione</p>
                 </div>
                 <p className="text-red-400 text-2xl font-semibold">€1.500+</p>
               </div>
