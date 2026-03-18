@@ -412,16 +412,16 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
                 whileHover={{ y: -6 }}
-                className="relative p-10 rounded-3xl bg-brand-accent-light/40 hover:bg-brand-accent-light/70 border border-brand-accent/10 hover:border-brand-accent/30 transition-all group overflow-hidden"
+                className="relative p-10 rounded-3xl bg-brand-accent hover:bg-brand-accent/90 border border-brand-accent transition-all group overflow-hidden"
               >
-                <span className="absolute top-6 right-8 text-brand-accent/15 text-6xl font-medium select-none">
+                <span className="absolute top-6 right-8 text-white/15 text-6xl font-medium select-none">
                   {item.step}
                 </span>
-                <div className="w-12 h-12 rounded-2xl bg-brand-accent/10 flex items-center justify-center text-xl mb-8">
+                <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl mb-8">
                   {item.icon}
                 </div>
-                <h3 className="text-2xl text-brand-dark mb-3">{item.title}</h3>
-                <p className="text-brand-dark/45 text-lg leading-relaxed">{item.desc}</p>
+                <h3 className="text-2xl text-white mb-3">{item.title}</h3>
+                <p className="text-white/80 text-lg leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
