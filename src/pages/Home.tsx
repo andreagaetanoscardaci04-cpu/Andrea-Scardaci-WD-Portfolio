@@ -158,7 +158,7 @@ const Home = () => {
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
                     <item.icon className="w-3.5 h-3.5 text-brand-accent" />
-                    <span className="text-[11px] text-white/60 tracking-wide">{item.label}</span>
+                    <span className="text-sm text-white/60 tracking-wide">{item.label}</span>
                   </div>
                 ))}
               </motion.div>
@@ -280,7 +280,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center max-w-2xl mx-auto mb-16"
           >
-            <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Ogni progetto</span>
+            <span className="text-brand-accent text-sm uppercase tracking-[0.2em] font-medium mb-4 block">Ogni progetto</span>
             <h2 className="text-3xl md:text-5xl text-brand-dark">Cosa include ogni sito web</h2>
           </motion.div>
 
@@ -314,8 +314,8 @@ const Home = () => {
                 <div className="w-12 h-12 rounded-2xl bg-brand-accent/10 group-hover:bg-brand-accent/20 flex items-center justify-center mb-8 transition-colors">
                   <item.icon className="w-5 h-5 text-brand-accent" />
                 </div>
-                <h3 className="text-xl text-brand-dark mb-3">{item.title}</h3>
-                <p className="text-brand-dark/40 text-base leading-relaxed">{item.desc}</p>
+                <h3 className="text-2xl text-brand-dark mb-3">{item.title}</h3>
+                <p className="text-brand-dark/40 text-lg leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -358,7 +358,7 @@ const Home = () => {
             </div>
             <Link
               to="/chi-sono"
-              className="inline-flex items-center gap-2 text-white font-medium text-sm group"
+              className="inline-flex items-center gap-2 text-white font-medium text-base group"
             >
               Scopri di più su di me
               <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform text-brand-accent" />
@@ -393,7 +393,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center max-w-2xl mx-auto mb-20"
           >
-            <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Come lavoro</span>
+            <span className="text-brand-accent text-sm uppercase tracking-[0.2em] font-medium mb-4 block">Come lavoro</span>
             <h2 className="text-3xl md:text-5xl text-brand-dark">
               Dal primo contatto al sito online
             </h2>
@@ -421,7 +421,7 @@ const Home = () => {
                   {item.icon}
                 </div>
                 <h3 className="text-2xl text-brand-dark mb-3">{item.title}</h3>
-                <p className="text-brand-dark/45 text-base leading-relaxed">{item.desc}</p>
+                <p className="text-brand-dark/45 text-lg leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -437,7 +437,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Portfolio</span>
+            <span className="text-brand-accent text-sm uppercase tracking-[0.2em] font-medium mb-4 block">Portfolio</span>
             <h2 className="text-4xl md:text-5xl text-brand-dark">
               Esempi di siti web
             </h2>
@@ -490,7 +490,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center max-w-2xl mx-auto mb-20"
           >
-            <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Perché investire online</span>
+            <span className="text-brand-accent text-sm uppercase tracking-[0.2em] font-medium mb-4 block">Perché investire online</span>
             <h2 className="text-3xl md:text-5xl text-brand-dark">
               Il tuo sito lavora per te, 24h su 24
             </h2>
@@ -512,8 +512,8 @@ const Home = () => {
                   <div className="w-11 h-11 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-6">
                     <Icon className="w-5 h-5 text-brand-accent" />
                   </div>
-                  <h3 className="text-xl text-brand-dark mb-3">{benefit.title}</h3>
-                  <p className="text-brand-dark/40 text-base leading-relaxed">{benefit.description}</p>
+                  <h3 className="text-2xl text-brand-dark mb-3">{benefit.title}</h3>
+                  <p className="text-brand-dark/40 text-lg leading-relaxed">{benefit.description}</p>
                 </motion.div>
               );
             })}
@@ -536,11 +536,11 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-6 block">Pricing</span>
+              <span className="text-brand-accent text-sm uppercase tracking-[0.2em] font-medium mb-6 block">Pricing</span>
               <h2 className="text-4xl md:text-5xl mb-8 leading-tight text-white">
                 Alta qualità, senza i costi delle agenzie.
               </h2>
-              <p className="text-white/40 text-base leading-relaxed mb-10">
+              <p className="text-white/40 text-xl leading-relaxed mb-10">
                 Grazie all'utilizzo di strumenti moderni e intelligenza artificiale posso offrire siti web professionali a una frazione del costo di un'agenzia tradizionale.
               </p>
               <Link
@@ -607,7 +607,7 @@ const Home = () => {
               <h2 className="text-4xl md:text-6xl text-white mb-6">
                 Iniziamo a lavorare insieme?
               </h2>
-              <p className="text-white/60 text-base mb-10 max-w-xl mx-auto leading-relaxed">
+              <p className="text-white/60 text-xl mb-10 max-w-xl mx-auto leading-relaxed">
                 Raccontami la tua attività e ti mostrerò come posso aiutarti a crescere online.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
