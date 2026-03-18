@@ -78,7 +78,7 @@ const Home = () => {
               </motion.div>
 
               <div className="mb-8 space-y-1">
-                {['Un sito web', 'che fa crescere', 'la tua attività.'].map((line, i) => (
+                {['Un sito web', 'per far crescere', 'la tua attività.'].map((line, i) => (
                   <motion.h1
                     key={i}
                     initial={{ opacity: 0, y: 50 }}
