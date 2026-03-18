@@ -340,10 +340,10 @@ const Home = () => {
             <h2 className="text-4xl md:text-6xl mb-8 leading-tight text-white">
               Andrea Scardaci
             </h2>
-            <div className="space-y-5 text-white/45 text-lg leading-relaxed mb-10">
+            <div className="space-y-5 text-white text-lg leading-relaxed mb-10">
               <p>
                 Sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con{' '}
-                <span className="text-white">eleganza e professionalità</span>.
+                <span className="font-bold">eleganza e professionalità</span>.
               </p>
               <p>
                 Non mi limito a "fare siti". Creo vetrine digitali che riflettono l'anima della tua attività, che sia una palestra storica, un moderno studio di personal training o un centro yoga.
