@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Instagram } from 'lucide-react';
+import { Phone, Instagram, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -18,6 +18,9 @@ const Footer = () => {
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/andrea.webdesign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all">
                 <Instagram className="w-5 h-5" />
+              </a>
+              <a href="mailto:andreascardacibusiness@gmail.com" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all">
+                <Mail className="w-5 h-5" />
               </a>
             </div>
           </div>
