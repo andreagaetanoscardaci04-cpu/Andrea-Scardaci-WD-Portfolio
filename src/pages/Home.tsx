@@ -281,7 +281,7 @@ const Home = () => {
             className="text-center max-w-2xl mx-auto mb-16"
           >
             <span className="text-brand-accent text-xs uppercase tracking-[0.2em] font-medium mb-4 block">Ogni progetto</span>
-            <h2 className="text-4xl md:text-5xl text-brand-dark">Cosa include ogni sito web</h2>
+            <h2 className="text-3xl md:text-5xl text-brand-dark">Cosa include ogni sito web</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -315,7 +315,7 @@ const Home = () => {
                   <item.icon className="w-5 h-5 text-brand-accent" />
                 </div>
                 <h3 className="text-xl text-brand-dark mb-3">{item.title}</h3>
-                <p className="text-brand-dark/40 text-sm leading-relaxed">{item.desc}</p>
+                <p className="text-brand-dark/40 text-base leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -340,7 +340,7 @@ const Home = () => {
             <h2 className="text-4xl md:text-6xl mb-8 leading-tight text-white">
               Andrea Scardaci
             </h2>
-            <div className="space-y-5 text-white/45 text-base leading-relaxed mb-10">
+            <div className="space-y-5 text-white/45 text-lg leading-relaxed mb-10">
               <p>
                 Sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con{' '}
                 <span className="text-white">eleganza e professionalità</span>.
