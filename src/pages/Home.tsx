@@ -111,7 +111,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.75 }}
-                className="text-base text-white/40 mb-10 max-w-md leading-relaxed"
+                className="text-lg lg:text-base text-white lg:text-white/40 mb-10 max-w-md leading-relaxed"
               >
                 Aiuto palestre, studi fitness e attività locali italiane ad avere una presenza online moderna, elegante e professionale.
               </motion.p>
@@ -124,7 +124,7 @@ const Home = () => {
               >
                 <Link
                   to="/lavoriamo-insieme"
-                  className="group relative bg-brand-accent text-white px-8 py-4 rounded-full font-medium text-sm flex items-center justify-center gap-2 overflow-hidden"
+                  className="group relative bg-brand-accent text-white px-8 py-5 lg:py-4 rounded-full font-medium text-base lg:text-sm flex items-center justify-center gap-2 overflow-hidden"
                   style={{ boxShadow: '0 0 30px rgba(34,197,94,0.4), 0 4px 15px rgba(34,197,94,0.2)' }}
                 >
                   <motion.span
@@ -138,7 +138,7 @@ const Home = () => {
                 </Link>
                 <Link
                   to="/esempi"
-                  className="border border-white/15 text-white/80 px-8 py-4 rounded-full font-medium text-sm flex items-center justify-center gap-2 hover:bg-white/5 hover:text-white transition-all"
+                  className="border border-white/15 text-white/80 px-8 py-5 lg:py-4 rounded-full font-medium text-base lg:text-sm flex items-center justify-center gap-2 hover:bg-white/5 hover:text-white transition-all"
                 >
                   Guarda i miei lavori
                 </Link>
