@@ -156,7 +156,7 @@ const Home = () => {
               className="relative block"
             >
               {/* Main photo */}
-              <div className="relative aspect-[4/5]">
+              <div className="relative aspect-[3/4] lg:aspect-[4/5]">
                 {/* Pulsing glow behind photo */}
                 <motion.div
                   animate={{ opacity: [0.3, 0.6, 0.3], scale: [0.98, 1.02, 0.98] }}
@@ -181,7 +181,7 @@ const Home = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.3, duration: 0.5 }}
-                className="absolute -left-14 top-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 text-white"
+                className="hidden lg:block absolute -left-14 top-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 text-white"
               >
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
@@ -203,7 +203,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.7, duration: 0.5 }}
-                className="absolute -bottom-6 left-8 bg-brand-accent rounded-2xl px-5 py-3 text-white"
+                className="hidden lg:block absolute -bottom-6 left-8 bg-brand-accent rounded-2xl px-5 py-3 text-white"
               >
                 <motion.div
                   animate={{ y: [0, -5, 0] }}
