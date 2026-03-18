@@ -96,7 +96,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="lg:hidden relative aspect-[3/4] rounded-3xl overflow-hidden mb-8 shadow-2xl"
+                className="lg:hidden relative aspect-square rounded-3xl overflow-hidden mb-8 shadow-2xl"
                 style={{ boxShadow: '0 0 50px rgba(34,197,94,0.15), 0 30px 60px rgba(0,0,0,0.5)' }}
               >
                 <img
