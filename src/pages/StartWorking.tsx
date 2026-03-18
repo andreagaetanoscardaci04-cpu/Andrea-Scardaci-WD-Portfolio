@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { MessageSquare, Layout, Globe, Send, CheckCircle2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+const SERVICE_ID = 'service_64i9n0o';
+const TEMPLATE_ID = 'template_aqri8cp';
+const PUBLIC_KEY = 'n4quzZkXOEwGK9cfX';
 
 const StartWorking = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError('');
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current!, PUBLIC_KEY);
+      setSubmitted(true);
+    } catch (err: any) {
+      console.error('EmailJS error:', err);
+      setError('Errore nell\'invio. Riprova o scrivimi direttamente via email.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const steps = [
@@ -117,22 +135,24 @@ const StartWorking = () => {
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-brand-dark uppercase tracking-widest">Nome</label>
-                      <input 
+                      <input
                         required
-                        type="text" 
+                        type="text"
+                        name="from_name"
                         placeholder="Il tuo nome"
                         className="w-full px-6 py-4 rounded-xl bg-brand-accent-light/30 border-transparent focus:bg-white focus:border-brand-accent focus:ring-0 transition-all"
                       />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-brand-dark uppercase tracking-widest">Attività</label>
-                      <input 
+                      <input
                         required
-                        type="text" 
+                        type="text"
+                        name="business"
                         placeholder="Nome della tua palestra/studio"
                         className="w-full px-6 py-4 rounded-xl bg-brand-accent-light/30 border-transparent focus:bg-white focus:border-brand-accent focus:ring-0 transition-all"
                       />
@@ -140,27 +160,31 @@ const StartWorking = () => {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-brand-dark uppercase tracking-widest">Email</label>
-                    <input 
+                    <input
                       required
-                      type="email" 
+                      type="email"
+                      name="reply_to"
                       placeholder="la-tua@email.com"
                       className="w-full px-6 py-4 rounded-xl bg-brand-accent-light/30 border-transparent focus:bg-white focus:border-brand-accent focus:ring-0 transition-all"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-brand-dark uppercase tracking-widest">Messaggio</label>
-                    <textarea 
+                    <textarea
                       required
                       rows={4}
+                      name="message"
                       placeholder="Raccontami brevemente di cosa hai bisogno..."
                       className="w-full px-6 py-4 rounded-xl bg-brand-accent-light/30 border-transparent focus:bg-white focus:border-brand-accent focus:ring-0 transition-all resize-none"
                     ></textarea>
                   </div>
-                  <button 
+                  {error && <p className="text-red-500 text-sm">{error}</p>}
+                  <button
                     type="submit"
-                    className="w-full bg-brand-dark text-white py-5 rounded-xl font-bold text-lg hover:bg-brand-accent transition-all shadow-xl shadow-brand-dark/20 flex items-center justify-center group"
+                    disabled={sending}
+                    className="w-full bg-brand-dark text-white py-5 rounded-xl font-bold text-lg hover:bg-brand-accent transition-all shadow-xl shadow-brand-dark/20 flex items-center justify-center group disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Richiedi informazioni
+                    {sending ? 'Invio in corso...' : 'Richiedi informazioni'}
                     <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>
                 </form>

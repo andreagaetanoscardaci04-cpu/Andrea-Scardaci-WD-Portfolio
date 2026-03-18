@@ -3,9 +3,9 @@ import { motion } from 'motion/react';
 import { Mail, Phone, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
-const SERVICE_ID = 'service_tymko2v';
+const SERVICE_ID = 'service_64i9n0o';
 const TEMPLATE_ID = 'template_aqri8cp';
-const PUBLIC_KEY = 'DwQoUKSjucj7mprusw79S';
+const PUBLIC_KEY = 'n4quzZkXOEwGK9cfX';
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -20,7 +20,8 @@ const Contact = () => {
     try {
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current!, PUBLIC_KEY);
       setSubmitted(true);
-    } catch {
+    } catch (err: any) {
+      console.error('EmailJS error:', err, JSON.stringify(err));
       setError('Errore nell\'invio. Riprova o scrivimi direttamente via email.');
     } finally {
       setSending(false);
