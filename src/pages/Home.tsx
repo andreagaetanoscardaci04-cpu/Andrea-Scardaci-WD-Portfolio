@@ -420,8 +420,8 @@ const Home = () => {
                 <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-xl mb-8">
                   {item.icon}
                 </div>
-                <h3 className="text-2xl text-white mb-3">{item.title}</h3>
-                <p className="text-white/80 text-lg leading-relaxed">{item.desc}</p>
+                <h3 className="text-2xl text-white font-black mb-3">{item.title}</h3>
+                <p className="text-white text-lg leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
