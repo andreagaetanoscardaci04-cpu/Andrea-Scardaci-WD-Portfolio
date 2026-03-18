@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+const SERVICE_ID = 'YOUR_SERVICE_ID';
+const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError('');
+    try {
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current!, PUBLIC_KEY);
+      setSubmitted(true);
+    } catch {
+      setError('Errore nell\'invio. Riprova o scrivimi direttamente via email.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -86,39 +103,44 @@ const Contact = () => {
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-brand-dark uppercase tracking-widest">Nome Completo</label>
-                    <input 
+                    <input
                       required
-                      type="text" 
+                      type="text"
+                      name="from_name"
                       placeholder="Mario Rossi"
                       className="w-full px-6 py-4 rounded-xl bg-brand-accent-light/30 border-transparent focus:bg-white focus:border-brand-accent focus:ring-0 transition-all"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-brand-dark uppercase tracking-widest">Email</label>
-                    <input 
+                    <input
                       required
-                      type="email" 
+                      type="email"
+                      name="reply_to"
                       placeholder="mario.rossi@email.com"
                       className="w-full px-6 py-4 rounded-xl bg-brand-accent-light/30 border-transparent focus:bg-white focus:border-brand-accent focus:ring-0 transition-all"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-brand-dark uppercase tracking-widest">Messaggio</label>
-                    <textarea 
+                    <textarea
                       required
                       rows={6}
+                      name="message"
                       placeholder="Come posso aiutarti?"
                       className="w-full px-6 py-4 rounded-xl bg-brand-accent-light/30 border-transparent focus:bg-white focus:border-brand-accent focus:ring-0 transition-all resize-none"
                     ></textarea>
                   </div>
-                  <button 
+                  {error && <p className="text-red-500 text-sm">{error}</p>}
+                  <button
                     type="submit"
-                    className="w-full bg-brand-dark text-white py-5 rounded-xl font-bold text-lg hover:bg-brand-accent transition-all shadow-xl shadow-brand-dark/20 flex items-center justify-center group"
+                    disabled={sending}
+                    className="w-full bg-brand-dark text-white py-5 rounded-xl font-bold text-lg hover:bg-brand-accent transition-all shadow-xl shadow-brand-dark/20 flex items-center justify-center group disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Invia Messaggio
+                    {sending ? 'Invio in corso...' : 'Invia Messaggio'}
                     <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>
                 </form>
