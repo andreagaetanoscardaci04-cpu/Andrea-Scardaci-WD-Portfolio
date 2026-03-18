@@ -44,7 +44,7 @@ const Navbar = () => {
               to={link.path}
               className={`text-sm font-medium transition-colors hover:text-brand-accent ${
                 location.pathname === link.path
-                  ? 'text-brand-accent'
+                  ? isHome && !scrolled ? 'text-white' : 'text-brand-accent'
                   : isHome && !scrolled ? 'text-white/70' : 'text-brand-dark/70'
               }`}
             >
