@@ -48,6 +48,14 @@ export const PROJECTS: Project[] = [
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop',
     category: 'Attività Locale',
     link: 'https://steakhouse-macello-tv38.vercel.app/'
+  },
+  {
+    id: '7',
+    title: 'Landing Page per Palestra',
+    description: 'Una landing page moderna e accattivante per una palestra, pensata per convertire visitatori in nuovi iscritti.',
+    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format&fit=crop',
+    category: 'Palestra',
+    link: 'https://athena-club-padova-spark.lovable.app/'
   }
 ];
 
