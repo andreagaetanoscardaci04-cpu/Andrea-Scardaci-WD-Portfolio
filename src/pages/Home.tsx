@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, Star, Globe, Zap, Palette, Clock, Check, X } from 'lucide-react';
+import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, Star, Globe, Zap, Palette, Clock, Check } from 'lucide-react';
 import { PROJECTS, BENEFITS } from '../constants';
 import ProjectCard from '../components/ProjectCard';
 
@@ -546,23 +546,39 @@ const Home = () => {
             </p>
           </motion.div>
 
-          {/* Group 1: Monthly subscription */}
+          {/* Offers grid */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-14"
+            className="mb-10"
           >
-            <div className="flex flex-wrap items-center gap-4 mb-8">
-              <span className="text-brand-accent text-sm uppercase tracking-[0.2em] font-medium whitespace-nowrap">Con canone mensile</span>
-              <div className="flex-1 h-px bg-white/10 hidden sm:block" />
-              <span className="text-white/30 text-xs whitespace-nowrap">Hosting · Dominio · 3 modifiche/anno inclusi</span>
-            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { pages: '1 Landing Page', activation: 199, popular: false },
-                { pages: '3 Pagine', activation: 375, popular: true },
-                { pages: '5 Pagine', activation: 497, popular: false },
+                {
+                  pages: '1 Landing Page',
+                  activation: 499,
+                  monthly: 40,
+                  popular: false,
+                  retainer: ['Assistenza personale', 'Manutenzione inclusa', 'Dominio personalizzato', 'Hosting incluso'],
+                  extra: ['SEO ottimizzato', 'Design su misura'],
+                },
+                {
+                  pages: '3 Pagine',
+                  activation: 750,
+                  monthly: 50,
+                  popular: true,
+                  retainer: ['Assistenza personale', 'Manutenzione inclusa', 'Dominio personalizzato', 'Hosting incluso'],
+                  extra: ['SEO ottimizzato', 'Design su misura'],
+                },
+                {
+                  pages: '5 Pagine',
+                  activation: 999,
+                  monthly: 60,
+                  popular: false,
+                  retainer: ['Assistenza personale', 'Manutenzione inclusa', 'Dominio personalizzato', 'Hosting incluso'],
+                  extra: ['SEO ottimizzato', 'Design su misura'],
+                },
               ].map((offer, i) => (
                 <motion.div
                   key={i}
@@ -586,18 +602,32 @@ const Home = () => {
                     {offer.pages}
                   </p>
                   <div className="mb-1">
-                    <span className="text-4xl font-bold text-white">€30</span>
-                    <span className="text-white/40 text-sm ml-1">/mese</span>
+                    <span className="text-4xl font-bold text-white">€{offer.activation}</span>
+                    <span className="text-white/40 text-sm ml-1">attivazione</span>
                   </div>
-                  <p className="text-white/50 text-sm mb-6">+ €{offer.activation} di attivazione</p>
-                  <ul className="space-y-3 mb-8 flex-1">
-                    {['Hosting incluso', 'Dominio .it / .com incluso', '3 modifiche assistite/anno', 'SEO ottimizzato', 'Design su misura'].map((feat) => (
+                  <p className="text-white/50 text-sm mb-2">+ €{offer.monthly}/mese di canone</p>
+
+                  <p className={`text-xs uppercase tracking-widest mb-3 mt-5 ${offer.popular ? 'text-brand-accent/80' : 'text-white/30'}`}>
+                    Incluso nel canone
+                  </p>
+                  <ul className="space-y-2 mb-4">
+                    {offer.retainer.map((feat) => (
                       <li key={feat} className="flex items-center gap-3 text-sm text-white/70">
                         <Check className="w-4 h-4 text-brand-accent flex-shrink-0" />
                         {feat}
                       </li>
                     ))}
                   </ul>
+
+                  <ul className="space-y-2 mb-8 flex-1">
+                    {offer.extra.map((feat) => (
+                      <li key={feat} className="flex items-center gap-3 text-sm text-white/50">
+                        <Check className="w-4 h-4 text-white/30 flex-shrink-0" />
+                        {feat}
+                      </li>
+                    ))}
+                  </ul>
+
                   <Link
                     to="/lavoriamo-insieme"
                     className={`text-center py-3 rounded-full font-medium text-sm transition-all ${
@@ -605,66 +635,6 @@ const Home = () => {
                         ? 'bg-brand-accent text-white hover:bg-white hover:text-brand-dark'
                         : 'border border-white/20 text-white hover:bg-white/10'
                     }`}
-                  >
-                    Inizia ora
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Group 2: One-time payment */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-10"
-          >
-            <div className="flex flex-wrap items-center gap-4 mb-8">
-              <span className="text-white/60 text-sm uppercase tracking-[0.2em] font-medium whitespace-nowrap">Pagamento unico</span>
-              <div className="flex-1 h-px bg-white/10 hidden sm:block" />
-              <span className="text-white/30 text-xs whitespace-nowrap">Hosting incluso · Dominio non incluso · Nessun canone</span>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { pages: '1 Landing Page', price: 399 },
-                { pages: '3 Pagine', price: 575 },
-                { pages: '5 Pagine', price: 697 },
-              ].map((offer, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ y: -6 }}
-                  className="relative rounded-2xl p-8 flex flex-col bg-white/5 border border-white/10 hover:border-white/20 transition-all"
-                >
-                  <p className="text-xs uppercase tracking-widest mb-4 text-white/40">{offer.pages}</p>
-                  <div className="mb-1">
-                    <span className="text-4xl font-bold text-white">€{offer.price}</span>
-                  </div>
-                  <p className="text-white/50 text-sm mb-6">Pagamento unico</p>
-                  <ul className="space-y-3 mb-8 flex-1">
-                    {[
-                      { label: 'Hosting incluso', ok: true },
-                      { label: 'Dominio non incluso', ok: false },
-                      { label: 'Nessuna modifica assistita/anno', ok: false },
-                      { label: 'SEO ottimizzato', ok: true },
-                      { label: 'Design su misura', ok: true },
-                    ].map((feat) => (
-                      <li key={feat.label} className="flex items-center gap-3 text-sm text-white/70">
-                        {feat.ok
-                          ? <Check className="w-4 h-4 text-brand-accent flex-shrink-0" />
-                          : <X className="w-4 h-4 text-white/25 flex-shrink-0" />
-                        }
-                        <span className={feat.ok ? '' : 'text-white/30'}>{feat.label}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    to="/lavoriamo-insieme"
-                    className="text-center py-3 rounded-full font-medium text-sm border border-white/20 text-white hover:bg-white/10 transition-all"
                   >
                     Inizia ora
                   </Link>
@@ -681,15 +651,15 @@ const Home = () => {
             className="rounded-2xl border border-dashed border-white/20 p-10 flex flex-col md:flex-row items-center justify-between gap-6"
           >
             <div>
-              <p className="text-white/40 text-xs uppercase tracking-widest mb-2">Progetto personalizzato</p>
-              <h3 className="text-white text-2xl font-medium mb-2">Hai esigenze particolari?</h3>
-              <p className="text-white/40 text-base">Ogni richiesta personalizzata viene valutata su misura per il cliente.</p>
+              <p className="text-white/40 text-xs uppercase tracking-widest mb-2">Offerta su misura</p>
+              <h3 className="text-white text-2xl font-medium mb-2">Hai una richiesta specifica?</h3>
+              <p className="text-white/40 text-base">Mandami un messaggio e riceverai un prezzo e un'offerta personalizzata su misura per te.</p>
             </div>
             <Link
               to="/lavoriamo-insieme"
               className="shrink-0 inline-flex items-center gap-2 bg-brand-accent text-white px-8 py-4 rounded-full font-medium text-sm hover:bg-white hover:text-brand-dark transition-all"
             >
-              Richiedi un preventivo
+              Scrivimi ora
               <ChevronRight className="w-4 h-4" />
             </Link>
           </motion.div>
