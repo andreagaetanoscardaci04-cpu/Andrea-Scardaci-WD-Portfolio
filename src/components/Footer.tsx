@@ -13,7 +13,7 @@ const Footer = () => {
             </Link>
             <p className="text-white/60 max-w-md mb-8 leading-relaxed">
               Realizzo siti web professionali per palestre, studi fitness e attività locali in Italia. 
-              Alta qualità, design moderno e prezzi imbattibili.
+              Alta qualità, design moderno e risultati concreti.
             </p>
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/andrea.webdesign" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all">
