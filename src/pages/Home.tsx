@@ -557,7 +557,7 @@ const Home = () => {
               {[
                 {
                   pages: '1 Landing Page',
-                  activation: 499,
+                  activation: 599,
                   monthly: 40,
                   popular: false,
                   retainer: ['Assistenza personale', 'Manutenzione inclusa', 'Dominio personalizzato', 'Hosting incluso'],
@@ -565,7 +565,7 @@ const Home = () => {
                 },
                 {
                   pages: '3 Pagine',
-                  activation: 750,
+                  activation: 899,
                   monthly: 50,
                   popular: true,
                   retainer: ['Assistenza personale', 'Manutenzione inclusa', 'Dominio personalizzato', 'Hosting incluso'],
@@ -573,7 +573,7 @@ const Home = () => {
                 },
                 {
                   pages: '5 Pagine',
-                  activation: 999,
+                  activation: 1199,
                   monthly: 60,
                   popular: false,
                   retainer: ['Assistenza personale', 'Manutenzione inclusa', 'Dominio personalizzato', 'Hosting incluso'],
