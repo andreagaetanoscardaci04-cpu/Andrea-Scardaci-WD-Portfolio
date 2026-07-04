@@ -60,17 +60,15 @@ const StartWorking = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-32"
+          >
             {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative"
-              >
-                <div className="w-20 h-20 rounded-3xl bg-brand-accent/10 flex items-center justify-center mb-8">
+              <div key={index} className="relative">
+                <div className="w-20 h-20 rounded-full bg-brand-accent/10 flex items-center justify-center mb-8">
                   <step.icon className="w-10 h-10 text-brand-accent" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4 text-brand-dark">{step.title}</h3>
@@ -79,9 +77,9 @@ const StartWorking = () => {
                 {index < 2 && (
                   <div className="hidden lg:block absolute top-10 left-full w-full border-t-2 border-dashed border-brand-accent/20 -z-10" />
                 )}
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div className="order-2 lg:order-1 bg-white p-6 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl border border-brand-dark/[0.06]">

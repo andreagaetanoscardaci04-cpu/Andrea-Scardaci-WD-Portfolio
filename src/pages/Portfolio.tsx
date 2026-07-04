@@ -48,30 +48,32 @@ const Portfolio = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-brand-dark">Dal primo contatto al sito online</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
             {[
               { step: '01', icon: MessageSquare, title: 'Parliamo', desc: 'Capisco la tua attività, i tuoi obiettivi e cosa vuoi comunicare ai tuoi clienti.' },
               { step: '02', icon: Layout, title: 'Progetto', desc: 'Realizzo un design moderno e professionale su misura per la tua identità visiva.' },
               { step: '03', icon: Globe, title: 'Online', desc: 'Il tuo sito è live, ottimizzato per tutti i dispositivi e pronto ad acquisire clienti.' },
             ].map((item, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                whileHover={{ y: -6 }}
-                className="relative p-10 rounded-3xl bg-white border border-brand-dark/[0.06] hover:border-brand-accent/25 transition-all group overflow-hidden"
+                className="relative p-10 rounded-3xl bg-white border border-brand-dark/[0.06] hover:border-brand-accent/25 transition-colors group"
               >
-                <span className="absolute top-6 right-8 text-brand-accent/10 text-6xl font-bold select-none">{item.step}</span>
-                <div className="w-12 h-12 rounded-2xl bg-brand-accent/10 group-hover:bg-brand-accent/20 flex items-center justify-center mb-8 transition-colors">
+                <div className="absolute top-6 right-6 w-9 h-9 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                  <span className="text-brand-accent font-bold text-xs">{item.step}</span>
+                </div>
+                <div className="w-12 h-12 rounded-full bg-brand-accent/10 group-hover:bg-brand-accent/20 flex items-center justify-center mb-8 transition-colors">
                   <item.icon className="w-5 h-5 text-brand-accent" />
                 </div>
                 <h3 className="text-2xl text-brand-dark font-bold mb-3">{item.title}</h3>
                 <p className="text-brand-dark/45 text-sm font-light leading-relaxed">{item.desc}</p>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

@@ -82,16 +82,16 @@ const Supporto = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {tiers.map((tier, i) => (
-              <motion.div
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {tiers.map((tier) => (
+              <div
                 key={tier.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
-                whileHover={{ y: -6 }}
-                className={`relative rounded-3xl p-8 flex flex-col transition-all ${
+                className={`relative rounded-3xl p-8 flex flex-col transition-colors ${
                   tier.popular
                     ? 'bg-brand-accent/10 border border-brand-accent/40'
                     : 'bg-white border border-brand-dark/[0.06] hover:border-brand-dark/15'
@@ -103,7 +103,7 @@ const Supporto = () => {
                     Più richiesto
                   </div>
                 )}
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 ${tier.popular ? 'bg-brand-accent/20' : 'bg-brand-accent/10'}`}>
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 ${tier.popular ? 'bg-brand-accent/20' : 'bg-brand-accent/10'}`}>
                   <tier.icon className="w-5 h-5 text-brand-accent" />
                 </div>
                 <p className="text-xs uppercase tracking-widest mb-3 text-brand-dark/40 font-light">{tier.name}</p>
@@ -114,24 +114,22 @@ const Supporto = () => {
                 <ul className="space-y-3 flex-1">
                   {tier.items.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-brand-dark/60 font-light">
-                      <Check className="w-4 h-4 text-brand-accent flex-shrink-0 mt-0.5" />
+                      <span className="w-4 h-4 rounded-full bg-brand-accent/15 flex items-center justify-center shrink-0 mt-0.5">
+                        <Check className="w-2.5 h-2.5 text-brand-accent" />
+                      </span>
                       {item}
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ── PACCHETTI LONG-TERM ──────────────────────── */}
       <section className="section-padding bg-brand-dark text-white overflow-hidden relative">
-        <motion.div
-          animate={{ x: [0, -20, 0], y: [0, 25, 0] }}
-          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
-          className="hidden lg:block absolute bottom-0 left-0 w-[450px] h-[450px] bg-brand-accent/15 rounded-full blur-[130px] pointer-events-none"
-        />
+        <div className="hidden lg:block absolute bottom-0 left-0 w-[420px] h-[420px] bg-brand-accent/10 rounded-full blur-[110px] pointer-events-none" />
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -146,15 +144,14 @@ const Supporto = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -6 }}
-              className="rounded-3xl p-8 bg-brand-accent/[0.12] border border-brand-accent/40 flex flex-col"
-            >
-              <div className="w-12 h-12 rounded-2xl bg-brand-accent/30 flex items-center justify-center mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            <div className="rounded-3xl p-8 bg-brand-accent/[0.12] border border-brand-accent/40 flex flex-col">
+              <div className="w-12 h-12 rounded-full bg-brand-accent/30 flex items-center justify-center mb-6">
                 <CalendarClock className="w-5 h-5 text-brand-accent" />
               </div>
               <p className="text-xs uppercase tracking-widest mb-3 text-brand-accent font-light">Pacchetto annuale</p>
@@ -167,25 +164,22 @@ const Supporto = () => {
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-3 text-sm text-white/60 font-light">
-                  <Check className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                  <span className="w-4 h-4 rounded-full bg-brand-accent/20 flex items-center justify-center shrink-0">
+                    <Check className="w-2.5 h-2.5 text-brand-accent" />
+                  </span>
                   150€ di valore extra incluso rispetto al prezzo delle modifiche singole
                 </li>
                 <li className="flex items-center gap-3 text-sm text-white/60 font-light">
-                  <Check className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                  <span className="w-4 h-4 rounded-full bg-brand-accent/20 flex items-center justify-center shrink-0">
+                    <Check className="w-2.5 h-2.5 text-brand-accent" />
+                  </span>
                   Un unico pagamento, nessuna sorpresa
                 </li>
               </ul>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              whileHover={{ y: -6 }}
-              className="rounded-3xl p-8 card-bento flex flex-col"
-            >
-              <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
+            <div className="rounded-3xl p-8 card-bento flex flex-col">
+              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6">
                 <Wallet className="w-5 h-5 text-brand-accent" />
               </div>
               <p className="text-xs uppercase tracking-widest mb-3 text-white/40 font-light">Pagamento mensile</p>
@@ -198,16 +192,20 @@ const Supporto = () => {
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center gap-3 text-sm text-white/60 font-light">
-                  <Check className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                  <span className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                    <Check className="w-2.5 h-2.5 text-brand-accent" />
+                  </span>
                   Nessun impegno anticipato
                 </li>
                 <li className="flex items-center gap-3 text-sm text-white/60 font-light">
-                  <Check className="w-4 h-4 text-brand-accent flex-shrink-0" />
+                  <span className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                    <Check className="w-2.5 h-2.5 text-brand-accent" />
+                  </span>
                   Disdici quando vuoi
                 </li>
               </ul>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -221,11 +219,7 @@ const Supporto = () => {
             className="relative rounded-[2rem] sm:rounded-[3rem] bg-brand-accent overflow-hidden p-10 sm:p-16 md:p-24 text-center"
             style={{ boxShadow: '0 0 80px rgba(34,197,94,0.25), 0 40px 80px rgba(0,0,0,0.1)' }}
           >
-            <motion.div
-              animate={{ scale: [1, 1.4, 1] }}
-              transition={{ duration: 9, repeat: Infinity }}
-              className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px] pointer-events-none"
-            />
+            <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-white/10 rounded-full blur-[110px] pointer-events-none" />
             <div className="relative z-10">
               <h2 className="text-3xl sm:text-4xl md:text-6xl text-white mb-6">
                 Non sai di che fascia hai bisogno?

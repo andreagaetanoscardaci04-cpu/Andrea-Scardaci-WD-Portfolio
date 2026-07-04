@@ -57,7 +57,12 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="max-w-3xl mx-auto border-t border-brand-dark/10"
+          >
             {[
               {
                 title: "Innovazione",
@@ -75,24 +80,19 @@ const About = () => {
                 icon: Users
               }
             ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-10 rounded-3xl border border-brand-dark/[0.06] hover:border-brand-accent/20 transition-colors"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-brand-accent/10 flex items-center justify-center mb-8">
-                  <item.icon className="w-8 h-8 text-brand-accent" />
+              <div key={index} className="flex items-center gap-6 sm:gap-8 py-8 border-b border-brand-dark/10">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-brand-accent/10 flex items-center justify-center shrink-0">
+                  <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-brand-accent" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-brand-dark">{item.title}</h3>
-                <p className="text-brand-dark/50 font-light leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-1.5 text-brand-dark">{item.title}</h3>
+                  <p className="text-brand-dark/50 font-light leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -136,7 +136,12 @@ const About = () => {
               Come lavoro con i miei clienti
             </h2>
           </div>
-          <div className="max-w-4xl mx-auto space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="max-w-4xl mx-auto"
+          >
             {[
               {
                 step: "01",
@@ -159,21 +164,17 @@ const About = () => {
                 description: "Mettiamo online il sito e ti insegno come gestirlo in autonomia per le piccole modifiche quotidiane."
               }
             ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="flex gap-8 items-start py-6 border-t border-white/10 first:border-t-0"
-              >
-                <span className="text-4xl font-bold text-brand-accent opacity-50 shrink-0">{item.step}</span>
+              <div key={index} className="flex gap-6 sm:gap-8 items-start py-6 border-t border-white/10 first:border-t-0">
+                <span className="w-12 h-12 rounded-full border border-brand-accent/30 flex items-center justify-center text-brand-accent font-bold text-sm shrink-0">
+                  {item.step}
+                </span>
                 <div>
                   <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
                   <p className="text-white/50 text-lg font-light leading-relaxed">{item.description}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

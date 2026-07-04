@@ -111,7 +111,7 @@ const Contact = () => {
 
             <div className="order-1 lg:order-2 space-y-12">
               <div className="flex items-start space-x-6">
-                <div className="w-14 h-14 rounded-2xl bg-brand-accent/10 flex items-center justify-center shrink-0">
+                <div className="w-14 h-14 rounded-full bg-brand-accent/10 flex items-center justify-center shrink-0">
                   <Mail className="w-7 h-7 text-brand-accent" />
                 </div>
                 <div>
@@ -121,7 +121,7 @@ const Contact = () => {
               </div>
 
               <div className="flex items-start space-x-6">
-                <div className="w-14 h-14 rounded-2xl bg-brand-accent/10 flex items-center justify-center shrink-0">
+                <div className="w-14 h-14 rounded-full bg-brand-accent/10 flex items-center justify-center shrink-0">
                   <Phone className="w-7 h-7 text-brand-accent" />
                 </div>
                 <div>

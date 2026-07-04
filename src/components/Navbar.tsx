@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronRight, ArrowUpRight, Instagram, Mail, Menu, X } from 'lucide-react';
+import { ChevronRight, ArrowUpRight, Instagram, Mail, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,14 +74,24 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Toggle — thin uneven bars, premium editorial feel */}
           <button
-            className={`md:hidden transition-colors duration-300 ${isOpen || !lightHeader ? 'text-brand-dark' : 'text-white'}`}
+            className={`md:hidden relative w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+              isOpen || !lightHeader ? 'bg-brand-dark/5' : 'bg-white/10'
+            }`}
             onClick={() => setIsOpen((v) => !v)}
             aria-label={isOpen ? 'Chiudi menu' : 'Apri menu'}
             aria-expanded={isOpen}
           >
-            {isOpen ? <X /> : <Menu />}
+            {isOpen ? (
+              <X className={isOpen || !lightHeader ? 'text-brand-dark w-5 h-5' : 'text-white w-5 h-5'} />
+            ) : (
+              <span className="flex flex-col items-end gap-[5px]">
+                <span className={`block h-[2px] w-5 rounded-full ${!lightHeader ? 'bg-brand-dark' : 'bg-white'}`} />
+                <span className={`block h-[2px] w-3.5 rounded-full ${!lightHeader ? 'bg-brand-accent' : 'bg-brand-accent'}`} />
+                <span className={`block h-[2px] w-5 rounded-full ${!lightHeader ? 'bg-brand-dark' : 'bg-white'}`} />
+              </span>
+            )}
           </button>
         </div>
       </nav>
