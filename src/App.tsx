@@ -7,6 +7,7 @@ import About from './pages/About';
 import Portfolio from './pages/Portfolio';
 import StartWorking from './pages/StartWorking';
 import Contact from './pages/Contact';
+import Supporto from './pages/Supporto';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/chi-sono" element={<About />} />
             <Route path="/esempi" element={<Portfolio />} />
             <Route path="/lavoriamo-insieme" element={<StartWorking />} />
+            <Route path="/supporto" element={<Supporto />} />
             <Route path="/contatti" element={<Contact />} />
           </Routes>
         </main>

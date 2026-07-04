@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Instagram, Mail } from 'lucide-react';
+import { Phone, Instagram, Mail, Plus } from 'lucide-react';
 
 const Footer = () => {
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  const toggle = (name: string) => setOpenSection((prev) => (prev === name ? null : name));
+
   return (
-    <footer className="bg-brand-dark text-white py-20">
+    <footer className="bg-brand-dark text-white py-16 md:py-20">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-2">
@@ -12,7 +16,7 @@ const Footer = () => {
               Andrea <span className="text-brand-accent">Scardaci</span>
             </Link>
             <p className="text-white/60 max-w-md mb-8 leading-relaxed">
-              Realizzo siti web professionali per palestre, studi fitness e attività locali in Italia. 
+              Realizzo siti web professionali per palestre, studi fitness e attività locali in Italia.
               Alta qualità, design moderno e risultati concreti.
             </p>
             <div className="flex space-x-4">
@@ -25,18 +29,20 @@ const Footer = () => {
             </div>
           </div>
 
-          <div>
+          {/* Desktop: static columns */}
+          <div className="hidden md:block">
             <h4 className="font-serif text-xl mb-6">Link Rapidi</h4>
             <ul className="space-y-4 text-white/60">
               <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
               <li><Link to="/chi-sono" className="hover:text-white transition-colors">Chi Sono</Link></li>
               <li><Link to="/esempi" className="hover:text-white transition-colors">Esempi di siti</Link></li>
               <li><Link to="/lavoriamo-insieme" className="hover:text-white transition-colors">Lavoriamo Insieme</Link></li>
+              <li><Link to="/supporto" className="hover:text-white transition-colors">Supporto</Link></li>
               <li><Link to="/contatti" className="hover:text-white transition-colors">Contatti</Link></li>
             </ul>
           </div>
 
-          <div>
+          <div className="hidden md:block">
             <h4 className="font-serif text-xl mb-6">Contatti</h4>
             <ul className="space-y-4 text-white/60">
               <li className="flex items-center">
@@ -51,11 +57,59 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+
+          {/* Mobile: accordions */}
+          <div className="md:hidden divide-y divide-white/10 border-t border-white/10">
+            {[
+              {
+                name: 'links',
+                title: 'Link Rapidi',
+                content: (
+                  <ul className="space-y-4 text-white/60 pb-6 pt-1">
+                    <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
+                    <li><Link to="/chi-sono" className="hover:text-white transition-colors">Chi Sono</Link></li>
+                    <li><Link to="/esempi" className="hover:text-white transition-colors">Esempi di siti</Link></li>
+                    <li><Link to="/lavoriamo-insieme" className="hover:text-white transition-colors">Lavoriamo Insieme</Link></li>
+                    <li><Link to="/supporto" className="hover:text-white transition-colors">Supporto</Link></li>
+                    <li><Link to="/contatti" className="hover:text-white transition-colors">Contatti</Link></li>
+                  </ul>
+                ),
+              },
+              {
+                name: 'contact',
+                title: 'Contatti',
+                content: (
+                  <ul className="space-y-4 text-white/60 pb-6 pt-1">
+                    <li className="flex items-center">
+                      <Mail className="w-5 h-5 mr-3 text-brand-accent shrink-0" />
+                      andreascardacibusiness@gmail.com
+                    </li>
+                    <li className="flex items-center">
+                      <Phone className="w-5 h-5 mr-3 text-brand-accent shrink-0" />
+                      +39 392 296 5248
+                    </li>
+                  </ul>
+                ),
+              },
+            ].map((section) => (
+              <div key={section.name}>
+                <button
+                  onClick={() => toggle(section.name)}
+                  className="w-full flex items-center justify-between py-5 text-left"
+                  aria-expanded={openSection === section.name}
+                >
+                  <span className="font-serif text-xl">{section.title}</span>
+                  <Plus className={`w-5 h-5 text-brand-accent transition-transform duration-200 ${openSection === section.name ? 'rotate-45' : ''}`} />
+                </button>
+                {openSection === section.name && section.content}
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-white/40 text-sm">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-white/40 text-sm gap-4">
           <p>© {new Date().getFullYear()} Andrea Scardaci. Tutti i diritti riservati.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex space-x-6">
             <a href="#" className="hover:text-white">Privacy Policy</a>
             <a href="#" className="hover:text-white">Cookie Policy</a>
           </div>

@@ -18,7 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, ca
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-2xl bg-white shadow-lg"
+      className="group relative overflow-hidden rounded-3xl bg-white border border-brand-dark/[0.06] hover:border-brand-accent/25 transition-colors"
     >
       <div className="aspect-[4/3] overflow-hidden">
         <img
@@ -30,13 +30,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, ca
         />
       </div>
       <div className="p-8">
-        <span className="text-xs font-bold uppercase tracking-widest text-brand-accent mb-2 block">
+        <span className="text-xs font-light uppercase tracking-[0.2em] text-brand-accent mb-2 block">
           {category}
         </span>
-        <h3 className="text-2xl font-serif font-bold mb-3 text-brand-dark">
+        <h3 className="text-2xl font-bold mb-3 text-brand-dark">
           {title}
         </h3>
-        <p className="text-brand-dark/60 text-sm mb-6 line-clamp-2">
+        <p className="text-brand-dark/50 text-sm font-light mb-6 line-clamp-2">
           {description}
         </p>
         {link ? (
