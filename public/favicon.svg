@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@700&amp;display=swap');
+    text { font-family: 'Urbanist', ui-sans-serif, system-ui, sans-serif; font-weight: 700; }
+  </style>
+  <rect width="32" height="32" rx="7" fill="#0a0e0c"/>
+  <text x="16" y="22" text-anchor="middle" font-size="17">
+    <tspan fill="#ffffff">A</tspan><tspan fill="#22c55e">S</tspan>
+  </text>
+</svg>
