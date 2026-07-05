@@ -158,7 +158,7 @@ const Home = () => {
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.33, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl leading-[1.02] font-extralight italic text-brand-accent"
+                  className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl leading-[1.02] font-light italic text-brand-accent"
                 >
                   per far crescere
                 </motion.h1>
