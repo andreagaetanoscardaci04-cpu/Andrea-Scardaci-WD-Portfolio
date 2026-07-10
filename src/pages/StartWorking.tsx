@@ -165,7 +165,7 @@ const StartWorking = () => {
                 Raccontami il tuo progetto
               </h2>
               <p className="text-lg text-brand-dark/50 font-light mb-10 leading-relaxed">
-                Compila il modulo con i tuoi dati e quelli della tua attività. Ti ricontatterò entro 24 ore per fissare una chiamata conoscitiva gratuita.
+                Compila il modulo con i tuoi dati e quelli della tua attività. Ti ricontatterò entro 48 ore per fissare una chiamata conoscitiva gratuita.
               </p>
 
               <div className="space-y-6">

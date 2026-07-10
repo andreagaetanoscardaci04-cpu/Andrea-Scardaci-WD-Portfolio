@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, Zap, Palette, Check, LifeBuoy, MessageCircle, Sparkles, Rocket } from 'lucide-react';
+import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, Check, LifeBuoy, MessageCircle, Sparkles, Rocket } from 'lucide-react';
 import { PROJECTS, BENEFITS } from '../constants';
 import ProjectCard from '../components/ProjectCard';
 
@@ -45,22 +45,28 @@ const Home = () => {
     { value: '0', suffix: '€', label: 'Canoni mensili obbligatori' },
   ];
 
-  const includes = [
-    {
-      icon: Zap,
-      title: 'Veloce per definizione',
-      desc: 'Tempi di caricamento ottimizzati al millisecondo. I tuoi visitatori non aspetteranno mai.',
-    },
-    {
-      icon: Palette,
-      title: 'Design su misura',
-      desc: 'Nessun template generico. Ogni sito è progettato attorno all\'identità visiva della tua attività.',
-    },
+  const reasons = [
     {
       icon: Search,
-      title: 'SEO già incluso',
-      desc: 'Struttura tecnica ottimizzata per Google fin dal primo giorno, senza costi aggiuntivi.',
+      title: 'Ti trovano su Google',
+      desc: 'Chi cerca un\'attività come la tua ti scopre online e conosce i tuoi servizi, anche senza passaparola.',
     },
+    {
+      icon: TrendingUp,
+      title: 'Più SEO grazie alla scheda Google',
+      desc: 'Un sito collegato alla tua scheda Google Business aumenta la visibilità nelle ricerche locali.',
+    },
+    {
+      icon: Award,
+      title: 'Valore percepito più alto',
+      desc: 'Un sito curato comunica professionalità e fa percepire la tua attività di qualità superiore.',
+    },
+  ];
+
+  const losses = [
+    'Clienti che scelgono un concorrente più visibile online',
+    'Meno chiamate e prenotazioni da chi ti cerca su Google',
+    'Un\'immagine meno curata rispetto a chi ha già un sito',
   ];
 
   const process = [
@@ -258,22 +264,21 @@ const Home = () => {
               transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="relative hidden lg:block"
             >
-              {/* Main photo — golden-ratio portrait crop */}
-              <div className="relative aspect-[1/1.618] mx-auto max-w-[420px]">
-                {/* Static soft halo behind photo — no continuous animation */}
-                <div className="absolute -inset-4 rounded-[2.5rem] bg-brand-accent/10 blur-2xl pointer-events-none" />
-                <div
-                  className="relative rounded-3xl overflow-hidden w-full h-full border border-white/10"
-                  style={{ boxShadow: '0 0 50px rgba(34,197,94,0.12), 0 30px 60px rgba(0,0,0,0.5)' }}
-                >
-                  <img
-                    src="/imageme.png.png"
-                    alt="Andrea Scardaci"
-                    loading="eager"
-                    className="w-full h-full object-cover object-top"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/50 via-transparent to-transparent" />
-                </div>
+              {/* Cutout portrait over a floating green orb — no frame, no crop */}
+              <div className="relative mx-auto max-w-[440px] aspect-[100/97]">
+                <motion.div
+                  animate={{ x: [0, 20, 0], y: [0, -14, 0] }}
+                  transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+                  className="absolute top-[4%] left-1/2 -translate-x-1/2 w-[82%] aspect-square rounded-full bg-brand-accent pointer-events-none"
+                  style={{ boxShadow: '0 0 90px rgba(34,197,94,0.4)' }}
+                />
+                <img
+                  src="/imageme_cutout.png"
+                  alt="Andrea Scardaci"
+                  loading="eager"
+                  className="relative z-10 w-full h-full object-contain object-bottom"
+                  style={{ filter: 'drop-shadow(0 30px 40px rgba(0,0,0,0.45))' }}
+                />
               </div>
 
               {/* Floating badge — bottom, static after entrance */}
@@ -281,7 +286,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3, duration: 0.5 }}
-                className="hidden lg:flex absolute -bottom-6 left-1/2 -translate-x-1/2 items-center gap-3 bg-brand-accent rounded-full pl-3 pr-5 py-3 text-white whitespace-nowrap"
+                className="hidden lg:flex absolute -bottom-20 left-1/2 -translate-x-1/2 items-center gap-3 bg-brand-accent rounded-full pl-3 pr-5 py-3 text-white whitespace-nowrap"
                 style={{ boxShadow: '0 15px 35px rgba(34,197,94,0.3)' }}
               >
                 <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
@@ -333,7 +338,7 @@ const Home = () => {
         </motion.div>
       </div>
 
-      {/* ── COSA INCLUDE ─── de-boxed list, circular medallions ── */}
+      {/* ── PERCHÉ UN SITO WEB ─── de-boxed list, circular medallions ── */}
       <section className="section-padding bg-brand-dark text-white">
         <div className="container-custom">
           <motion.div
@@ -342,8 +347,8 @@ const Home = () => {
             viewport={{ once: true, amount: 0.4 }}
             className="text-center max-w-2xl mx-auto mb-16"
           >
-            <span className="eyebrow mb-4 block">Ogni progetto</span>
-            <h2 className="text-3xl md:text-5xl text-white">Cosa include ogni sito web</h2>
+            <span className="eyebrow mb-4 block">Perché un sito web</span>
+            <h2 className="text-3xl md:text-5xl text-white">Perché un sito web può far crescere la tua attività</h2>
           </motion.div>
 
           <motion.div
@@ -352,7 +357,7 @@ const Home = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="max-w-3xl mx-auto border-t border-white/10"
           >
-            {includes.map((item, i) => (
+            {reasons.map((item, i) => (
               <div key={i} className="flex items-center gap-6 sm:gap-8 py-8 border-b border-white/10">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-brand-accent/10 flex items-center justify-center shrink-0">
                   <item.icon className="w-6 h-6 text-brand-accent" />
@@ -363,6 +368,28 @@ const Home = () => {
                 </div>
               </div>
             ))}
+          </motion.div>
+
+          {/* Cosa stai perdendo — elevated contrasting panel */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="max-w-3xl mx-auto mt-10 rounded-[2rem] bg-brand-dark-elevated border border-white/[0.06] p-8 sm:p-12"
+          >
+            <h3 className="text-2xl md:text-3xl text-white font-bold mb-8 text-center">
+              Cosa stai perdendo senza un sito web?
+            </h3>
+            <div className="space-y-5">
+              {losses.map((loss, i) => (
+                <div key={i} className="flex items-start gap-4">
+                  <span className="w-7 h-7 rounded-full bg-rose-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <X className="w-3.5 h-3.5 text-rose-400" />
+                  </span>
+                  <p className="text-white/50 text-base sm:text-lg leading-relaxed font-light">{loss}</p>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>

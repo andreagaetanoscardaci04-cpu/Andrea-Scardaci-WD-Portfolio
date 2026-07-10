@@ -110,8 +110,8 @@ const Footer = () => {
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-white/40 text-sm gap-4">
           <p>© {new Date().getFullYear()} Andrea Scardaci. Tutti i diritti riservati.</p>
           <div className="flex space-x-6">
-            <a href="#" className="hover:text-white">Privacy Policy</a>
-            <a href="#" className="hover:text-white">Cookie Policy</a>
+            <Link to="/privacy-policy#privacy-policy" className="hover:text-white">Privacy Policy</Link>
+            <Link to="/privacy-policy#cookie-policy" className="hover:text-white">Cookie Policy</Link>
           </div>
         </div>
       </div>

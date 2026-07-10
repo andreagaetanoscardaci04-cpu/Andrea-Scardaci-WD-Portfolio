@@ -23,7 +23,6 @@ const Supporto = () => {
       price: '75-100€',
       unit: 'a modifica',
       icon: Layers,
-      popular: true,
       items: [
         'Sostituzione di un\'intera sezione',
         'Cambiamento del look generale del sito',
