@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, Check, LifeBuoy, MessageCircle, Sparkles, Rocket } from 'lucide-react';
 import { PROJECTS, BENEFITS } from '../constants';
@@ -33,16 +33,17 @@ const OrbIcon: React.FC<{ children: React.ReactNode; size?: string; ring?: strin
 const Home = () => {
   const icons: Record<string, any> = { ShieldCheck, Search, Image, Phone };
 
+  const [avatarOpen, setAvatarOpen] = useState(false);
+
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const videoY = useTransform(heroScroll, [0, 1], [0, 140]);
+  const videoScale = useTransform(heroScroll, [0, 1], [1, 1.12]);
+
   const marqueeItems = [
     'Design Moderno', 'Siti Web Veloci', 'SEO Ottimizzato',
     'Mobile First', 'Alta Qualità', 'Prezzi Accessibili',
     'Palestre', 'Personal Training', 'Attività Locali',
-  ];
-
-  const stats = [
-    { value: '7', suffix: ' giorni', label: 'Tempo medio di consegna' },
-    { value: '100', suffix: '%', label: 'Design su misura, mai un template' },
-    { value: '0', suffix: '€', label: 'Canoni mensili obbligatori' },
   ];
 
   const reasons = [
@@ -100,7 +101,7 @@ const Home = () => {
     <div className="overflow-hidden">
 
       {/* ── HERO ─────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center bg-brand-dark overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center bg-brand-dark overflow-hidden">
 
         {/* Radial spotlight from top — static, no blur filter needed */}
         <div
@@ -131,32 +132,12 @@ const Home = () => {
 
             {/* Left */}
             <div>
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-3 mb-8 pl-2 pr-4 py-2 rounded-full border border-white/10 bg-white/[0.04]"
-              >
-                <div className="w-6 h-6 rounded-full overflow-hidden border border-white/15 shrink-0">
-                  <img src="/imageme.png.png" alt="" className="w-full h-full object-cover object-top" />
-                </div>
-                <motion.span
-                  animate={{ scale: [1, 1.5, 1], opacity: [0.8, 1, 0.8] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="w-1.5 h-1.5 rounded-full bg-brand-accent inline-block"
-                  style={{ boxShadow: '0 0 8px rgba(34,197,94,0.8)' }}
-                />
-                <span className="text-white/60 text-xs uppercase tracking-[0.2em] font-light">
-                  Disponibile per nuovi progetti
-                </span>
-              </motion.div>
-
               <div className="mb-8 space-y-1">
                 <motion.h1
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl leading-[1.02] font-black text-white"
+                  className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl leading-[1.02] font-black text-white"
                 >
                   Un sito web
                 </motion.h1>
@@ -164,7 +145,7 @@ const Home = () => {
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.33, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl leading-[1.02] font-light italic text-brand-accent"
+                  className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl leading-[1.02] font-light italic text-brand-accent"
                 >
                   per far crescere
                 </motion.h1>
@@ -172,37 +153,39 @@ const Home = () => {
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.51, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-4xl sm:text-5xl md:text-7xl lg:text-7xl leading-[1.02] font-black text-white"
+                  className="text-5xl sm:text-6xl md:text-8xl lg:text-8xl leading-[1.02] font-black text-white"
                 >
                   la tua attività.
                 </motion.h1>
               </div>
 
-              {/* Mobile-only image */}
+              {/* Mobile-only video */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="lg:hidden relative aspect-square rounded-3xl overflow-hidden mb-8 border border-white/10"
+                className="lg:hidden relative aspect-video rounded-3xl overflow-hidden mb-8 border border-white/10"
                 style={{ boxShadow: '0 0 50px rgba(34,197,94,0.12), 0 30px 60px rgba(0,0,0,0.5)' }}
               >
-                <img
-                  src="/imageme.png.png"
-                  alt="Andrea Scardaci"
-                  className="w-full h-full object-cover object-top"
-                />
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/videos/hero-laptop-poster.jpg"
+                  className="w-full h-full object-cover"
+                >
+                  <source src="/videos/hero-laptop.webm" type="video/webm" />
+                  <source src="/videos/hero-laptop.mp4" type="video/mp4" />
+                </video>
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-2">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center">
                   <div className="flex items-center gap-2 bg-brand-dark/70 border border-white/15 rounded-full pl-2 pr-4 py-2">
                     <div className="w-7 h-7 rounded-full bg-brand-accent/30 flex items-center justify-center shrink-0">
                       <Globe className="w-3.5 h-3.5 text-brand-accent" />
                     </div>
-                    <span className="text-[11px] text-white font-light">Online in 7 giorni</span>
+                    <span className="text-[11px] text-white font-light">Online in 10 giorni</span>
                   </div>
-                  <span className="flex items-center gap-1.5 bg-brand-accent rounded-full px-3 py-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white" />
-                    <span className="text-[10px] text-white font-medium uppercase tracking-wide">Attivo</span>
-                  </span>
                 </div>
               </motion.div>
 
@@ -239,21 +222,25 @@ const Home = () => {
                 </Link>
               </motion.div>
 
-              {/* Stats strip */}
+              {/* Mini bio */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.1 }}
-                className="grid grid-cols-3 gap-4 sm:gap-8 mt-14 pt-10 border-t border-white/10"
+                className="flex items-center justify-center gap-5 mt-14 pt-10 border-t border-white/10"
               >
-                {stats.map((s, i) => (
-                  <div key={i}>
-                    <p className="text-2xl sm:text-3xl md:text-4xl font-black text-white">
-                      {s.value}<span className="text-brand-accent">{s.suffix}</span>
-                    </p>
-                    <p className="text-white/35 text-[11px] sm:text-xs uppercase tracking-wider mt-1.5 font-light leading-snug">{s.label}</p>
-                  </div>
-                ))}
+                <button
+                  type="button"
+                  onClick={() => setAvatarOpen(true)}
+                  aria-label="Ingrandisci la foto di Andrea Scardaci"
+                  className="w-20 h-20 rounded-full overflow-hidden border border-white/15 shrink-0 cursor-pointer"
+                >
+                  <img src="/imageme.png.png" alt="Andrea Scardaci" className="w-full h-full object-cover object-top" />
+                </button>
+                <div className="text-center">
+                  <p className="text-white text-xl font-medium">Andrea Scardaci</p>
+                  <p className="text-white/45 text-base font-light">Web Designer & Developer</p>
+                </div>
               </motion.div>
             </div>
 
@@ -264,22 +251,25 @@ const Home = () => {
               transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="relative hidden lg:block"
             >
-              {/* Cutout portrait over a floating green orb — no frame, no crop */}
-              <div className="relative mx-auto max-w-[440px] aspect-[100/97]">
-                <motion.div
-                  animate={{ x: [0, 20, 0], y: [0, -14, 0] }}
-                  transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-                  className="absolute top-[4%] left-1/2 -translate-x-1/2 w-[82%] aspect-square rounded-full bg-brand-accent pointer-events-none"
-                  style={{ boxShadow: '0 0 90px rgba(34,197,94,0.4)' }}
-                />
-                <img
-                  src="/imageme_cutout.png"
-                  alt="Andrea Scardaci"
-                  loading="eager"
-                  className="relative z-10 w-full h-full object-contain object-bottom"
-                  style={{ filter: 'drop-shadow(0 30px 40px rgba(0,0,0,0.45))' }}
-                />
-              </div>
+              {/* Product video panel — subtle parallax tied to scroll */}
+              <motion.div
+                style={{ y: videoY, scale: videoScale, boxShadow: '0 30px 80px rgba(0,0,0,0.5)' }}
+                className="relative mx-auto max-w-[440px] aspect-square rounded-[2rem] overflow-hidden border border-white/10"
+              >
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/videos/hero-laptop-poster.jpg"
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source src="/videos/hero-laptop.webm" type="video/webm" />
+                  <source src="/videos/hero-laptop.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/55 via-transparent to-transparent" />
+                <div className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10 pointer-events-none" />
+              </motion.div>
 
               {/* Floating badge — bottom, static after entrance */}
               <motion.div
@@ -300,23 +290,6 @@ const Home = () => {
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
-        >
-          <span className="text-white/25 text-[10px] tracking-[0.25em] uppercase font-light">Scorri</span>
-          <div className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center pt-1.5">
-            <motion.div
-              animate={{ y: [0, 12, 0], opacity: [1, 0.2, 1] }}
-              transition={{ duration: 1.8, repeat: Infinity }}
-              className="w-1 h-2 rounded-full bg-brand-accent"
-            />
-          </div>
-        </motion.div>
       </section>
 
       {/* ── MARQUEE ──────────────────────────────────── */}
@@ -763,6 +736,30 @@ const Home = () => {
         </div>
       </section>
 
+      <AnimatePresence>
+        {avatarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setAvatarOpen(false)}
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6"
+          >
+            <motion.div
+              initial={{ scale: 0.7, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.7, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] rounded-full overflow-hidden border border-white/15 shrink-0"
+              style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.6)' }}
+            >
+              <img src="/imageme.png.png" alt="Andrea Scardaci" className="w-full h-full object-cover object-top" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
