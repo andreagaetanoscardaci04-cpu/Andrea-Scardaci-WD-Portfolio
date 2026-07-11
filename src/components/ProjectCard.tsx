@@ -22,12 +22,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, ca
     >
       {/* The circle — pure photo, no text on top of it, so legibility is never a fight with the image */}
       <div className="relative mb-8">
-        <span className="absolute -inset-3 rounded-full border border-brand-accent/15 group-hover:border-brand-accent/40 transition-colors duration-500 pointer-events-none" />
         <span className="absolute -inset-1 rounded-full bg-brand-accent/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
         <div
           className="relative aspect-square rounded-full overflow-hidden"
-          style={{ boxShadow: '0 30px 60px -18px rgba(10,14,12,0.35), inset 0 0 0 7px rgba(255,255,255,0.95)' }}
+          style={{ boxShadow: '0 30px 60px -18px rgba(10,14,12,0.35)' }}
         >
           <img
             src={image}

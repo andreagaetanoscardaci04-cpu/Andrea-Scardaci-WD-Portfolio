@@ -5,23 +5,23 @@ export const PROJECTS: Project[] = [
     id: '1',
     title: 'Sito web per Palestra',
     description: 'Un design moderno e dinamico per una palestra che vuole mostrare i propri corsi e orari.',
-    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/palestre-salvo-nicotra-cover.webp',
     category: 'Palestra',
     link: 'https://palestresalvonicotra.com'
   },
   {
-    id: '2',
-    title: 'Sito web per Centro Fitness',
-    description: 'Completo di tutte le informazioni su abbonamenti, servizi e tour virtuale.',
-    image: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1000&auto=format&fit=crop',
-    category: 'Centro Fitness',
-    link: 'https://elite-fitness-palermo-black-version.vercel.app/'
+    id: '7',
+    title: 'Landing Page per Palestra',
+    description: 'Una landing page moderna e accattivante per una palestra, pensata per convertire visitatori in nuovi iscritti.',
+    image: '/images/landing-page-palestra-cover.webp',
+    category: 'Palestra',
+    link: 'https://athena-club-padova-spark.lovable.app/'
   },
   {
     id: '3',
     title: 'Sito Web per Studio PT',
     description: 'Elegante e professionale, focalizzato sulla presentazione dei coach e dei risultati.',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/studio-pt-cover.webp',
     category: 'Personal Training',
     link: 'https://fitness-life-studio.vercel.app/'
   },
@@ -48,14 +48,6 @@ export const PROJECTS: Project[] = [
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop',
     category: 'Attività Locale',
     link: 'https://steakhouse-macello-tv38.vercel.app/'
-  },
-  {
-    id: '7',
-    title: 'Landing Page per Palestra',
-    description: 'Una landing page moderna e accattivante per una palestra, pensata per convertire visitatori in nuovi iscritti.',
-    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format&fit=crop',
-    category: 'Palestra',
-    link: 'https://athena-club-padova-spark.lovable.app/'
   }
 ];
 

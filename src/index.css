@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-luxury: "Fraunces", "Geist", ui-serif, serif;
 
   --color-brand-dark: #0a0e0c;
   --color-brand-dark-elevated: #12160f;

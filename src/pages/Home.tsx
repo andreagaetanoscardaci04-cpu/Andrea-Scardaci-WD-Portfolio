@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, Check, LifeBuoy, MessageCircle, Sparkles, Rocket } from 'lucide-react';
 import { PROJECTS, BENEFITS } from '../constants';
 import ProjectCard from '../components/ProjectCard';
+import { GoogleListingCompare, SeoRankingGraphic, PerceivedValueGraphic } from '../components/ReasonGraphics';
+import HeroBackground from '../components/HeroBackground';
 
 /** Glossy sphere-and-ring icon medallion — a Saturn-like signature detail. */
 const OrbIcon: React.FC<{ children: React.ReactNode; size?: string; ring?: string; tint?: string; className?: string }> = ({
@@ -51,16 +53,19 @@ const Home = () => {
       icon: Search,
       title: 'Ti trovano su Google',
       desc: 'Chi cerca un\'attività come la tua ti scopre online e conosce i tuoi servizi, anche senza passaparola.',
+      Visual: GoogleListingCompare,
     },
     {
       icon: TrendingUp,
       title: 'Più SEO grazie alla scheda Google',
       desc: 'Un sito collegato alla tua scheda Google Business aumenta la visibilità nelle ricerche locali.',
+      Visual: SeoRankingGraphic,
     },
     {
       icon: Award,
       title: 'Valore percepito più alto',
       desc: 'Un sito curato comunica professionalità e fa percepire la tua attività di qualità superiore.',
+      Visual: PerceivedValueGraphic,
     },
   ];
 
@@ -100,32 +105,13 @@ const Home = () => {
   return (
     <div className="overflow-hidden">
 
+      {/* Code-generated animated background — flowing dark-green light, no video/image assets.
+          Fixed to the viewport and shared by every dark section below (each tagged with
+          data-animated-bg-region); opaque light sections naturally cover it in between. */}
+      <HeroBackground className="fixed inset-0 w-full h-full -z-10" />
+
       {/* ── HERO ─────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center bg-brand-dark overflow-hidden">
-
-        {/* Radial spotlight from top — static, no blur filter needed */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse 110% 65% at 50% -5%, rgba(34,197,94,0.16) 0%, transparent 65%)',
-          }}
-        />
-
-        {/* Single soft ambient glow behind the portrait — one gentle motion, not several */}
-        <motion.div
-          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-          className="hidden lg:block absolute top-1/4 right-[8%] w-[480px] h-[480px] bg-brand-accent/15 rounded-full blur-[100px] pointer-events-none"
-        />
-
-        {/* Dot grid pattern — static */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '36px 36px',
-          }}
-        />
+      <section ref={heroRef} data-animated-bg-region className="relative min-h-screen flex items-center overflow-hidden">
 
         <div className="container-custom relative z-10 pt-32 pb-16 md:pt-36 md:pb-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -293,11 +279,13 @@ const Home = () => {
       </section>
 
       {/* ── MARQUEE ──────────────────────────────────── */}
-      <div className="bg-brand-dark py-5 overflow-hidden border-t border-white/5">
+      <div data-animated-bg-region className="relative py-5 overflow-hidden border-t border-white/5">
+        {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
         <motion.div
           animate={{ x: ['0%', '-50%'] }}
           transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
-          className="flex gap-10 whitespace-nowrap w-max"
+          className="relative z-10 flex gap-10 whitespace-nowrap w-max"
         >
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span
@@ -312,36 +300,56 @@ const Home = () => {
       </div>
 
       {/* ── PERCHÉ UN SITO WEB ─── de-boxed list, circular medallions ── */}
-      <section className="section-padding bg-brand-dark text-white">
-        <div className="container-custom">
+      <section data-animated-bg-region className="section-padding text-white relative">
+        {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
-            className="text-center max-w-2xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-20"
           >
-            <span className="eyebrow mb-4 block">Perché un sito web</span>
-            <h2 className="text-3xl md:text-5xl text-white">Perché un sito web può far crescere la tua attività</h2>
+            <span className="eyebrow mb-5 block">Perché un sito web</span>
+            <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] text-white">
+              {['Perché un sito web ', 'può far crescere', ' la tua attività?'].map((chunk, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
+                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ duration: 0.8, delay: 0.15 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                  className={`inline-block ${i === 1 ? 'italic text-brand-accent' : ''}`}
+                >
+                  {chunk}
+                </motion.span>
+              ))}
+            </h2>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            className="max-w-3xl mx-auto border-t border-white/10"
-          >
+          <div className="max-w-5xl mx-auto border-t border-white/10">
             {reasons.map((item, i) => (
-              <div key={i} className="flex items-center gap-6 sm:gap-8 py-8 border-b border-white/10">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-brand-accent/10 flex items-center justify-center shrink-0">
-                  <item.icon className="w-6 h-6 text-brand-accent" />
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center gap-8 py-10 border-b border-white/10"
+              >
+                <div className="flex items-start gap-6 sm:gap-8">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-brand-accent/10 flex items-center justify-center shrink-0">
+                    <item.icon className="w-6 h-6 text-brand-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl sm:text-2xl text-white font-bold mb-1.5">{item.title}</h3>
+                    <p className="text-white/45 text-base leading-relaxed font-light">{item.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl sm:text-2xl text-white font-bold mb-1.5">{item.title}</h3>
-                  <p className="text-white/45 text-base leading-relaxed font-light">{item.desc}</p>
-                </div>
-              </div>
+                <item.Visual />
+              </motion.div>
             ))}
-          </motion.div>
+          </div>
 
           {/* Cosa stai perdendo — elevated contrasting panel */}
           <motion.div
@@ -368,7 +376,9 @@ const Home = () => {
       </section>
 
       {/* ── CHI SONO ──────────────────────────────────── */}
-      <section className="section-padding bg-brand-dark text-white overflow-hidden relative border-t border-white/5">
+      <section data-animated-bg-region className="section-padding text-white overflow-hidden relative border-t border-white/5">
+        {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
         <div
           className="hidden lg:block absolute top-0 right-0 w-[550px] h-[550px] bg-brand-accent/[0.07] rounded-full blur-[130px] pointer-events-none"
         />
@@ -428,8 +438,10 @@ const Home = () => {
       </section>
 
       {/* ── PROCESSO ──────────────────────────────────── */}
-      <section className="section-padding bg-brand-dark text-white border-t border-white/5">
-        <div className="container-custom">
+      <section data-animated-bg-region className="section-padding text-white border-t border-white/5 relative">
+        {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -550,7 +562,9 @@ const Home = () => {
       </section>
 
       {/* ── OFFERTE / PRICING ─────────────────────────── */}
-      <section className="section-padding bg-brand-dark text-white overflow-hidden relative">
+      <section data-animated-bg-region className="section-padding text-white overflow-hidden relative">
+        {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
         <div
           className="hidden lg:block absolute bottom-0 left-0 w-[420px] h-[420px] bg-brand-accent/10 rounded-full blur-[110px] pointer-events-none"
         />
