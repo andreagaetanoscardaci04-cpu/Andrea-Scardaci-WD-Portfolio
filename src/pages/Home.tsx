@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, Check, LifeBuoy, MessageCircle, Sparkles, Rocket } from 'lucide-react';
 import { PROJECTS, BENEFITS } from '../constants';
 import ProjectCard from '../components/ProjectCard';
-import { GoogleListingCompare, SeoRankingGraphic, PerceivedValueGraphic } from '../components/ReasonGraphics';
+import { GoogleListingCompare, SeoRankingGraphic, PerceivedValueGraphic, CompetitorReactionCompare, PerformanceMetricsCompare, BrandImageCompare } from '../components/ReasonGraphics';
 import HeroBackground from '../components/HeroBackground';
 
 /** Glossy sphere-and-ring icon medallion — a Saturn-like signature detail. */
@@ -31,6 +31,13 @@ const OrbIcon: React.FC<{ children: React.ReactNode; size?: string; ring?: strin
     </div>
   </div>
 );
+
+/** Photo treatment for the "Come lavoro" process cards — keyed by step index, added one at a time as artwork comes in. */
+const PROCESS_VISUALS: Record<number, { src: string; alt: string }> = {
+  0: { src: '/images/processo-parliamo.webp', alt: 'Videochiamata di consulenza iniziale con un titolare di palestra' },
+  1: { src: '/images/processo-progetto.webp', alt: 'Progettazione del design del sito su schermo' },
+  2: { src: '/images/processo-online.webp', alt: 'Sito web live su laptop, tablet e smartphone dopo il lancio' },
+};
 
 const Home = () => {
   const icons: Record<string, any> = { ShieldCheck, Search, Image, Phone };
@@ -70,9 +77,18 @@ const Home = () => {
   ];
 
   const losses = [
-    'Clienti che scelgono un concorrente più visibile online',
-    'Meno chiamate e prenotazioni da chi ti cerca su Google',
-    'Un\'immagine meno curata rispetto a chi ha già un sito',
+    {
+      text: 'Clienti che scelgono un\'attività più visibile',
+      Visual: CompetitorReactionCompare,
+    },
+    {
+      text: 'Meno chiamate e prenotazioni da chi ti cerca su Google',
+      Visual: PerformanceMetricsCompare,
+    },
+    {
+      text: 'Un\'immagine meno curata rispetto a chi ha già un sito',
+      Visual: BrandImageCompare,
+    },
   ];
 
   const process = [
@@ -111,14 +127,14 @@ const Home = () => {
       <HeroBackground className="fixed inset-0 w-full h-full -z-10" />
 
       {/* ── HERO ─────────────────────────────────────── */}
-      <section ref={heroRef} data-animated-bg-region className="relative min-h-screen flex items-center overflow-hidden">
+      <section ref={heroRef} data-animated-bg-region className="relative flex items-center overflow-hidden">
 
-        <div className="container-custom relative z-10 pt-32 pb-16 md:pt-36 md:pb-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="container-custom relative z-10 pt-16 pb-10 md:pt-20 md:pb-14">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
             {/* Left */}
             <div>
-              <div className="mb-8 space-y-1">
+              <div className="mb-4 lg:mb-8 space-y-1">
                 <motion.h1
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -145,32 +161,25 @@ const Home = () => {
                 </motion.h1>
               </div>
 
-              {/* Mobile-only video */}
+              {/* Mobile-only photo — short horizontal frame, same crop as desktop */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="lg:hidden relative aspect-video rounded-3xl overflow-hidden mb-8 border border-white/10"
-                style={{ boxShadow: '0 0 50px rgba(34,197,94,0.12), 0 30px 60px rgba(0,0,0,0.5)' }}
+                className="lg:hidden relative aspect-[7/5] mb-5"
               >
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/videos/hero-laptop-poster.jpg"
-                  className="w-full h-full object-cover"
-                >
-                  <source src="/videos/hero-laptop.webm" type="video/webm" />
-                  <source src="/videos/hero-laptop.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center">
-                  <div className="flex items-center gap-2 bg-brand-dark/70 border border-white/15 rounded-full pl-2 pr-4 py-2">
-                    <div className="w-7 h-7 rounded-full bg-brand-accent/30 flex items-center justify-center shrink-0">
-                      <Globe className="w-3.5 h-3.5 text-brand-accent" />
+                <img
+                  src="/imageme.png.png"
+                  alt="Andrea Scardaci"
+                  className="w-full h-full object-cover object-top scale-75 rounded-[2.5rem] border border-white/10"
+                  style={{ boxShadow: '0 0 50px rgba(34,197,94,0.12), 0 30px 60px rgba(0,0,0,0.5)' }}
+                />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-center">
+                  <div className="flex items-center gap-1.5 bg-brand-dark/70 border border-white/15 rounded-full pl-1.5 pr-3 py-1.5">
+                    <div className="w-5 h-5 rounded-full bg-brand-accent/30 flex items-center justify-center shrink-0">
+                      <Globe className="w-2.5 h-2.5 text-brand-accent" />
                     </div>
-                    <span className="text-[11px] text-white font-light">Online in 10 giorni</span>
+                    <span className="text-[9px] text-white font-light">Online in 10 giorni</span>
                   </div>
                 </div>
               </motion.div>
@@ -179,7 +188,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.75 }}
-                className="text-lg md:text-xl text-white/55 font-light mb-10 max-w-md leading-relaxed"
+                className="text-lg md:text-xl text-white/55 font-light mb-6 lg:mb-10 max-w-md leading-relaxed"
               >
                 Aiuto palestre, studi fitness e attività locali italiane ad avere una presenza online moderna, elegante e professionale.
               </motion.p>
@@ -213,19 +222,19 @@ const Home = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.1 }}
-                className="flex items-center justify-center gap-5 mt-14 pt-10 border-t border-white/10"
+                className="flex items-center justify-center gap-3.5 mt-10 pt-6 border-t border-white/10"
               >
                 <button
                   type="button"
                   onClick={() => setAvatarOpen(true)}
                   aria-label="Ingrandisci la foto di Andrea Scardaci"
-                  className="w-20 h-20 rounded-full overflow-hidden border border-white/15 shrink-0 cursor-pointer"
+                  className="w-14 h-14 rounded-full overflow-hidden border border-white/15 shrink-0 cursor-pointer"
                 >
-                  <img src="/imageme.png.png" alt="Andrea Scardaci" className="w-full h-full object-cover object-top" />
+                  <img src="/images/andrea-selfie.webp" alt="Andrea Scardaci" className="w-full h-full object-cover object-[center_35%] scale-125" />
                 </button>
                 <div className="text-center">
-                  <p className="text-white text-xl font-medium">Andrea Scardaci</p>
-                  <p className="text-white/45 text-base font-light">Web Designer & Developer</p>
+                  <p className="text-white text-base font-medium">Andrea Scardaci</p>
+                  <p className="text-white/45 text-sm font-light">Web Designer & Developer</p>
                 </div>
               </motion.div>
             </div>
@@ -237,22 +246,16 @@ const Home = () => {
               transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="relative hidden lg:block"
             >
-              {/* Product video panel — subtle parallax tied to scroll */}
+              {/* Photo panel — short horizontal frame, subtle parallax tied to scroll */}
               <motion.div
                 style={{ y: videoY, scale: videoScale, boxShadow: '0 30px 80px rgba(0,0,0,0.5)' }}
-                className="relative mx-auto max-w-[440px] aspect-square rounded-[2rem] overflow-hidden border border-white/10"
+                className="relative mx-auto max-w-[440px] aspect-[7/5] rounded-[2rem] overflow-hidden border border-white/10"
               >
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/videos/hero-laptop-poster.jpg"
-                  className="absolute inset-0 w-full h-full object-cover"
-                >
-                  <source src="/videos/hero-laptop.webm" type="video/webm" />
-                  <source src="/videos/hero-laptop.mp4" type="video/mp4" />
-                </video>
+                <img
+                  src="/imageme.png.png"
+                  alt="Andrea Scardaci"
+                  className="absolute inset-0 w-full h-full object-cover object-top scale-75"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/55 via-transparent to-transparent" />
                 <div className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10 pointer-events-none" />
               </motion.div>
@@ -351,27 +354,44 @@ const Home = () => {
             ))}
           </div>
 
-          {/* Cosa stai perdendo — elevated contrasting panel */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="max-w-3xl mx-auto mt-10 rounded-[2rem] bg-brand-dark-elevated border border-white/[0.06] p-8 sm:p-12"
-          >
-            <h3 className="text-2xl md:text-3xl text-white font-bold mb-8 text-center">
-              Cosa stai perdendo senza un sito web?
-            </h3>
-            <div className="space-y-5">
+          {/* Cosa stai perdendo — de-boxed list, mirrors "Perché un sito web" above */}
+          <div className="mt-32">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              className="text-center max-w-3xl mx-auto mb-20"
+            >
+              <span className="eyebrow mb-5 block text-rose-400">Cosa può succedere</span>
+              <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] text-white">
+                Cosa potresti star perdendo{' '}
+                <span className="italic text-rose-500" style={{ textShadow: '0 0 40px rgba(244,63,94,0.4)' }}>
+                  senza un sito web?
+                </span>
+              </h2>
+            </motion.div>
+
+            <div className="max-w-5xl mx-auto border-t border-white/10">
               {losses.map((loss, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <span className="w-7 h-7 rounded-full bg-rose-500/10 flex items-center justify-center shrink-0 mt-0.5">
-                    <X className="w-3.5 h-3.5 text-rose-400" />
-                  </span>
-                  <p className="text-white/50 text-base sm:text-lg leading-relaxed font-light">{loss}</p>
-                </div>
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className={`grid grid-cols-1 ${loss.Visual ? 'lg:grid-cols-[1fr_auto] items-center gap-8' : ''} py-10 border-b border-white/10`}
+                >
+                  <div className="flex items-start gap-6 sm:gap-8">
+                    <span className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-rose-500/10 flex items-center justify-center shrink-0">
+                      <X className="w-5 h-5 text-rose-500" />
+                    </span>
+                    <p className="text-white text-xl sm:text-2xl font-bold leading-relaxed pt-3 sm:pt-4">{loss.text}</p>
+                  </div>
+                  {loss.Visual && <loss.Visual />}
+                </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -425,7 +445,7 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="aspect-[1/1.618] rounded-3xl overflow-hidden border border-white/10">
+            <div className="aspect-[7/5] rounded-3xl overflow-hidden border border-white/10">
               <img
                 src="/imageme1.png.png"
                 alt="Andrea Scardaci"
@@ -460,21 +480,40 @@ const Home = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
-            {process.map((item, i) => (
+            {process.map((item, i) => {
+              const visual = PROCESS_VISUALS[i];
+              return (
               <div
                 key={i}
-                className="relative p-10 rounded-[2rem] bg-brand-accent hover:bg-brand-accent/90 border border-brand-accent transition-colors group"
+                className="relative rounded-[2rem] bg-brand-accent hover:bg-brand-accent/90 border border-brand-accent transition-colors group overflow-hidden"
               >
-                <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                {visual && (
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      src={visual.src}
+                      alt={visual.alt}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-accent via-brand-accent/10 to-transparent" />
+                  </div>
+                )}
+
+                <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center z-10">
                   <span className="text-white font-bold text-sm">{item.step}</span>
                 </div>
-                <OrbIcon size="w-14 h-14" ring="border-white/30" className="mb-8">
-                  <item.icon className="w-6 h-6 text-white" />
-                </OrbIcon>
-                <h3 className="text-2xl text-white font-black mb-3">{item.title}</h3>
-                <p className="text-white text-lg leading-relaxed font-light">{item.desc}</p>
+
+                <div className={visual ? 'relative px-10 pb-10 -mt-10' : 'relative p-10'}>
+                  {!visual && (
+                    <OrbIcon size="w-14 h-14" ring="border-white/30" className="mb-8">
+                      <item.icon className="w-6 h-6 text-white" />
+                    </OrbIcon>
+                  )}
+                  <h3 className="text-2xl text-white font-black mb-3">{item.title}</h3>
+                  <p className="text-white text-lg leading-relaxed font-light">{item.desc}</p>
+                </div>
               </div>
-            ))}
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -769,7 +808,7 @@ const Home = () => {
               className="relative w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] rounded-full overflow-hidden border border-white/15 shrink-0"
               style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.6)' }}
             >
-              <img src="/imageme.png.png" alt="Andrea Scardaci" className="w-full h-full object-cover object-top" />
+              <img src="/images/andrea-selfie.webp" alt="Andrea Scardaci" className="w-full h-full object-cover object-[center_35%] scale-125" />
             </motion.div>
           </motion.div>
         )}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Star, X, Check, ArrowRight, BarChart3, Sparkles, Plus, Award } from 'lucide-react';
+import { Star, X, Check, ArrowRight, BarChart3, Sparkles, Plus, Award, RotateCcw } from 'lucide-react';
 
 const StarsRow: React.FC<{ filled?: number; size?: string }> = ({ filled = 4, size = 'w-3 h-3' }) => (
   <div className="flex items-center gap-0.5">
@@ -38,8 +38,8 @@ export const GoogleListingCompare: React.FC = () => {
   const flip = () => setIndex((i) => (i === 0 ? 1 : 0));
 
   return (
-    <div className="w-full lg:w-[300px] shrink-0 flex justify-center">
-      <div className="w-[140px]">
+    <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
+      <div className="w-[240px] sm:w-[260px]">
       <div className="relative aspect-square" style={{ perspective: 900 }}>
         <AnimatePresence initial={false}>
           <motion.div
@@ -48,7 +48,7 @@ export const GoogleListingCompare: React.FC = () => {
             animate={{ rotateY: 0, opacity: 1 }}
             exit={{ rotateY: -90, opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className={`absolute inset-0 rounded-lg border overflow-hidden ${slide.border}`}
+            className={`absolute inset-0 rounded-2xl border overflow-hidden ${slide.border}`}
             style={{ backfaceVisibility: 'hidden' }}
           >
             <img
@@ -63,14 +63,24 @@ export const GoogleListingCompare: React.FC = () => {
           type="button"
           onClick={flip}
           aria-label={index === 0 ? 'Mostra il dopo' : 'Mostra il prima'}
-          className="absolute -bottom-2 -right-2 z-10 w-6 h-6 rounded-full bg-brand-accent text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
-          style={{ boxShadow: '0 4px 10px rgba(34,197,94,0.4)' }}
+          className="absolute -bottom-2 -right-2 z-10 flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
+          style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
         >
-          <ArrowRight className="w-3 h-3" />
+          {index === 0 ? (
+            <>
+              Premi qui
+              <ArrowRight className="w-4 h-4" />
+            </>
+          ) : (
+            <>
+              <RotateCcw className="w-4 h-4" />
+              Torna indietro
+            </>
+          )}
         </button>
       </div>
 
-      <div className="relative h-9 mt-2 overflow-hidden">
+      <div className="relative h-9 mt-3 overflow-hidden">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={index}
@@ -78,13 +88,274 @@ export const GoogleListingCompare: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className={`absolute inset-x-0 flex flex-col items-center gap-0.5 text-center text-[8.5px] leading-tight uppercase tracking-wide ${slide.tone}`}
+            className={`absolute inset-x-0 flex flex-col items-center gap-0.5 text-center text-[10px] leading-tight uppercase tracking-wide ${slide.tone}`}
           >
-            <Icon className="w-2.5 h-2.5 shrink-0" />
+            <Icon className="w-3 h-3 shrink-0" />
             <p>{slide.label}</p>
           </motion.div>
         </AnimatePresence>
       </div>
+      </div>
+    </div>
+  );
+};
+
+const COMPETITOR_SLIDES = [
+  {
+    src: '/images/competitor-listing-rifiuta.png',
+    label: 'Il cliente rifiuta',
+    icon: X,
+    tone: 'text-white/35',
+    border: 'border-white/10',
+  },
+  {
+    src: '/images/competitor-listing-sceglie.png',
+    label: 'Sceglie un\'altra attività',
+    icon: Check,
+    tone: 'text-rose-400',
+    border: 'border-rose-400/30',
+  },
+];
+
+/** Loss #1 — a customer rejecting a photo-less, site-less listing in favor of a competitor's; click "Premi qui" to flip. */
+export const CompetitorReactionCompare: React.FC = () => {
+  const [index, setIndex] = useState(0);
+  const slide = COMPETITOR_SLIDES[index];
+  const Icon = slide.icon;
+  const flip = () => setIndex((i) => (i === 0 ? 1 : 0));
+
+  return (
+    <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
+      <div className="w-[240px] sm:w-[260px]">
+        <div className="relative aspect-square" style={{ perspective: 900 }}>
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={index}
+              initial={{ rotateY: 90, opacity: 0 }}
+              animate={{ rotateY: 0, opacity: 1 }}
+              exit={{ rotateY: -90, opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className={`absolute inset-0 rounded-2xl border overflow-hidden ${slide.border}`}
+              style={{ backfaceVisibility: 'hidden' }}
+            >
+              <img
+                src={slide.src}
+                alt={index === 1 ? 'Cliente sceglie un\'altra attività con foto e sito web' : 'Cliente rifiuta attività senza foto né sito web'}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          <button
+            type="button"
+            onClick={flip}
+            aria-label={index === 0 ? 'Mostra il dopo' : 'Mostra il prima'}
+            className="absolute -bottom-2 -right-2 z-10 flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
+            style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
+          >
+            {index === 0 ? (
+              <>
+                Premi qui
+                <ArrowRight className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                <RotateCcw className="w-4 h-4" />
+                Torna indietro
+              </>
+            )}
+          </button>
+        </div>
+
+        <div className="relative h-9 mt-3 overflow-hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className={`absolute inset-x-0 flex flex-col items-center gap-0.5 text-center text-[10px] leading-tight uppercase tracking-wide ${slide.tone}`}
+            >
+              <Icon className="w-3 h-3 shrink-0" />
+              <p>{slide.label}</p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const METRICS_SLIDES = [
+  {
+    src: '/images/gbp-performance-basso.png',
+    label: 'Poche interazioni sulla scheda',
+    icon: X,
+    tone: 'text-white/35',
+    border: 'border-white/10',
+  },
+  {
+    src: '/images/gbp-performance-alto.png',
+    label: 'Interazioni e clic in crescita',
+    icon: Check,
+    tone: 'text-brand-accent',
+    border: 'border-brand-accent/30',
+  },
+];
+
+/** Loss #2 — Google Business performance dashboard, before vs after a connected website; click "Premi qui" to flip. */
+export const PerformanceMetricsCompare: React.FC = () => {
+  const [index, setIndex] = useState(0);
+  const slide = METRICS_SLIDES[index];
+  const Icon = slide.icon;
+  const flip = () => setIndex((i) => (i === 0 ? 1 : 0));
+
+  return (
+    <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
+      <div className="w-[240px] sm:w-[260px]">
+        <div className="relative aspect-square" style={{ perspective: 900 }}>
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={index}
+              initial={{ rotateY: 90, opacity: 0 }}
+              animate={{ rotateY: 0, opacity: 1 }}
+              exit={{ rotateY: -90, opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className={`absolute inset-0 rounded-2xl border overflow-hidden ${slide.border}`}
+              style={{ backfaceVisibility: 'hidden' }}
+            >
+              <img
+                src={slide.src}
+                alt={index === 1 ? 'Statistiche Google Business in crescita con sito web collegato' : 'Statistiche Google Business basse senza sito web'}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          <button
+            type="button"
+            onClick={flip}
+            aria-label={index === 0 ? 'Mostra il dopo' : 'Mostra il prima'}
+            className="absolute -bottom-2 -right-2 z-10 flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
+            style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
+          >
+            {index === 0 ? (
+              <>
+                Premi qui
+                <ArrowRight className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                <RotateCcw className="w-4 h-4" />
+                Torna indietro
+              </>
+            )}
+          </button>
+        </div>
+
+        <div className="relative h-9 mt-3 overflow-hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className={`absolute inset-x-0 flex flex-col items-center gap-0.5 text-center text-[10px] leading-tight uppercase tracking-wide ${slide.tone}`}
+            >
+              <Icon className="w-3 h-3 shrink-0" />
+              <p>{slide.label}</p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const BRAND_IMAGE_SLIDES = [
+  {
+    src: '/images/brand-image-scarsa.png',
+    label: 'Il cliente non ti trova',
+    icon: X,
+    tone: 'text-white/35',
+    border: 'border-white/10',
+  },
+  {
+    src: '/images/brand-image-curata.png',
+    label: 'Fiducia e professionalità',
+    icon: Check,
+    tone: 'text-brand-accent',
+    border: 'border-brand-accent/30',
+  },
+];
+
+/** Loss #3 — a customer's perception of the business, before vs after a professional connected website; click "Premi qui" to flip. */
+export const BrandImageCompare: React.FC = () => {
+  const [index, setIndex] = useState(0);
+  const slide = BRAND_IMAGE_SLIDES[index];
+  const Icon = slide.icon;
+  const flip = () => setIndex((i) => (i === 0 ? 1 : 0));
+
+  return (
+    <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
+      <div className="w-[240px] sm:w-[260px]">
+        <div className="relative aspect-square" style={{ perspective: 900 }}>
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={index}
+              initial={{ rotateY: 90, opacity: 0 }}
+              animate={{ rotateY: 0, opacity: 1 }}
+              exit={{ rotateY: -90, opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className={`absolute inset-0 rounded-2xl border overflow-hidden ${slide.border}`}
+              style={{ backfaceVisibility: 'hidden' }}
+            >
+              <img
+                src={slide.src}
+                alt={index === 1 ? 'Cliente percepisce professionalità grazie al sito web' : 'Cliente non trova informazioni senza sito web'}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          <button
+            type="button"
+            onClick={flip}
+            aria-label={index === 0 ? 'Mostra il dopo' : 'Mostra il prima'}
+            className="absolute -bottom-2 -right-2 z-10 flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
+            style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
+          >
+            {index === 0 ? (
+              <>
+                Premi qui
+                <ArrowRight className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                <RotateCcw className="w-4 h-4" />
+                Torna indietro
+              </>
+            )}
+          </button>
+        </div>
+
+        <div className="relative h-9 mt-3 overflow-hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className={`absolute inset-x-0 flex flex-col items-center gap-0.5 text-center text-[10px] leading-tight uppercase tracking-wide ${slide.tone}`}
+            >
+              <Icon className="w-3 h-3 shrink-0" />
+              <p>{slide.label}</p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
@@ -126,10 +397,10 @@ export const SeoRankingGraphic: React.FC = () => {
 
   return (
     <>
-      <div className="w-full lg:w-[300px] shrink-0 flex justify-center">
-        <div className="w-[140px]">
-          <div className="relative aspect-square rounded-lg border border-brand-dark/[0.08] bg-white flex items-center justify-center">
-            <div className="relative w-[92px] h-[92px] shrink-0">
+      <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
+        <div className="w-[240px] sm:w-[260px]">
+          <div className="relative aspect-square rounded-2xl border border-brand-dark/[0.08] bg-white flex items-center justify-center">
+            <div className="relative w-[168px] h-[168px] shrink-0">
               <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
                 <circle cx="50" cy="50" r={SEO_RING_RADIUS} fill="none" stroke="rgba(34,197,94,0.15)" strokeWidth="9" />
                 <motion.circle
@@ -148,26 +419,26 @@ export const SeoRankingGraphic: React.FC = () => {
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-brand-dark text-xl font-bold leading-none flex items-baseline">
-                  <Plus className="w-3.5 h-3.5 mr-0.5 stroke-[3]" /> {SEO_HERO_PCT}%
+                <span className="text-brand-dark text-3xl font-bold leading-none flex items-baseline">
+                  <Plus className="w-5 h-5 mr-0.5 stroke-[3]" /> {SEO_HERO_PCT}%
                 </span>
-                <span className="text-brand-dark/60 text-[7px] font-medium uppercase tracking-wide mt-1">del ranking</span>
+                <span className="text-brand-dark/60 text-[10px] font-medium uppercase tracking-wide mt-1.5">del ranking</span>
               </div>
             </div>
 
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="absolute -bottom-2.5 -right-6 z-10 whitespace-nowrap rounded-full bg-brand-accent text-white text-[10px] font-medium px-3 py-1.5 hover:scale-105 active:scale-95 transition-transform"
-              style={{ boxShadow: '0 4px 10px rgba(34,197,94,0.4)' }}
+              className="absolute -bottom-2 -right-2 z-10 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
+              style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
             >
               Scopri di più
             </button>
           </div>
 
-          <div className="flex flex-col items-center gap-0.5 text-center mt-2">
-            <BarChart3 className="w-2.5 h-2.5 text-brand-accent shrink-0" />
-            <p className="text-[8.5px] leading-tight uppercase tracking-wide text-brand-accent">Peso SEO del sito</p>
+          <div className="flex flex-col items-center gap-0.5 text-center mt-3">
+            <BarChart3 className="w-3 h-3 text-brand-accent shrink-0" />
+            <p className="text-[10px] leading-tight uppercase tracking-wide text-brand-accent">Peso SEO del sito</p>
           </div>
         </div>
       </div>
@@ -257,28 +528,28 @@ export const PerceivedValueGraphic: React.FC = () => {
 
   return (
     <>
-      <div className="w-full lg:w-[300px] shrink-0 flex justify-center">
-        <div className="w-[140px]">
-          <div className="relative aspect-square rounded-lg border border-brand-dark/[0.08] bg-white flex flex-col items-center justify-center gap-1.5 px-3">
-            <StarsRow filled={5} size="w-3.5 h-3.5" />
-            <span className="text-brand-dark text-2xl font-bold leading-none">46%</span>
-            <p className="text-brand-dark/50 text-[7px] uppercase tracking-wide text-center leading-tight">
+      <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
+        <div className="w-[240px] sm:w-[260px]">
+          <div className="relative aspect-square rounded-2xl border border-brand-dark/[0.08] bg-white flex flex-col items-center justify-center gap-2.5 px-5">
+            <StarsRow filled={5} size="w-6 h-6" />
+            <span className="text-brand-dark text-4xl font-bold leading-none">46%</span>
+            <p className="text-brand-dark/50 text-[11px] uppercase tracking-wide text-center leading-tight">
               giudica la credibilità dal design del sito
             </p>
 
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="absolute -bottom-2.5 -right-6 z-10 whitespace-nowrap rounded-full bg-brand-accent text-white text-[10px] font-medium px-3 py-1.5 hover:scale-105 active:scale-95 transition-transform"
-              style={{ boxShadow: '0 4px 10px rgba(34,197,94,0.4)' }}
+              className="absolute -bottom-2 -right-2 z-10 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
+              style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
             >
               Scopri lo studio
             </button>
           </div>
 
-          <div className="flex flex-col items-center gap-0.5 text-center mt-2">
-            <Award className="w-2.5 h-2.5 text-brand-accent shrink-0" />
-            <p className="text-[8.5px] leading-tight uppercase tracking-wide text-brand-accent">
+          <div className="flex flex-col items-center gap-0.5 text-center mt-3">
+            <Award className="w-3 h-3 text-brand-accent shrink-0" />
+            <p className="text-[10px] leading-tight uppercase tracking-wide text-brand-accent">
               Studio su credibilità web
             </p>
           </div>

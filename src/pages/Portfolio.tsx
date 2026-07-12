@@ -3,18 +3,22 @@ import { motion } from 'motion/react';
 import { MessageSquare, Layout, Globe } from 'lucide-react';
 import { PROJECTS } from '../constants';
 import ProjectCard from '../components/ProjectCard';
+import HeroBackground from '../components/HeroBackground';
 
 const Portfolio = () => {
   return (
-    <div className="pt-32">
-      <section className="section-padding">
-        <div className="container-custom">
+    <div className="pt-32 overflow-hidden">
+      {/* Code-generated animated background — same nebula shader as the homepage, shared by every section below. */}
+      <HeroBackground className="fixed inset-0 w-full h-full -z-10" />
+
+      <section data-animated-bg-region className="relative section-padding">
+        <div className="container-custom relative z-10">
           <div className="max-w-3xl mb-20">
             <span className="eyebrow mb-4 block">Portfolio</span>
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-brand-dark">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white">
               Esempi di siti web
             </h1>
-            <p className="text-xl text-brand-dark/50 font-light leading-relaxed">
+            <p className="text-xl text-white/50 font-light leading-relaxed">
               Scopri come ho aiutato altre attività locali a migliorare la loro presenza online con design moderni e professionali.
             </p>
           </div>
@@ -29,6 +33,7 @@ const Portfolio = () => {
                 category={project.category}
                 index={index}
                 link={project.link}
+                theme="dark"
               />
             ))}
           </div>
@@ -36,8 +41,9 @@ const Portfolio = () => {
       </section>
 
       {/* Come funziona */}
-      <section className="section-padding bg-brand-paper">
-        <div className="container-custom">
+      <section data-animated-bg-region className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +51,7 @@ const Portfolio = () => {
             className="text-center mb-16"
           >
             <span className="eyebrow mb-4 block">Come funziona</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-brand-dark">Dal primo contatto al sito online</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white">Dal primo contatto al sito online</h2>
           </motion.div>
 
           <motion.div

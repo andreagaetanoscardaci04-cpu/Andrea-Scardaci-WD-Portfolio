@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { MessageSquare, Layout, Globe, Send, CheckCircle2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import HeroBackground from '../components/HeroBackground';
 
 const SERVICE_ID = 'service_64i9n0o';
 const TEMPLATE_ID = 'template_aqri8cp';
@@ -47,15 +48,18 @@ const StartWorking = () => {
   ];
 
   return (
-    <div className="pt-32">
-      <section className="section-padding">
-        <div className="container-custom">
+    <div className="pt-32 overflow-hidden">
+      {/* Code-generated animated background — same nebula shader as the homepage. */}
+      <HeroBackground className="fixed inset-0 w-full h-full -z-10" />
+
+      <section data-animated-bg-region className="relative section-padding">
+        <div className="container-custom relative z-10">
           <div className="max-w-3xl mb-20">
             <span className="eyebrow mb-4 block">Lavoriamo insieme</span>
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-brand-dark">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white">
               Iniziamo a lavorare insieme
             </h1>
-            <p className="text-xl text-brand-dark/50 font-light leading-relaxed">
+            <p className="text-xl text-white/60 font-light leading-relaxed">
               Il processo è semplice e trasparente. Mi occupo di tutto io, così tu puoi concentrarti sulla tua attività.
             </p>
           </div>
@@ -71,8 +75,8 @@ const StartWorking = () => {
                 <div className="w-20 h-20 rounded-full bg-brand-accent/10 flex items-center justify-center mb-8">
                   <step.icon className="w-10 h-10 text-brand-accent" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-brand-dark">{step.title}</h3>
-                <p className="text-brand-dark/50 font-light text-lg leading-relaxed">{step.description}</p>
+                <h3 className="text-2xl font-bold mb-4 text-white">{step.title}</h3>
+                <p className="text-white/50 font-light text-lg leading-relaxed">{step.description}</p>
 
                 {index < 2 && (
                   <div className="hidden lg:block absolute top-10 left-full w-full border-t-2 border-dashed border-brand-accent/20 -z-10" />
@@ -161,10 +165,10 @@ const StartWorking = () => {
             </div>
 
             <div className="order-1 lg:order-2">
-              <h2 className="text-4xl font-bold mb-8 text-brand-dark">
+              <h2 className="text-4xl font-bold mb-8 text-white">
                 Raccontami il tuo progetto
               </h2>
-              <p className="text-lg text-brand-dark/50 font-light mb-10 leading-relaxed">
+              <p className="text-lg text-white/50 font-light mb-10 leading-relaxed">
                 Compila il modulo con i tuoi dati e quelli della tua attività. Ti ricontatterò entro 48 ore per fissare una chiamata conoscitiva gratuita.
               </p>
 
@@ -173,19 +177,19 @@ const StartWorking = () => {
                   <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <p className="font-medium text-brand-dark">Consulenza gratuita iniziale</p>
+                  <p className="font-medium text-white">Consulenza gratuita iniziale</p>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <p className="font-medium text-brand-dark">Preventivo chiaro e senza sorprese</p>
+                  <p className="font-medium text-white">Preventivo chiaro e senza sorprese</p>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <p className="font-medium text-brand-dark">Tempi di consegna rapidi</p>
+                  <p className="font-medium text-white">Tempi di consegna rapidi</p>
                 </div>
               </div>
             </div>

@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import HeroBackground from '../components/HeroBackground';
 
 const SERVICE_ID = 'service_64i9n0o';
 const TEMPLATE_ID = 'template_aqri8cp';
@@ -29,15 +30,18 @@ const Contact = () => {
   };
 
   return (
-    <div className="pt-32">
-      <section className="section-padding">
-        <div className="container-custom">
+    <div className="pt-32 overflow-hidden">
+      {/* Code-generated animated background — same nebula shader as the homepage. */}
+      <HeroBackground className="fixed inset-0 w-full h-full -z-10" />
+
+      <section data-animated-bg-region className="relative section-padding">
+        <div className="container-custom relative z-10">
           <div className="max-w-3xl mb-20">
             <span className="eyebrow mb-4 block">Contatti</span>
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-brand-dark">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white">
               Contattami
             </h1>
-            <p className="text-xl text-brand-dark/50 font-light leading-relaxed">
+            <p className="text-xl text-white/60 font-light leading-relaxed">
               Se vuoi informazioni o un preventivo per il tuo sito web, scrivimi. Ti risponderò il prima possibile.
             </p>
           </div>
@@ -115,8 +119,8 @@ const Contact = () => {
                   <Mail className="w-7 h-7 text-brand-accent" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-brand-dark">Email</h3>
-                  <p className="text-lg text-brand-dark/50 font-light">andreagaetanoscardaci04@gmail.com</p>
+                  <h3 className="text-xl font-bold mb-2 text-white">Email</h3>
+                  <p className="text-lg text-white/50 font-light">andreagaetanoscardaci04@gmail.com</p>
                 </div>
               </div>
 
@@ -125,8 +129,8 @@ const Contact = () => {
                   <Phone className="w-7 h-7 text-brand-accent" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-brand-dark">Telefono</h3>
-                  <p className="text-lg text-brand-dark/50 font-light">+39 392 296 5248</p>
+                  <h3 className="text-xl font-bold mb-2 text-white">Telefono</h3>
+                  <p className="text-lg text-white/50 font-light">+39 392 296 5248</p>
                 </div>
               </div>
 

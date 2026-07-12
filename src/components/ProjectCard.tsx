@@ -9,9 +9,11 @@ interface ProjectCardProps {
   category: string;
   index: number;
   link?: string;
+  theme?: 'light' | 'dark';
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, category, index, link }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, category, index, link, theme = 'light' }) => {
+  const isDark = theme === 'dark';
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -55,10 +57,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, ca
       <span className="text-xs font-light uppercase tracking-[0.2em] text-brand-accent mb-2 block">
         {category}
       </span>
-      <h3 className="text-xl font-bold mb-2 text-brand-dark">
+      <h3 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-brand-dark'}`}>
         {title}
       </h3>
-      <p className="text-brand-dark/50 text-sm font-light mb-5 line-clamp-2 max-w-[240px] mx-auto">
+      <p className={`text-sm font-light mb-5 line-clamp-2 max-w-[240px] mx-auto ${isDark ? 'text-white/50' : 'text-brand-dark/50'}`}>
         {description}
       </p>
       {link ? (
@@ -72,7 +74,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, ca
           <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
         </a>
       ) : (
-        <button className="inline-flex items-center justify-center text-brand-dark font-semibold text-sm group/btn">
+        <button className={`inline-flex items-center justify-center font-semibold text-sm group/btn ${isDark ? 'text-white' : 'text-brand-dark'}`}>
           Visualizza esempio
           <ChevronRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
         </button>

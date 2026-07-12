@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Check, Sparkles, Layers, Hammer, CalendarClock, Wallet } from 'lucide-react';
+import HeroBackground from '../components/HeroBackground';
 
 const Supporto = () => {
   const tiers = [
@@ -44,11 +45,13 @@ const Supporto = () => {
   ];
 
   return (
-    <div className="pt-32">
+    <div className="pt-32 overflow-hidden">
+      {/* Code-generated animated background — same nebula shader as the homepage. */}
+      <HeroBackground className="fixed inset-0 w-full h-full -z-10" />
 
       {/* ── HERO ─────────────────────────────────────── */}
-      <section className="section-padding pb-0">
-        <div className="container-custom">
+      <section data-animated-bg-region className="relative section-padding pb-0">
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -56,10 +59,10 @@ const Supporto = () => {
             className="max-w-3xl"
           >
             <span className="eyebrow mb-6 block">Supporto</span>
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-brand-dark leading-[1.05]">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white leading-[1.05]">
               Assistenza su misura, non un canone fisso.
             </h1>
-            <p className="text-xl text-brand-dark/50 font-light leading-relaxed">
+            <p className="text-xl text-white/60 font-light leading-relaxed">
               Il tuo sito è online, ma la tua attività continua a crescere e cambiare. Niente abbonamenti obbligatori: paghi solo le modifiche di cui hai davvero bisogno, quando ne hai bisogno.
             </p>
           </motion.div>
@@ -67,16 +70,17 @@ const Supporto = () => {
       </section>
 
       {/* ── TIERS ────────────────────────────────────── */}
-      <section className="section-padding">
-        <div className="container-custom">
+      <section data-animated-bg-region className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="max-w-2xl mb-16"
           >
-            <h2 className="text-3xl md:text-5xl text-brand-dark font-bold mb-4">Modifiche singole</h2>
-            <p className="text-brand-dark/50 text-lg font-light leading-relaxed">
+            <h2 className="text-3xl md:text-5xl text-white font-bold mb-4">Modifiche singole</h2>
+            <p className="text-white/50 text-lg font-light leading-relaxed">
               Ogni richiesta viene classificata in una delle tre fasce, in base alla complessità e al tempo richiesto.
             </p>
           </motion.div>
@@ -127,7 +131,8 @@ const Supporto = () => {
       </section>
 
       {/* ── PACCHETTI LONG-TERM ──────────────────────── */}
-      <section className="section-padding bg-brand-dark text-white overflow-hidden relative">
+      <section data-animated-bg-region className="section-padding text-white overflow-hidden relative">
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
         <div className="hidden lg:block absolute bottom-0 left-0 w-[420px] h-[420px] bg-brand-accent/10 rounded-full blur-[110px] pointer-events-none" />
         <div className="container-custom relative z-10">
           <motion.div
@@ -209,8 +214,8 @@ const Supporto = () => {
       </section>
 
       {/* ── CTA ──────────────────────────────────────── */}
-      <section className="section-padding">
-        <div className="container-custom">
+      <section data-animated-bg-region className="relative section-padding">
+        <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

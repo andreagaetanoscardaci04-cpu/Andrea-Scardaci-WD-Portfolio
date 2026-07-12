@@ -42,7 +42,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
 
   const waveLines = useMemo(() => {
     const mid = (WAVE_LINES - 1) / 2;
@@ -50,7 +49,7 @@ const Navbar = () => {
       const baseY = 6 + (i * (WAVE_HEIGHT - 12)) / (WAVE_LINES - 1);
       const amplitude = 10 + 5 * Math.sin(i * 0.75);
       const phase = i * 0.13;
-      const opacity = 0.16 + 0.42 * (1 - Math.abs(i - mid) / mid);
+      const opacity = 0.1 + 0.26 * (1 - Math.abs(i - mid) / mid);
       return {
         d: wavePath(WAVE_WIDTH, baseY, amplitude, 1.15, phase, WAVE_WIDTH * 0.58),
         opacity,
@@ -82,17 +81,17 @@ const Navbar = () => {
     { name: 'Contatti', path: '/contatti' },
   ];
 
-  const lightHeader = isHome && !scrolled && !isOpen;
+  const lightHeader = !scrolled && !isOpen;
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled || isOpen ? 'bg-white/90 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-6'
+          scrolled || isOpen ? 'bg-white/90 backdrop-blur-md py-2.5 md:py-4 shadow-sm' : 'bg-transparent py-3 md:py-6'
         }`}
       >
         <div className="container-custom flex justify-between items-center">
-          <Link to="/" className={`flex items-baseline gap-1.5 text-2xl tracking-tight transition-colors duration-300 ${lightHeader ? 'text-white' : 'text-brand-dark'}`}>
+          <Link to="/" className={`flex items-baseline gap-1 md:gap-1.5 text-base md:text-2xl tracking-tight transition-colors duration-300 ${lightHeader ? 'text-white' : 'text-brand-dark'}`}>
             <span className="font-thin">Andrea</span>
             <span className="font-light text-brand-accent">Scardaci</span>
           </Link>
@@ -127,7 +126,7 @@ const Navbar = () => {
 
           {/* Mobile Toggle — thin uneven bars, premium editorial feel */}
           <button
-            className={`md:hidden relative w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+            className={`md:hidden relative w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-300 ${
               isOpen || !lightHeader ? 'bg-brand-dark/5' : 'bg-white/10'
             }`}
             onClick={() => setIsOpen((v) => !v)}
@@ -135,12 +134,12 @@ const Navbar = () => {
             aria-expanded={isOpen}
           >
             {isOpen ? (
-              <X className={isOpen || !lightHeader ? 'text-brand-dark w-5 h-5' : 'text-white w-5 h-5'} />
+              <X className={isOpen || !lightHeader ? 'text-brand-dark w-4 h-4' : 'text-white w-4 h-4'} />
             ) : (
-              <span className="flex flex-col items-end gap-[5px]">
-                <span className={`block h-[2px] w-5 rounded-full ${!lightHeader ? 'bg-brand-dark' : 'bg-white'}`} />
-                <span className={`block h-[2px] w-3.5 rounded-full ${!lightHeader ? 'bg-brand-accent' : 'bg-brand-accent'}`} />
-                <span className={`block h-[2px] w-5 rounded-full ${!lightHeader ? 'bg-brand-dark' : 'bg-white'}`} />
+              <span className="flex flex-col items-end gap-[4px]">
+                <span className={`block h-[1.5px] w-4 rounded-full ${!lightHeader ? 'bg-brand-dark' : 'bg-white'}`} />
+                <span className={`block h-[1.5px] w-3 rounded-full ${!lightHeader ? 'bg-brand-accent' : 'bg-brand-accent'}`} />
+                <span className={`block h-[1.5px] w-4 rounded-full ${!lightHeader ? 'bg-brand-dark' : 'bg-white'}`} />
               </span>
             )}
           </button>
@@ -228,13 +227,13 @@ const Navbar = () => {
                 transition={{ delay: 0.15 + navLinks.length * 0.06 + 0.1, duration: 0.4 }}
                 className="flex flex-col gap-6 pt-10"
               >
-                <div className="flex items-center justify-center py-3">
-                  <svg width={WAVE_WIDTH} height={WAVE_HEIGHT} viewBox={`0 0 ${WAVE_WIDTH} ${WAVE_HEIGHT}`} fill="none" style={{ filter: 'drop-shadow(0 0 14px rgba(255,255,255,0.12))' }}>
+                <div className="-mx-8 flex items-center justify-center py-3">
+                  <svg width="100%" height={WAVE_HEIGHT} viewBox={`0 0 ${WAVE_WIDTH} ${WAVE_HEIGHT}`} preserveAspectRatio="none" fill="none" style={{ filter: 'drop-shadow(0 0 14px rgba(255,255,255,0.06))' }}>
                     <defs>
                       <linearGradient id="waveFade" x1="0" y1="0" x2={WAVE_WIDTH} y2="0" gradientUnits="userSpaceOnUse">
                         <stop offset="0%" stopColor="#fff" stopOpacity="0" />
-                        <stop offset="15%" stopColor="#fff" stopOpacity="1" />
-                        <stop offset="85%" stopColor="#fff" stopOpacity="1" />
+                        <stop offset="15%" stopColor="#fff" stopOpacity="0.55" />
+                        <stop offset="85%" stopColor="#fff" stopOpacity="0.55" />
                         <stop offset="100%" stopColor="#fff" stopOpacity="0" />
                       </linearGradient>
                     </defs>
