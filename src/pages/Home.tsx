@@ -130,7 +130,7 @@ const Home = () => {
       <section ref={heroRef} data-animated-bg-region className="relative flex items-center overflow-hidden">
 
         <div className="container-custom relative z-10 pt-16 pb-10 md:pt-20 md:pb-14">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
             {/* Left */}
             <div>
@@ -241,23 +241,22 @@ const Home = () => {
 
             {/* Right */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: 50, y: 0 }}
+              animate={{ opacity: 1, x: 0, y: -64 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="relative hidden lg:block"
             >
-              {/* Photo panel — short horizontal frame, subtle parallax tied to scroll */}
+              {/* Photo panel — short horizontal frame, rounded directly on the photo (same treatment as mobile), subtle parallax tied to scroll */}
               <motion.div
-                style={{ y: videoY, scale: videoScale, boxShadow: '0 30px 80px rgba(0,0,0,0.5)' }}
-                className="relative mx-auto max-w-[440px] aspect-[7/5] rounded-[2rem] overflow-hidden border border-white/10"
+                style={{ y: videoY, scale: videoScale }}
+                className="relative mx-auto max-w-[440px] aspect-[7/5]"
               >
                 <img
                   src="/imageme.png.png"
                   alt="Andrea Scardaci"
-                  className="absolute inset-0 w-full h-full object-cover object-top scale-75"
+                  className="absolute inset-0 w-full h-full object-cover object-top scale-75 rounded-[2.5rem] border border-white/10"
+                  style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.5)' }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/55 via-transparent to-transparent" />
-                <div className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10 pointer-events-none" />
               </motion.div>
 
               {/* Floating badge — bottom, static after entrance */}
@@ -265,15 +264,15 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3, duration: 0.5 }}
-                className="hidden lg:flex absolute -bottom-20 left-1/2 -translate-x-1/2 items-center gap-3 bg-brand-accent rounded-full pl-3 pr-5 py-3 text-white whitespace-nowrap"
+                className="hidden lg:flex absolute -bottom-16 left-1/2 -translate-x-1/2 items-center gap-2 bg-brand-accent rounded-full pl-2 pr-4 py-2 text-white whitespace-nowrap"
                 style={{ boxShadow: '0 15px 35px rgba(34,197,94,0.3)' }}
               >
-                <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-                  <Globe className="w-4 h-4 text-white" />
+                <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                  <Globe className="w-3 h-3 text-white" />
                 </span>
                 <div>
-                  <p className="text-[10px] text-white/70 uppercase tracking-wider">Disponibile ora</p>
-                  <p className="text-sm font-medium">Accetta nuovi clienti</p>
+                  <p className="text-[9px] text-white/70 uppercase tracking-wider">Disponibile ora</p>
+                  <p className="text-xs font-medium">Accetta nuovi clienti</p>
                 </div>
               </motion.div>
             </motion.div>
