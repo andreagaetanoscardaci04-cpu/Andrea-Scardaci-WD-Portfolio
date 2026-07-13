@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, Check, LifeBuoy, MessageCircle, Sparkles, Rocket } from 'lucide-react';
+import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, Check, LifeBuoy } from 'lucide-react';
 import { PROJECTS, BENEFITS } from '../constants';
 import ProjectCard from '../components/ProjectCard';
 import { GoogleListingCompare, SeoRankingGraphic, PerceivedValueGraphic, CompetitorReactionCompare, PerformanceMetricsCompare, BrandImageCompare } from '../components/ReasonGraphics';
@@ -32,12 +32,19 @@ const OrbIcon: React.FC<{ children: React.ReactNode; size?: string; ring?: strin
   </div>
 );
 
-/** Photo treatment for the "Come lavoro" process cards — keyed by step index, added one at a time as artwork comes in. */
+/** Photo treatment for the "Come lavoro" process circles — keyed by step index. */
 const PROCESS_VISUALS: Record<number, { src: string; alt: string }> = {
   0: { src: '/images/processo-parliamo.webp', alt: 'Videochiamata di consulenza iniziale con un titolare di palestra' },
   1: { src: '/images/processo-progetto.webp', alt: 'Progettazione del design del sito su schermo' },
   2: { src: '/images/processo-online.webp', alt: 'Sito web live su laptop, tablet e smartphone dopo il lancio' },
 };
+
+/** Per-step float path for the "Come lavoro" orbs — position within the shared cluster, plus a unique drift loop so the three circles feel alive rather than synchronized. */
+const PROCESS_FLOAT = [
+  { top: '10%', left: '6%', size: 'w-36 h-36 sm:w-52 sm:h-52', duration: 7, delay: 0, x: [0, 8, -5, 0], y: [0, -10, 6, 0] },
+  { top: '38%', left: '46%', size: 'w-40 h-40 sm:w-56 sm:h-56', duration: 8.5, delay: 0.8, x: [0, -10, 6, 0], y: [0, 10, -8, 0] },
+  { top: '64%', left: '12%', size: 'w-32 h-32 sm:w-48 sm:h-48', duration: 6.5, delay: 1.4, x: [0, 6, -8, 0], y: [0, -8, 5, 0] },
+];
 
 const Home = () => {
   const icons: Record<string, any> = { ShieldCheck, Search, Image, Phone };
@@ -92,9 +99,9 @@ const Home = () => {
   ];
 
   const process = [
-    { step: '01', title: 'Parliamo', desc: 'Capisco la tua attività, i tuoi obiettivi e cosa vuoi comunicare ai tuoi clienti.', icon: MessageCircle },
-    { step: '02', title: 'Progetto', desc: 'Realizzo un design moderno e professionale su misura per la tua identità visiva.', icon: Sparkles },
-    { step: '03', title: 'Online', desc: 'Il tuo sito è live, ottimizzato per tutti i dispositivi e pronto ad acquisire clienti.', icon: Rocket },
+    { title: 'Parliamo' },
+    { title: 'Progetto' },
+    { title: 'Online' },
   ];
 
   const offers = [
@@ -401,10 +408,10 @@ const Home = () => {
         <div
           className="hidden lg:block absolute top-0 right-0 w-[550px] h-[550px] bg-brand-accent/[0.07] rounded-full blur-[130px] pointer-events-none"
         />
-        <div className="container-custom relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        <div className="container-custom relative z-10 max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.8 }}
           >
@@ -412,6 +419,17 @@ const Home = () => {
             <h2 className="text-4xl md:text-6xl mb-8 leading-tight text-white font-bold">
               Andrea Scardaci
             </h2>
+
+            <div className="relative max-w-md aspect-[7/5] rounded-3xl overflow-hidden border border-white/10 mb-10">
+              <img
+                src="/imageme1.png.png"
+                alt="Andrea Scardaci"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: '50% 18%' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
+            </div>
+
             <div className="space-y-5 text-white/60 text-lg font-light leading-relaxed mb-10">
               <p>
                 Sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con{' '}
@@ -436,23 +454,6 @@ const Home = () => {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform text-brand-accent" />
             </Link>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="aspect-[7/5] rounded-3xl overflow-hidden border border-white/10">
-              <img
-                src="/imageme1.png.png"
-                alt="Andrea Scardaci"
-                className="w-full h-full object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
-            </div>
-          </motion.div>
         </div>
       </section>
 
@@ -473,47 +474,67 @@ const Home = () => {
             </h2>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
+          <div className="relative mx-auto max-w-md h-[480px] sm:h-[640px] md:h-[680px]">
+            {/* soft ambient glow tying the three orbs into one cluster */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: 'radial-gradient(circle at 50% 45%, rgba(34,197,94,0.1), transparent 60%)' }}
+            />
+
             {process.map((item, i) => {
+              const pos = PROCESS_FLOAT[i];
               const visual = PROCESS_VISUALS[i];
               return (
-              <div
-                key={i}
-                className="relative rounded-[2rem] bg-brand-accent hover:bg-brand-accent/90 border border-brand-accent transition-colors group overflow-hidden"
-              >
-                {visual && (
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <img
-                      src={visual.src}
-                      alt={visual.alt}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-accent via-brand-accent/10 to-transparent" />
-                  </div>
-                )}
+                <motion.div
+                  key={i}
+                  className="absolute"
+                  style={{ top: pos.top, left: pos.left }}
+                  initial={{ opacity: 0, scale: 0.4, y: -30 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, delay: 0.15 * i, ease: 'easeOut' }}
+                >
+                  <motion.div
+                    className="relative"
+                    animate={{ x: pos.x, y: pos.y }}
+                    transition={{ duration: pos.duration, delay: pos.delay, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <h3 className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 whitespace-nowrap text-white font-black text-xl sm:text-2xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+                      {item.title}
+                    </h3>
 
-                <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center z-10">
-                  <span className="text-white font-bold text-sm">{item.step}</span>
-                </div>
+                    <div className={`relative ${pos.size}`}>
+                      {/* Saturn-style ring accent in brand green */}
+                      <span
+                        className="absolute left-1/2 top-1/2 w-[150%] h-[46%] border-2 border-brand-accent/50 rounded-full pointer-events-none"
+                        style={{ transform: 'translate(-50%, -50%) rotate(-18deg)' }}
+                      />
+                      {/* soft green ambient glow behind the photo */}
+                      <div
+                        className="absolute -inset-4 rounded-full blur-2xl opacity-70 pointer-events-none"
+                        style={{ background: 'radial-gradient(circle, rgba(34,197,94,0.55), transparent 70%)' }}
+                      />
 
-                <div className={visual ? 'relative px-10 pb-10 -mt-10' : 'relative p-10'}>
-                  {!visual && (
-                    <OrbIcon size="w-14 h-14" ring="border-white/30" className="mb-8">
-                      <item.icon className="w-6 h-6 text-white" />
-                    </OrbIcon>
-                  )}
-                  <h3 className="text-2xl text-white font-black mb-3">{item.title}</h3>
-                  <p className="text-white text-lg leading-relaxed font-light">{item.desc}</p>
-                </div>
-              </div>
+                      <div
+                        className="absolute inset-0 rounded-full overflow-hidden"
+                        style={{ boxShadow: '0 0 0 3px rgba(34,197,94,0.6), 0 18px 40px rgba(0,0,0,0.5)' }}
+                      >
+                        <img
+                          src={visual.src}
+                          alt={visual.alt}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        <div
+                          className="absolute inset-0"
+                          style={{ background: 'radial-gradient(circle at 30% 25%, rgba(34,197,94,0.25), rgba(10,14,12,0.35) 70%)' }}
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 

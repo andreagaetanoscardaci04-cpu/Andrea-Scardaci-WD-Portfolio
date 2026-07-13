@@ -63,7 +63,9 @@ export const GoogleListingCompare: React.FC = () => {
           type="button"
           onClick={flip}
           aria-label={index === 0 ? 'Mostra il dopo' : 'Mostra il prima'}
-          className="absolute -bottom-2 -right-2 z-10 flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
+          className={`absolute -bottom-2 -right-2 z-10 flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white hover:scale-105 active:scale-95 transition-transform ${
+            index === 0 ? 'text-sm font-bold uppercase tracking-wide px-5 py-2.5' : 'p-3'
+          }`}
           style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
         >
           {index === 0 ? (
@@ -72,10 +74,7 @@ export const GoogleListingCompare: React.FC = () => {
               <ArrowRight className="w-4 h-4" />
             </>
           ) : (
-            <>
-              <RotateCcw className="w-4 h-4" />
-              Torna indietro
-            </>
+            <RotateCcw className="w-4 h-4" />
           )}
         </button>
       </div>
