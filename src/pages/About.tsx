@@ -36,9 +36,9 @@ const About = () => {
               <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white">
                 Chi è Andrea Scardaci
               </h1>
-              <div className="space-y-6 text-xl text-white/60 font-light leading-relaxed">
+              <div className="space-y-6 text-xl text-white/85 font-luxury leading-relaxed">
                 <p>
-                  Mi chiamo <span className="text-white font-normal">Andrea Scardaci</span> e sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con eleganza e professionalità.
+                  Mi chiamo <span className="text-white italic">Andrea Scardaci</span> e sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con eleganza e professionalità.
                 </p>
                 <p>
                   Non mi limito a "fare siti". Creo vetrine digitali che riflettono l'anima della tua attività, che sia una palestra storica, un moderno studio di personal training o un centro yoga.

@@ -430,10 +430,10 @@ const Home = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
             </div>
 
-            <div className="space-y-5 text-white/60 text-lg font-light leading-relaxed mb-10">
+            <div className="space-y-5 text-white/85 text-lg font-luxury leading-relaxed mb-10">
               <p>
                 Sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con{' '}
-                <span className="text-white font-normal">eleganza e professionalità</span>.
+                <span className="text-white italic">eleganza e professionalità</span>.
               </p>
               <p>
                 Non mi limito a "fare siti". Creo vetrine digitali che riflettono l'anima della tua attività, che sia una palestra storica, un moderno studio di personal training o un centro yoga.
@@ -504,17 +504,6 @@ const Home = () => {
                     </h3>
 
                     <div className={`relative ${pos.size}`}>
-                      {/* Saturn-style ring accent in brand green */}
-                      <span
-                        className="absolute left-1/2 top-1/2 w-[150%] h-[46%] border-2 border-brand-accent/50 rounded-full pointer-events-none"
-                        style={{ transform: 'translate(-50%, -50%) rotate(-18deg)' }}
-                      />
-                      {/* soft green ambient glow behind the photo */}
-                      <div
-                        className="absolute -inset-4 rounded-full blur-2xl opacity-70 pointer-events-none"
-                        style={{ background: 'radial-gradient(circle, rgba(34,197,94,0.55), transparent 70%)' }}
-                      />
-
                       <div
                         className="absolute inset-0 rounded-full overflow-hidden"
                         style={{ boxShadow: '0 0 0 3px rgba(34,197,94,0.6), 0 18px 40px rgba(0,0,0,0.5)' }}
@@ -523,10 +512,6 @@ const Home = () => {
                           src={visual.src}
                           alt={visual.alt}
                           className="absolute inset-0 w-full h-full object-cover"
-                        />
-                        <div
-                          className="absolute inset-0"
-                          style={{ background: 'radial-gradient(circle at 30% 25%, rgba(34,197,94,0.25), rgba(10,14,12,0.35) 70%)' }}
                         />
                       </div>
                     </div>
