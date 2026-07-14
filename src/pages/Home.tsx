@@ -257,15 +257,15 @@ const Home = () => {
               transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="relative hidden lg:block"
             >
-              {/* Photo panel — short horizontal frame, rounded directly on the photo (same treatment as mobile), subtle parallax tied to scroll */}
+              {/* Photo panel — tall vertical frame sized to match the headline block, subtle parallax tied to scroll */}
               <motion.div
                 style={{ y: videoY, scale: videoScale }}
-                className="relative mx-auto max-w-[440px] aspect-[7/5]"
+                className="relative w-full aspect-[3/4] xl:aspect-[4/5]"
               >
                 <img
                   src="/imageme.png.png"
                   alt="Andrea Scardaci"
-                  className="absolute inset-0 w-full h-full object-cover object-top scale-75 rounded-[2.5rem] border border-white/10"
+                  className="absolute inset-0 w-full h-full object-cover object-top rounded-[2.5rem] border border-white/10"
                   style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.5)' }}
                 />
               </motion.div>

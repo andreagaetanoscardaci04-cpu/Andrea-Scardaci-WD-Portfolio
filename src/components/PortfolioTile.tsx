@@ -20,7 +20,10 @@ const PortfolioTile: React.FC<PortfolioTileProps> = ({ title, image, link, index
     viewport={{ once: true, amount: 0.3 }}
     transition={{ delay: index * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     className="group relative block aspect-square rounded-[1.5rem] sm:rounded-[1.75rem] overflow-hidden"
-    style={{ boxShadow: '0 24px 50px -18px rgba(10,14,12,0.4)' }}
+    style={{
+      boxShadow:
+        '0 24px 50px -18px rgba(10,14,12,0.45), inset 0 0 0 1.5px rgba(197,255,220,0.22), inset 0 0 40px rgba(34,197,94,0.06)',
+    }}
   >
     <img
       src={image}
@@ -29,17 +32,30 @@ const PortfolioTile: React.FC<PortfolioTileProps> = ({ title, image, link, index
       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
       referrerPolicy="no-referrer"
     />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+
+    {/* Glossy top-left highlight — echoes the site's orb-icon sphere treatment */}
     <div
-      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-      style={{ boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.25)' }}
+      className="absolute inset-0 pointer-events-none opacity-70"
+      style={{ backgroundImage: 'radial-gradient(circle at 22% 15%, rgba(255,255,255,0.22), rgba(255,255,255,0) 45%)' }}
+    />
+
+    {/* Text scrim — tinted with the site's near-black (not flat black) so the caption reads as part of the same world as the page behind it */}
+    <div
+      className="absolute inset-0"
+      style={{ backgroundImage: 'linear-gradient(to top, rgba(10,14,12,0.96) 0%, rgba(10,14,12,0.62) 30%, rgba(10,14,12,0) 62%)' }}
+    />
+
+    {/* Premium edge ring — brightens to the brand green on hover */}
+    <div
+      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+      style={{ boxShadow: 'inset 0 0 0 1.5px rgba(34,197,94,0.55)' }}
     />
 
     <span className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center group-hover:bg-brand-accent group-hover:border-brand-accent transition-colors duration-300">
       <ArrowUpRight className="w-4 h-4 text-white" />
     </span>
 
-    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-center">
       <h3 className="font-luxury text-white text-base sm:text-lg md:text-xl leading-snug drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
         {title}
       </h3>

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { MessageSquare, Layout, Globe } from 'lucide-react';
 import { PROJECTS } from '../constants';
-import ProjectCard from '../components/ProjectCard';
+import PortfolioTile from '../components/PortfolioTile';
 import HeroBackground from '../components/HeroBackground';
 
 const Portfolio = () => {
@@ -23,17 +23,14 @@ const Portfolio = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
             {PROJECTS.map((project, index) => (
-              <ProjectCard
+              <PortfolioTile
                 key={project.id}
                 title={project.title}
-                description={project.description}
                 image={project.image}
-                category={project.category}
-                index={index}
                 link={project.link}
-                theme="dark"
+                index={index}
               />
             ))}
           </div>
