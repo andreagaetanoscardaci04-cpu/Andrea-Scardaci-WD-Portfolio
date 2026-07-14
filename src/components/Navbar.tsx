@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronRight, ArrowUpRight, Instagram, Mail, X } from 'lucide-react';
+import { useContactModal } from '../context/ContactModalContext';
 
 /** Builds a smooth cubic-bezier path through a series of points (Catmull-Rom → Bezier). */
 const smoothPath = (points: [number, number][]) => {
@@ -42,6 +43,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { openModal } = useContactModal();
 
   const waveLines = useMemo(() => {
     const mid = (WAVE_LINES - 1) / 2;
@@ -111,8 +113,9 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link
-              to="/lavoriamo-insieme"
+            <button
+              type="button"
+              onClick={() => openModal('navbar')}
               className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center group ${
                 lightHeader
                   ? 'bg-white/10 border border-white/25 text-white hover:bg-brand-accent hover:border-brand-accent'
@@ -121,7 +124,7 @@ const Navbar = () => {
             >
               Inizia Ora
               <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </button>
           </div>
 
           {/* Mobile Toggle — thin uneven bars, premium editorial feel */}

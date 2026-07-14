@@ -2,6 +2,8 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ContactModal from './components/ContactModal';
+import { ContactModalProvider } from './context/ContactModalContext';
 import Home from './pages/Home';
 import About from './pages/About';
 import Portfolio from './pages/Portfolio';
@@ -37,22 +39,25 @@ const ScrollToTop = () => {
 export default function App() {
   return (
     <Router>
-      <ScrollToTop />
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/chi-sono" element={<About />} />
-            <Route path="/esempi" element={<Portfolio />} />
-            <Route path="/lavoriamo-insieme" element={<StartWorking />} />
-            <Route path="/supporto" element={<Supporto />} />
-            <Route path="/contatti" element={<Contact />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <ContactModalProvider>
+        <ScrollToTop />
+        <div className="min-h-screen flex flex-col">
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/chi-sono" element={<About />} />
+              <Route path="/esempi" element={<Portfolio />} />
+              <Route path="/lavoriamo-insieme" element={<StartWorking />} />
+              <Route path="/supporto" element={<Supporto />} />
+              <Route path="/contatti" element={<Contact />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+        <ContactModal />
+      </ContactModalProvider>
     </Router>
   );
 }

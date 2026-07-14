@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
 import { ChevronRight, Check, Sparkles, Layers, Hammer, CalendarClock, Wallet } from 'lucide-react';
 import HeroBackground from '../components/HeroBackground';
+import { useContactModal } from '../context/ContactModalContext';
 
 const Supporto = () => {
+  const { openModal } = useContactModal();
   const tiers = [
     {
       name: 'Low-tier',
@@ -232,13 +233,14 @@ const Supporto = () => {
                 Scrivimi cosa vorresti cambiare sul tuo sito: ti dico subito a quale fascia appartiene e quanto costa.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  to="/contatti"
+                <button
+                  type="button"
+                  onClick={() => openModal('supporto-cta')}
                   className="inline-flex items-center justify-center gap-2 bg-white text-brand-accent px-10 py-4 rounded-full font-medium hover:bg-brand-dark hover:text-white transition-all"
                 >
                   Scrivimi ora
                   <ChevronRight className="w-4 h-4" />
-                </Link>
+                </button>
               </div>
             </div>
           </motion.div>

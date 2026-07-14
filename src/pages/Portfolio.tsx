@@ -15,8 +15,8 @@ const Portfolio = () => {
         <div className="container-custom relative z-10">
           <div className="max-w-3xl mb-20">
             <span className="eyebrow mb-4 block">Portfolio</span>
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white">
-              Esempi di siti web
+            <h1 className="font-luxury text-5xl md:text-7xl leading-[1.15] mb-8 text-white">
+              Esempi di <span className="italic text-brand-accent">siti web</span>
             </h1>
             <p className="text-xl text-white/50 font-light leading-relaxed">
               Scopri come ho aiutato altre attività locali a migliorare la loro presenza online con design moderni e professionali.
@@ -51,7 +51,9 @@ const Portfolio = () => {
             className="text-center mb-16"
           >
             <span className="eyebrow mb-4 block">Come funziona</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white">Dal primo contatto al sito online</h2>
+            <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] text-white">
+              Dal primo contatto <span className="italic text-brand-accent">al sito online</span>
+            </h2>
           </motion.div>
 
           <motion.div

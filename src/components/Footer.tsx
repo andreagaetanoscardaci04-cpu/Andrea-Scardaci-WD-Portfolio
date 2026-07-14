@@ -12,8 +12,8 @@ const Footer = () => {
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-2">
-            <Link to="/" className="text-3xl font-serif font-medium mb-6 block">
-              Andrea <span className="text-brand-accent">Scardaci</span>
+            <Link to="/" className="text-3xl tracking-tight mb-6 block">
+              <span className="font-thin">Andrea</span> <span className="font-light text-brand-accent">Scardaci</span>
             </Link>
             <p className="text-white/60 max-w-md mb-8 leading-relaxed">
               Realizzo siti web professionali per palestre, studi fitness e attività locali in Italia.

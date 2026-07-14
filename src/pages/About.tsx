@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Heart, Zap, Users } from 'lucide-react';
 import HeroBackground from '../components/HeroBackground';
+import { useContactModal } from '../context/ContactModalContext';
 
 const About = () => {
+  const { openModal } = useContactModal();
   return (
     <div className="pt-24 overflow-hidden">
       {/* Code-generated animated background — same nebula shader as the homepage, shared by every section below. */}
@@ -216,18 +217,20 @@ const About = () => {
                 Se il mio modo di lavorare ti convince, raccontami la tua attività e vediamo insieme come farla crescere online.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  to="/lavoriamo-insieme"
+                <button
+                  type="button"
+                  onClick={() => openModal('about-cta')}
                   className="bg-white text-brand-accent px-10 py-4 rounded-full font-medium hover:bg-brand-dark hover:text-white transition-all"
                 >
                   Inizia ora
-                </Link>
-                <Link
-                  to="/contatti"
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openModal('about-cta')}
                   className="border border-white/25 text-white px-10 py-4 rounded-full font-medium hover:bg-white/10 transition-all"
                 >
                   Contattami
-                </Link>
+                </button>
               </div>
             </div>
           </motion.div>

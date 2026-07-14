@@ -3,9 +3,11 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, Check, LifeBuoy } from 'lucide-react';
 import { PROJECTS, BENEFITS } from '../constants';
-import ProjectCard from '../components/ProjectCard';
+import PortfolioTile from '../components/PortfolioTile';
+import BenefitsStepper from '../components/BenefitsStepper';
 import { GoogleListingCompare, SeoRankingGraphic, PerceivedValueGraphic, CompetitorReactionCompare, PerformanceMetricsCompare, BrandImageCompare } from '../components/ReasonGraphics';
 import HeroBackground from '../components/HeroBackground';
+import { useContactModal } from '../context/ContactModalContext';
 
 /** Glossy sphere-and-ring icon medallion — a Saturn-like signature detail. */
 const OrbIcon: React.FC<{ children: React.ReactNode; size?: string; ring?: string; tint?: string; className?: string }> = ({
@@ -50,6 +52,7 @@ const Home = () => {
   const icons: Record<string, any> = { ShieldCheck, Search, Image, Phone };
 
   const [avatarOpen, setAvatarOpen] = useState(false);
+  const { openModal } = useContactModal();
 
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
@@ -206,15 +209,16 @@ const Home = () => {
                 transition={{ duration: 0.6, delay: 0.9 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <Link
-                  to="/lavoriamo-insieme"
+                <button
+                  type="button"
+                  onClick={() => openModal('hero')}
                   className="group relative bg-brand-accent text-white px-8 py-5 lg:py-4 rounded-full font-medium text-base lg:text-sm flex items-center justify-center gap-2 overflow-hidden"
                   style={{ boxShadow: '0 0 30px rgba(34,197,94,0.35), 0 4px 15px rgba(34,197,94,0.2)' }}
                 >
                   <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300" />
                   Iniziamo a lavorare insieme
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
-                </Link>
+                </button>
                 <Link
                   to="/esempi"
                   className="group border border-white/15 text-white/70 px-8 py-5 lg:py-4 rounded-full font-light tracking-wide text-base lg:text-sm flex items-center justify-center gap-2 hover:border-white/30 hover:text-white transition-all"
@@ -469,8 +473,8 @@ const Home = () => {
             className="text-center max-w-2xl mx-auto mb-20"
           >
             <span className="eyebrow mb-4 block">Come lavoro</span>
-            <h2 className="text-3xl md:text-5xl text-white">
-              Dal primo contatto al sito online
+            <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] text-white">
+              Dal primo contatto <span className="italic text-brand-accent">al sito online</span>
             </h2>
           </motion.div>
 
@@ -533,21 +537,19 @@ const Home = () => {
             className="mb-16"
           >
             <span className="eyebrow mb-4 block">Portfolio</span>
-            <h2 className="text-4xl md:text-5xl text-brand-dark">
-              Esempi di siti web
+            <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] text-brand-dark">
+              Esempi di <span className="italic text-brand-accent">siti web</span>
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PROJECTS.slice(0, 3).map((project, index) => (
-              <ProjectCard
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+            {PROJECTS.map((project, index) => (
+              <PortfolioTile
                 key={project.id}
                 title={project.title}
-                description={project.description}
                 image={project.image}
-                category={project.category}
-                index={index}
                 link={project.link}
+                index={index}
               />
             ))}
           </div>
@@ -572,35 +574,38 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
-            className="text-center max-w-2xl mx-auto mb-20"
+            className="text-center max-w-2xl mx-auto mb-14"
           >
             <span className="eyebrow mb-4 block">Perché investire online</span>
-            <h2 className="text-3xl md:text-5xl text-brand-dark">
-              Il tuo sito lavora per te, 24h su 24
+            <h2 className="font-luxury text-3xl sm:text-4xl md:text-5xl leading-[1.15] text-brand-dark">
+              Il tuo sito lavora <span className="italic text-brand-accent">per te</span>,{' '}
+              <span className="lining-nums">24 ore su 24</span>
             </h2>
           </motion.div>
 
+          {/* Showcase video — benefit card hangs off its bottom edge, mostly resting on the page background */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            viewport={{ once: true, amount: 0.3 }}
+            className="relative mx-auto w-full max-w-xl sm:max-w-2xl mb-32 sm:mb-20"
           >
-            {BENEFITS.map((benefit, index) => {
-              const Icon = icons[benefit.icon];
-              return (
-                <div
-                  key={index}
-                  className="p-8 rounded-[1.75rem] border border-brand-dark/[0.06] hover:border-brand-accent/25 transition-colors"
-                >
-                  <OrbIcon size="w-12 h-12" ring="border-brand-accent/30" tint="bg-brand-accent/10" className="mb-6">
-                    <Icon className="w-5 h-5 text-brand-accent" />
-                  </OrbIcon>
-                  <h3 className="text-2xl text-brand-dark mb-3">{benefit.title}</h3>
-                  <p className="text-brand-dark/40 text-lg leading-relaxed font-light">{benefit.description}</p>
-                </div>
-              );
-            })}
+            <div className="relative aspect-[7/5] rounded-[2rem] overflow-hidden border border-brand-dark/[0.08] bg-brand-dark/[0.04]">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster="/videos/benefits-showcase-poster.jpg"
+                className="absolute inset-0 w-full h-full object-cover"
+              >
+                <source src="/videos/benefits-showcase.webm" type="video/webm" />
+                <source src="/videos/benefits-showcase.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+            </div>
+
+            <BenefitsStepper items={BENEFITS} icons={icons} />
           </motion.div>
         </div>
       </section>
@@ -622,8 +627,10 @@ const Home = () => {
             className="text-center max-w-2xl mx-auto mb-16"
           >
             <span className="eyebrow mb-4 block">Offerte</span>
-            <h2 className="text-4xl md:text-5xl mb-6 leading-tight text-white">
-              Alta qualità, senza i costi delle agenzie.
+            <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] mb-6">
+              <span className="text-white">Un progetto</span><br />
+              <span className="text-white">pensato su misura</span><br />
+              <span className="italic text-brand-accent">per te.</span>
             </h2>
             <p className="text-white/40 text-xl leading-relaxed font-light">
               Scegli il piano più adatto alla tua attività.
@@ -673,8 +680,9 @@ const Home = () => {
                   ))}
                 </ul>
 
-                <Link
-                  to="/lavoriamo-insieme"
+                <button
+                  type="button"
+                  onClick={() => openModal(`offerta-${offer.pages}`)}
                   className={`text-center py-3 rounded-full font-medium text-sm transition-all ${
                     offer.popular
                       ? 'bg-brand-accent text-white hover:bg-white hover:text-brand-dark'
@@ -682,7 +690,7 @@ const Home = () => {
                   }`}
                 >
                   Inizia ora
-                </Link>
+                </button>
               </div>
             ))}
           </motion.div>
@@ -699,33 +707,31 @@ const Home = () => {
               <h3 className="text-white text-2xl font-medium mb-2">Hai una richiesta specifica?</h3>
               <p className="text-white/40 text-base font-light">Mandami un messaggio e riceverai un prezzo e un'offerta personalizzata su misura per te.</p>
             </div>
-            <Link
-              to="/lavoriamo-insieme"
+            <button
+              type="button"
+              onClick={() => openModal('offerta-custom')}
               className="shrink-0 inline-flex items-center gap-2 bg-brand-accent text-white px-8 py-4 rounded-full font-medium text-sm hover:bg-white hover:text-brand-dark transition-all"
             >
               Scrivimi ora
               <ChevronRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
 
-          {/* ── SUPPORTO (elevated panel on the same dark canvas) ── */}
+          {/* ── SUPPORTO (bare on the page background, no card) ── */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            className="relative rounded-[2rem] sm:rounded-[3rem] bg-brand-dark-elevated border border-white/[0.06] p-8 sm:p-12 md:p-20 mt-16 grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] items-center gap-8 lg:gap-14"
+            className="relative mt-16 flex flex-col lg:flex-row items-center lg:items-end justify-between gap-10 lg:gap-16"
           >
-            <OrbIcon size="w-16 h-16" ring="border-brand-accent/35" tint="bg-brand-accent/15" className="relative z-10 mx-auto lg:mx-0 shrink-0">
-              <LifeBuoy className="w-7 h-7 text-brand-accent" />
-            </OrbIcon>
-
             <div className="relative z-10 text-center lg:text-left">
               <span className="eyebrow mb-4 block">Dopo il lancio</span>
-              <h2 className="text-3xl md:text-4xl text-white mb-4 leading-snug">
-                Un sito web ha bisogno di chi se ne prende cura.
+              <h2 className="font-luxury text-5xl sm:text-6xl md:text-7xl leading-[1.15] mb-5">
+                <span className="text-white">E per il</span><br />
+                <span className="italic text-brand-accent">supporto?</span>
               </h2>
-              <p className="text-white/40 text-lg leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
-                Con il tempo la tua attività cambia, e il sito deve poterla seguire: nuove offerte, foto aggiornate, sezioni da modificare. Offro un servizio di assistenza dedicata, su misura per le modifiche di cui hai davvero bisogno.
+              <p className="text-white/70 text-lg leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
+                Il lancio è solo l'inizio. La tua attività cresce e cambia: nuove offerte, foto aggiornate, contenuti da perfezionare. Il sito ti segue con la stessa cura con cui è nato, con un'assistenza dedicata e pensata su misura per ogni esigenza che nasce dopo il lancio.
               </p>
             </div>
 
@@ -737,60 +743,11 @@ const Home = () => {
               <span className="w-9 h-9 rounded-full bg-white/20 group-hover:bg-brand-accent/15 flex items-center justify-center transition-colors">
                 <LifeBuoy className="w-4 h-4 text-white group-hover:text-brand-accent transition-colors" />
               </span>
-              <span className="group-hover:text-brand-dark transition-colors">Scopri il supporto</span>
+              <span className="group-hover:text-brand-dark transition-colors">Scopri l'assistenza</span>
               <ChevronRight className="w-4 h-4 group-hover:text-brand-dark group-hover:translate-x-0.5 transition-all" />
             </Link>
           </motion.div>
 
-        </div>
-      </section>
-
-      {/* ── FINAL CTA ─── large orbit rings echo the planet-icon motif ── */}
-      <section className="section-padding relative overflow-hidden">
-        <div
-          className="absolute top-1/2 left-1/2 w-[620px] h-[620px] sm:w-[820px] sm:h-[820px] rounded-full border border-brand-accent/15 pointer-events-none"
-          style={{ transform: 'translate(-50%, -52%)' }}
-        />
-        <div
-          className="absolute top-1/2 left-1/2 w-[520px] h-[210px] sm:w-[700px] sm:h-[280px] rounded-full border border-brand-accent/20 pointer-events-none"
-          style={{ transform: 'translate(-50%, -50%) rotate(-10deg)' }}
-        />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(34,197,94,0.09), transparent 70%)' }}
-        />
-        <div className="container-custom relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="relative rounded-[2rem] sm:rounded-[3rem] bg-brand-accent overflow-hidden p-10 sm:p-16 md:p-24 text-center"
-            style={{ boxShadow: '0 0 80px rgba(34,197,94,0.25), 0 40px 80px rgba(0,0,0,0.1)' }}
-          >
-            <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-white/10 rounded-full blur-[110px] pointer-events-none" />
-            <div className="relative z-10">
-              <h2 className="text-3xl sm:text-4xl md:text-6xl text-white mb-6">
-                Iniziamo a lavorare insieme?
-              </h2>
-              <p className="text-white/60 text-lg md:text-xl mb-10 max-w-xl mx-auto leading-relaxed font-light">
-                Raccontami la tua attività e ti mostrerò come posso aiutarti a crescere online.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  to="/lavoriamo-insieme"
-                  className="bg-white text-brand-accent px-10 py-4 rounded-full font-medium hover:bg-brand-dark hover:text-white transition-all"
-                >
-                  Inizia ora
-                </Link>
-                <Link
-                  to="/contatti"
-                  className="border border-white/25 text-white px-10 py-4 rounded-full font-medium hover:bg-white/10 transition-all"
-                >
-                  Contattami
-                </Link>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
