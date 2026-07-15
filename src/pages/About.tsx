@@ -14,39 +14,45 @@ const About = () => {
       {/* Hero Section */}
       <section data-animated-bg-region className="relative pb-20 md:pb-32">
         <div className="container-custom relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="relative order-1 lg:order-2"
-            >
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-                <img
-                  src="/imageme.png.png"
-                  alt="Andrea Scardaci"
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="order-2 lg:order-1"
-            >
-              <span className="eyebrow mb-6 block">Chi sono</span>
-              <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white">
-                Chi è Andrea Scardaci
-              </h1>
-              <div className="space-y-6 text-xl text-white/85 font-luxury leading-relaxed">
-                <p>
-                  Mi chiamo <span className="text-white italic">Andrea Scardaci</span> e sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con eleganza e professionalità.
-                </p>
-                <p>
-                  Non mi limito a "fare siti". Creo vetrine digitali che riflettono l'anima della tua attività, che sia una palestra storica, un moderno studio di personal training o un centro yoga.
-                </p>
-              </div>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center max-w-3xl mx-auto mb-10 md:mb-14"
+          >
+            <span className="eyebrow mb-4 block">Chi sono</span>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white">
+              Chi è Andrea Scardaci
+            </h1>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.15 }}
+            className="relative aspect-[4/5] sm:aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+          >
+            <img
+              src="/imageme.png.png"
+              alt="Andrea Scardaci"
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="max-w-2xl mx-auto mt-12 md:mt-16"
+          >
+            <div className="space-y-6 text-xl text-white/85 font-luxury leading-relaxed">
+              <p>
+                Mi chiamo <span className="text-white italic">Andrea Scardaci</span> e sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con eleganza e professionalità.
+              </p>
+              <p>
+                Non mi limito a "fare siti". Creo vetrine digitali che riflettono l'anima della tua attività, che sia una palestra storica, un moderno studio di personal training o un centro yoga.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -68,32 +74,36 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            className="max-w-3xl mx-auto border-t border-white/10"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl mx-auto"
           >
             {[
               {
                 title: "Innovazione",
-                description: "Utilizzo l'intelligenza artificiale e gli strumenti più moderni per abbattere i tempi di produzione mantenendo una qualità altissima.",
+                description: "Intelligenza artificiale e strumenti moderni, per ridurre i tempi senza perdere qualità.",
                 icon: Zap
               },
               {
                 title: "Semplicità",
-                description: "I miei siti sono facili da usare per te e per i tuoi clienti. Niente complicazioni tecniche inutili.",
+                description: "Siti facili da usare, per te e per i tuoi clienti. Zero complicazioni inutili.",
                 icon: Heart
               },
               {
                 title: "Risultati",
-                description: "Ogni sito è progettato con un obiettivo: far crescere la tua attività e attirare nuovi clienti.",
+                description: "Ogni sito è pensato per un obiettivo: far crescere la tua attività.",
                 icon: Users
               }
             ].map((item, index) => (
-              <div key={index} className="flex items-center gap-6 sm:gap-8 py-8 border-b border-white/10">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-brand-accent/10 flex items-center justify-center shrink-0">
-                  <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-brand-accent" />
+              <div
+                key={index}
+                className="group relative aspect-square rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-7 flex flex-col justify-between overflow-hidden transition-colors duration-300 hover:border-brand-accent/30 hover:bg-white/[0.05]"
+              >
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-brand-accent/10 to-transparent pointer-events-none" />
+                <div className="relative z-10 w-12 h-12 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                  <item.icon className="w-5 h-5 text-brand-accent" />
                 </div>
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold mb-1.5 text-white">{item.title}</h3>
-                  <p className="text-white/50 font-light leading-relaxed">
+                <div className="relative z-10">
+                  <h3 className="text-lg sm:text-xl font-bold mb-1.5 text-white">{item.title}</h3>
+                  <p className="text-white/50 font-light text-sm leading-relaxed">
                     {item.description}
                   </p>
                 </div>

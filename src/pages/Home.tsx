@@ -164,7 +164,7 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.75 }}
-                className="text-lg md:text-xl text-white/55 font-light mb-6 lg:mb-10 max-w-md leading-relaxed"
+                className="text-lg md:text-xl text-white font-light mb-6 lg:mb-10 max-w-md leading-relaxed"
               >
                 Aiuto palestre, studi fitness e attività locali italiane ad avere una presenza online moderna, elegante e professionale.
               </motion.p>
@@ -496,11 +496,14 @@ const Home = () => {
           <div className="flex justify-center mt-14">
             <Link
               to="/esempi"
-              className="group relative inline-flex items-center gap-3 bg-brand-dark text-white px-10 py-5 rounded-full font-medium text-base overflow-hidden hover:bg-brand-accent transition-colors duration-300"
+              className="group relative inline-flex items-center gap-5 bg-brand-dark text-white pl-9 pr-2.5 py-2.5 rounded-full font-medium text-base overflow-hidden ring-1 ring-white/10 transition-shadow duration-500 hover:shadow-[0_20px_50px_-10px_rgba(34,197,94,0.45)]"
               style={{ boxShadow: '0 4px 30px rgba(0,0,0,0.15)' }}
             >
-              <span className="relative z-10">Vedi tutti i lavori</span>
-              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <span className="absolute inset-0 -z-10 bg-brand-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <span className="relative z-10 tracking-wide">Vedi tutti i lavori</span>
+              <span className="relative z-10 w-12 h-12 rounded-full bg-white/10 group-hover:bg-white/20 flex items-center justify-center transition-colors duration-300">
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
             </Link>
           </div>
         </div>
