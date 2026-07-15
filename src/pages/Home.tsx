@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, LifeBuoy } from 'lucide-react';
+import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X } from 'lucide-react';
 import { PROJECTS, BENEFITS } from '../constants';
 import PortfolioTile from '../components/PortfolioTile';
 import BenefitsStepper from '../components/BenefitsStepper';
@@ -51,12 +51,6 @@ const Home = () => {
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const videoY = useTransform(heroScroll, [0, 1], [0, 140]);
   const videoScale = useTransform(heroScroll, [0, 1], [1, 1.12]);
-
-  const marqueeItems = [
-    'Design Moderno', 'Siti Web Veloci', 'SEO Ottimizzato',
-    'Mobile First', 'Alta Qualità', 'Prezzi Accessibili',
-    'Palestre', 'Personal Training', 'Attività Locali',
-  ];
 
   const reasons = [
     {
@@ -263,27 +257,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── MARQUEE ──────────────────────────────────── */}
-      <div data-animated-bg-region className="relative py-5 overflow-hidden border-t border-white/5">
-        {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
-        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-        <motion.div
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
-          className="relative z-10 flex gap-10 whitespace-nowrap w-max"
-        >
-          {[...marqueeItems, ...marqueeItems].map((item, i) => (
-            <span
-              key={i}
-              className="text-xs uppercase tracking-[0.2em] text-white/25 font-light flex items-center gap-10"
-            >
-              {item}
-              <span className="w-1 h-1 rounded-full bg-brand-accent inline-block" />
-            </span>
-          ))}
-        </motion.div>
-      </div>
-
       {/* ── PERCHÉ UN SITO WEB ─── de-boxed list, circular medallions ── */}
       <section data-animated-bg-region className="section-padding text-white relative">
         {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
@@ -295,7 +268,6 @@ const Home = () => {
             viewport={{ once: true, amount: 0.4 }}
             className="text-center max-w-3xl mx-auto mb-20"
           >
-            <span className="eyebrow mb-5 block">Perché un sito web</span>
             <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] text-white">
               {['Perché un sito web ', 'può far crescere', ' la tua attività?'].map((chunk, i) => (
                 <motion.span
@@ -344,7 +316,6 @@ const Home = () => {
               viewport={{ once: true, amount: 0.4 }}
               className="text-center max-w-3xl mx-auto mb-20"
             >
-              <span className="eyebrow mb-5 block text-rose-400">Cosa può succedere</span>
               <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] text-white">
                 Cosa potresti star perdendo{' '}
                 <span className="italic text-rose-500" style={{ textShadow: '0 0 40px rgba(244,63,94,0.4)' }}>
@@ -611,71 +582,6 @@ const Home = () => {
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
             </button>
           </motion.div>
-        </div>
-      </section>
-
-      {/* ── OFFERTE / PRICING ─────────────────────────── */}
-      <section data-animated-bg-region className="section-padding text-white overflow-hidden relative">
-        {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
-        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-        <div
-          className="hidden lg:block absolute bottom-0 left-0 w-[420px] h-[420px] bg-brand-accent/10 rounded-full blur-[110px] pointer-events-none"
-        />
-        <div className="container-custom relative z-10">
-
-          {/* Custom offer — faceted, cut-corner polygon instead of a plain rounded box */}
-          <div
-            className="border border-dashed border-white/20 p-8 sm:p-10 flex flex-col md:flex-row items-center text-center md:text-left justify-between gap-6"
-            style={{
-              clipPath: 'polygon(28px 0, calc(100% - 28px) 0, 100% 28px, 100% calc(100% - 28px), calc(100% - 28px) 100%, 28px 100%, 0 calc(100% - 28px), 0 28px)',
-            }}
-          >
-            <div>
-              <p className="text-white/40 text-xs uppercase tracking-widest mb-2 font-light">Offerta su misura</p>
-              <h3 className="text-white text-2xl font-medium mb-2">Hai una richiesta specifica?</h3>
-              <p className="text-white/40 text-base font-light">Mandami un messaggio e riceverai un prezzo e un'offerta personalizzata su misura per te.</p>
-            </div>
-            <button
-              type="button"
-              onClick={() => openModal('offerta-custom')}
-              className="shrink-0 inline-flex items-center gap-2 bg-brand-accent text-white px-8 py-4 rounded-full font-medium text-sm hover:bg-white hover:text-brand-dark transition-all"
-            >
-              Scrivimi ora
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* ── SUPPORTO (bare on the page background, no card) ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="relative mt-16 flex flex-col lg:flex-row items-center lg:items-end justify-between gap-10 lg:gap-16"
-          >
-            <div className="relative z-10 text-center lg:text-left">
-              <span className="eyebrow mb-4 block">Dopo il lancio</span>
-              <h2 className="font-luxury text-5xl sm:text-6xl md:text-7xl leading-[1.15] mb-5">
-                <span className="text-white">E per il</span><br />
-                <span className="italic text-brand-accent">supporto?</span>
-              </h2>
-              <p className="text-white/70 text-lg leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
-                Il lancio è solo l'inizio. La tua attività cresce e cambia: nuove offerte, foto aggiornate, contenuti da perfezionare. Il sito ti segue con la stessa cura con cui è nato, con un'assistenza dedicata e pensata su misura per ogni esigenza che nasce dopo il lancio.
-              </p>
-            </div>
-
-            <Link
-              to="/supporto"
-              className="group relative z-10 mx-auto lg:mx-0 shrink-0 inline-flex items-center gap-3 bg-brand-accent text-white pl-2 pr-6 py-2 rounded-full font-medium text-sm hover:bg-white transition-all whitespace-nowrap"
-              style={{ boxShadow: '0 10px 25px rgba(34,197,94,0.25)' }}
-            >
-              <span className="w-9 h-9 rounded-full bg-white/20 group-hover:bg-brand-accent/15 flex items-center justify-center transition-colors">
-                <LifeBuoy className="w-4 h-4 text-white group-hover:text-brand-accent transition-colors" />
-              </span>
-              <span className="group-hover:text-brand-dark transition-colors">Scopri l'assistenza</span>
-              <ChevronRight className="w-4 h-4 group-hover:text-brand-dark group-hover:translate-x-0.5 transition-all" />
-            </Link>
-          </motion.div>
-
         </div>
       </section>
 
