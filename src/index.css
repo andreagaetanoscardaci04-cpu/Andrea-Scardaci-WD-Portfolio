@@ -43,6 +43,17 @@
   @apply text-brand-accent text-xs uppercase tracking-[0.25em] font-medium;
 }
 
+/* Pure-CSS infinite scroll — runs on the compositor thread so the loop reset never
+   drops a frame or stutters, unlike a JS-driven keyframe animation with few repeats. */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee-x {
+  animation: marquee-x linear infinite;
+}
+
 .card-bento {
   @apply bg-white/[0.04] border border-white/[0.08] rounded-3xl transition-colors;
 }

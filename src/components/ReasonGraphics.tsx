@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Star, X, Check, ArrowRight, BarChart3, Sparkles, Plus, Award, RotateCcw } from 'lucide-react';
+import { Star, X, Check, BarChart3, Sparkles, Plus, Award, ZoomIn } from 'lucide-react';
 
 const StarsRow: React.FC<{ filled?: number; size?: string }> = ({ filled = 4, size = 'w-3 h-3' }) => (
   <div className="flex items-center gap-0.5">
@@ -13,352 +13,157 @@ const StarsRow: React.FC<{ filled?: number; size?: string }> = ({ filled = 4, si
   </div>
 );
 
-const SLIDES = [
-  {
-    src: '/images/google-listing-senza-sito.webp',
-    label: 'Prima della collaborazione',
-    icon: X,
-    tone: 'text-white/35',
-    border: 'border-white/10',
-  },
-  {
-    src: '/images/google-listing-con-sito.webp',
-    label: 'Dopo la collaborazione',
-    icon: Check,
-    tone: 'text-brand-accent',
-    border: 'border-brand-accent/30',
-  },
-];
+interface BeforeAfterCompareProps {
+  beforeSrc: string;
+  afterSrc: string;
+  beforeAlt: string;
+  afterAlt: string;
+  /** object-position tweak for listing-style screenshots that need to stay left-aligned */
+  objectPosition?: string;
+}
 
-/** Reason #1 — real Google listing, before vs after: click the small arrow to flip the card. */
-export const GoogleListingCompare: React.FC = () => {
-  const [index, setIndex] = useState(0);
-  const slide = SLIDES[index];
-  const Icon = slide.icon;
-  const flip = () => setIndex((i) => (i === 0 ? 1 : 0));
+/** Shared before/after pair — both images shown side by side at once; tap either to zoom into a full-size lightbox. */
+const BeforeAfterCompare: React.FC<BeforeAfterCompareProps> = ({ beforeSrc, afterSrc, beforeAlt, afterAlt, objectPosition }) => {
+  const [zoomed, setZoomed] = useState<'before' | 'after' | null>(null);
+  const zoomedSrc = zoomed === 'before' ? beforeSrc : zoomed === 'after' ? afterSrc : null;
+  const zoomedAlt = zoomed === 'before' ? beforeAlt : zoomed === 'after' ? afterAlt : '';
 
   return (
-    <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
-      <div className="w-[240px] sm:w-[260px]">
-      <div className="relative aspect-square" style={{ perspective: 900 }}>
-        <AnimatePresence initial={false}>
-          <motion.div
-            key={index}
-            initial={{ rotateY: 90, opacity: 0 }}
-            animate={{ rotateY: 0, opacity: 1 }}
-            exit={{ rotateY: -90, opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className={`absolute inset-0 rounded-2xl border overflow-hidden ${slide.border}`}
-            style={{ backfaceVisibility: 'hidden' }}
+    <div className="w-full lg:w-[440px] shrink-0 flex justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[440px]"
+      >
+        <div>
+          <button
+            type="button"
+            onClick={() => setZoomed('before')}
+            aria-label="Ingrandisci l'immagine prima"
+            className="group relative block w-full aspect-square rounded-2xl border border-rose-400/30 overflow-hidden cursor-zoom-in"
           >
             <img
-              src={slide.src}
-              alt={index === 1 ? 'Scheda Google con sito web collegato' : 'Scheda Google senza sito web'}
-              className="w-full h-full object-cover object-left"
+              src={beforeSrc}
+              alt={beforeAlt}
+              className="w-full h-full object-cover"
+              style={objectPosition ? { objectPosition } : undefined}
             />
-          </motion.div>
-        </AnimatePresence>
+            <span className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+              <ZoomIn className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </span>
+          </button>
+          <div className="flex items-center justify-center gap-1 mt-2 text-rose-400 text-[10px] leading-tight uppercase tracking-wide font-medium">
+            <X className="w-3 h-3 shrink-0" />
+            Prima
+          </div>
+        </div>
+        <div>
+          <button
+            type="button"
+            onClick={() => setZoomed('after')}
+            aria-label="Ingrandisci l'immagine dopo"
+            className="group relative block w-full aspect-square rounded-2xl border border-brand-accent/30 overflow-hidden cursor-zoom-in"
+          >
+            <img
+              src={afterSrc}
+              alt={afterAlt}
+              className="w-full h-full object-cover"
+              style={objectPosition ? { objectPosition } : undefined}
+            />
+            <span className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+              <ZoomIn className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </span>
+          </button>
+          <div className="flex items-center justify-center gap-1 mt-2 text-brand-accent text-[10px] leading-tight uppercase tracking-wide font-medium">
+            <Check className="w-3 h-3 shrink-0" />
+            Dopo
+          </div>
+        </div>
+      </motion.div>
 
-        <button
-          type="button"
-          onClick={flip}
-          aria-label={index === 0 ? 'Mostra il dopo' : 'Mostra il prima'}
-          className={`absolute -bottom-2 -right-2 z-10 flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white hover:scale-105 active:scale-95 transition-transform ${
-            index === 0 ? 'text-sm font-bold uppercase tracking-wide px-5 py-2.5' : 'p-3'
-          }`}
-          style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
-        >
-          {index === 0 ? (
-            <>
-              Premi qui
-              <ArrowRight className="w-4 h-4" />
-            </>
-          ) : (
-            <RotateCcw className="w-4 h-4" />
-          )}
-        </button>
-      </div>
-
-      <div className="relative h-9 mt-3 overflow-hidden">
-        <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence>
+        {zoomedSrc && (
           <motion.div
-            key={index}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className={`absolute inset-x-0 flex flex-col items-center gap-0.5 text-center text-[10px] leading-tight uppercase tracking-wide ${slide.tone}`}
+            onClick={() => setZoomed(null)}
+            className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-sm flex items-center justify-center p-6"
           >
-            <Icon className="w-3 h-3 shrink-0" />
-            <p>{slide.label}</p>
+            <motion.div
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-[92vw] max-h-[85vh]"
+            >
+              <img
+                src={zoomedSrc}
+                alt={zoomedAlt}
+                className="max-w-[92vw] max-h-[85vh] w-auto h-auto rounded-2xl border border-white/15 object-contain"
+                style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.6)' }}
+              />
+              <button
+                type="button"
+                onClick={() => setZoomed(null)}
+                aria-label="Chiudi"
+                className="absolute -top-4 -right-4 w-9 h-9 rounded-full bg-white text-brand-dark flex items-center justify-center hover:bg-brand-accent hover:text-white transition-colors"
+                style={{ boxShadow: '0 6px 16px rgba(0,0,0,0.4)' }}
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </motion.div>
           </motion.div>
-        </AnimatePresence>
-      </div>
-      </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
-const COMPETITOR_SLIDES = [
-  {
-    src: '/images/competitor-listing-rifiuta.png',
-    label: 'Il cliente rifiuta',
-    icon: X,
-    tone: 'text-white/35',
-    border: 'border-white/10',
-  },
-  {
-    src: '/images/competitor-listing-sceglie.png',
-    label: 'Sceglie un\'altra attività',
-    icon: Check,
-    tone: 'text-rose-400',
-    border: 'border-rose-400/30',
-  },
-];
+/** Reason #1 — real Google listing, before vs after, both visible at once. */
+export const GoogleListingCompare: React.FC = () => (
+  <BeforeAfterCompare
+    beforeSrc="/images/google-listing-senza-sito.webp"
+    afterSrc="/images/google-listing-con-sito.webp"
+    beforeAlt="Scheda Google senza sito web"
+    afterAlt="Scheda Google con sito web collegato"
+    objectPosition="left"
+  />
+);
 
-/** Loss #1 — a customer rejecting a photo-less, site-less listing in favor of a competitor's; click "Premi qui" to flip. */
-export const CompetitorReactionCompare: React.FC = () => {
-  const [index, setIndex] = useState(0);
-  const slide = COMPETITOR_SLIDES[index];
-  const Icon = slide.icon;
-  const flip = () => setIndex((i) => (i === 0 ? 1 : 0));
+/** Loss #1 — a customer rejecting a photo-less, site-less listing in favor of a competitor's, both visible at once. */
+export const CompetitorReactionCompare: React.FC = () => (
+  <BeforeAfterCompare
+    beforeSrc="/images/competitor-listing-rifiuta.png"
+    afterSrc="/images/competitor-listing-sceglie.png"
+    beforeAlt="Cliente rifiuta attività senza foto né sito web"
+    afterAlt="Cliente sceglie un'altra attività con foto e sito web"
+  />
+);
 
-  return (
-    <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
-      <div className="w-[240px] sm:w-[260px]">
-        <div className="relative aspect-square" style={{ perspective: 900 }}>
-          <AnimatePresence initial={false}>
-            <motion.div
-              key={index}
-              initial={{ rotateY: 90, opacity: 0 }}
-              animate={{ rotateY: 0, opacity: 1 }}
-              exit={{ rotateY: -90, opacity: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className={`absolute inset-0 rounded-2xl border overflow-hidden ${slide.border}`}
-              style={{ backfaceVisibility: 'hidden' }}
-            >
-              <img
-                src={slide.src}
-                alt={index === 1 ? 'Cliente sceglie un\'altra attività con foto e sito web' : 'Cliente rifiuta attività senza foto né sito web'}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </AnimatePresence>
+/** Loss #2 — Google Business performance dashboard, before vs after a connected website, both visible at once. */
+export const PerformanceMetricsCompare: React.FC = () => (
+  <BeforeAfterCompare
+    beforeSrc="/images/gbp-performance-basso.png"
+    afterSrc="/images/gbp-performance-alto.png"
+    beforeAlt="Statistiche Google Business basse senza sito web"
+    afterAlt="Statistiche Google Business in crescita con sito web collegato"
+  />
+);
 
-          <button
-            type="button"
-            onClick={flip}
-            aria-label={index === 0 ? 'Mostra il dopo' : 'Mostra il prima'}
-            className="absolute -bottom-2 -right-2 z-10 flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
-            style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
-          >
-            {index === 0 ? (
-              <>
-                Premi qui
-                <ArrowRight className="w-4 h-4" />
-              </>
-            ) : (
-              <>
-                <RotateCcw className="w-4 h-4" />
-                Torna indietro
-              </>
-            )}
-          </button>
-        </div>
-
-        <div className="relative h-9 mt-3 overflow-hidden">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className={`absolute inset-x-0 flex flex-col items-center gap-0.5 text-center text-[10px] leading-tight uppercase tracking-wide ${slide.tone}`}
-            >
-              <Icon className="w-3 h-3 shrink-0" />
-              <p>{slide.label}</p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const METRICS_SLIDES = [
-  {
-    src: '/images/gbp-performance-basso.png',
-    label: 'Poche interazioni sulla scheda',
-    icon: X,
-    tone: 'text-white/35',
-    border: 'border-white/10',
-  },
-  {
-    src: '/images/gbp-performance-alto.png',
-    label: 'Interazioni e clic in crescita',
-    icon: Check,
-    tone: 'text-brand-accent',
-    border: 'border-brand-accent/30',
-  },
-];
-
-/** Loss #2 — Google Business performance dashboard, before vs after a connected website; click "Premi qui" to flip. */
-export const PerformanceMetricsCompare: React.FC = () => {
-  const [index, setIndex] = useState(0);
-  const slide = METRICS_SLIDES[index];
-  const Icon = slide.icon;
-  const flip = () => setIndex((i) => (i === 0 ? 1 : 0));
-
-  return (
-    <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
-      <div className="w-[240px] sm:w-[260px]">
-        <div className="relative aspect-square" style={{ perspective: 900 }}>
-          <AnimatePresence initial={false}>
-            <motion.div
-              key={index}
-              initial={{ rotateY: 90, opacity: 0 }}
-              animate={{ rotateY: 0, opacity: 1 }}
-              exit={{ rotateY: -90, opacity: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className={`absolute inset-0 rounded-2xl border overflow-hidden ${slide.border}`}
-              style={{ backfaceVisibility: 'hidden' }}
-            >
-              <img
-                src={slide.src}
-                alt={index === 1 ? 'Statistiche Google Business in crescita con sito web collegato' : 'Statistiche Google Business basse senza sito web'}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          <button
-            type="button"
-            onClick={flip}
-            aria-label={index === 0 ? 'Mostra il dopo' : 'Mostra il prima'}
-            className="absolute -bottom-2 -right-2 z-10 flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
-            style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
-          >
-            {index === 0 ? (
-              <>
-                Premi qui
-                <ArrowRight className="w-4 h-4" />
-              </>
-            ) : (
-              <>
-                <RotateCcw className="w-4 h-4" />
-                Torna indietro
-              </>
-            )}
-          </button>
-        </div>
-
-        <div className="relative h-9 mt-3 overflow-hidden">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className={`absolute inset-x-0 flex flex-col items-center gap-0.5 text-center text-[10px] leading-tight uppercase tracking-wide ${slide.tone}`}
-            >
-              <Icon className="w-3 h-3 shrink-0" />
-              <p>{slide.label}</p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const BRAND_IMAGE_SLIDES = [
-  {
-    src: '/images/brand-image-scarsa.png',
-    label: 'Il cliente non ti trova',
-    icon: X,
-    tone: 'text-white/35',
-    border: 'border-white/10',
-  },
-  {
-    src: '/images/brand-image-curata.png',
-    label: 'Fiducia e professionalità',
-    icon: Check,
-    tone: 'text-brand-accent',
-    border: 'border-brand-accent/30',
-  },
-];
-
-/** Loss #3 — a customer's perception of the business, before vs after a professional connected website; click "Premi qui" to flip. */
-export const BrandImageCompare: React.FC = () => {
-  const [index, setIndex] = useState(0);
-  const slide = BRAND_IMAGE_SLIDES[index];
-  const Icon = slide.icon;
-  const flip = () => setIndex((i) => (i === 0 ? 1 : 0));
-
-  return (
-    <div className="w-full lg:w-[320px] shrink-0 flex justify-center">
-      <div className="w-[240px] sm:w-[260px]">
-        <div className="relative aspect-square" style={{ perspective: 900 }}>
-          <AnimatePresence initial={false}>
-            <motion.div
-              key={index}
-              initial={{ rotateY: 90, opacity: 0 }}
-              animate={{ rotateY: 0, opacity: 1 }}
-              exit={{ rotateY: -90, opacity: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className={`absolute inset-0 rounded-2xl border overflow-hidden ${slide.border}`}
-              style={{ backfaceVisibility: 'hidden' }}
-            >
-              <img
-                src={slide.src}
-                alt={index === 1 ? 'Cliente percepisce professionalità grazie al sito web' : 'Cliente non trova informazioni senza sito web'}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          <button
-            type="button"
-            onClick={flip}
-            aria-label={index === 0 ? 'Mostra il dopo' : 'Mostra il prima'}
-            className="absolute -bottom-2 -right-2 z-10 flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-accent text-white text-sm font-bold uppercase tracking-wide px-5 py-2.5 hover:scale-105 active:scale-95 transition-transform"
-            style={{ boxShadow: '0 6px 16px rgba(34,197,94,0.45)' }}
-          >
-            {index === 0 ? (
-              <>
-                Premi qui
-                <ArrowRight className="w-4 h-4" />
-              </>
-            ) : (
-              <>
-                <RotateCcw className="w-4 h-4" />
-                Torna indietro
-              </>
-            )}
-          </button>
-        </div>
-
-        <div className="relative h-9 mt-3 overflow-hidden">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className={`absolute inset-x-0 flex flex-col items-center gap-0.5 text-center text-[10px] leading-tight uppercase tracking-wide ${slide.tone}`}
-            >
-              <Icon className="w-3 h-3 shrink-0" />
-              <p>{slide.label}</p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-    </div>
-  );
-};
+/** Loss #3 — a customer's perception of the business, before vs after a professional connected website, both visible at once. */
+export const BrandImageCompare: React.FC = () => (
+  <BeforeAfterCompare
+    beforeSrc="/images/brand-image-scarsa.png"
+    afterSrc="/images/brand-image-curata.png"
+    beforeAlt="Cliente non trova informazioni senza sito web"
+    afterAlt="Cliente percepisce professionalità grazie al sito web"
+  />
+);
 
 const RANKING_FACTORS = [
   { label: 'Scheda Google Business', pct: 32, highlight: false },

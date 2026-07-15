@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, Check, LifeBuoy } from 'lucide-react';
+import { ChevronRight, ShieldCheck, Search, Image, Phone, ArrowRight, ArrowUpRight, Globe, TrendingUp, Award, X, LifeBuoy } from 'lucide-react';
 import { PROJECTS, BENEFITS } from '../constants';
 import PortfolioTile from '../components/PortfolioTile';
 import BenefitsStepper from '../components/BenefitsStepper';
@@ -40,13 +40,6 @@ const PROCESS_VISUALS: Record<number, { src: string; alt: string }> = {
   1: { src: '/images/processo-progetto.webp', alt: 'Progettazione del design del sito su schermo' },
   2: { src: '/images/processo-online.webp', alt: 'Sito web live su laptop, tablet e smartphone dopo il lancio' },
 };
-
-/** Per-step float path for the "Come lavoro" orbs — position within the shared cluster, plus a unique drift loop so the three circles feel alive rather than synchronized. */
-const PROCESS_FLOAT = [
-  { top: '10%', left: '6%', size: 'w-36 h-36 sm:w-52 sm:h-52', duration: 7, delay: 0, x: [0, 8, -5, 0], y: [0, -10, 6, 0] },
-  { top: '38%', left: '46%', size: 'w-40 h-40 sm:w-56 sm:h-56', duration: 8.5, delay: 0.8, x: [0, -10, 6, 0], y: [0, 10, -8, 0] },
-  { top: '64%', left: '12%', size: 'w-32 h-32 sm:w-48 sm:h-48', duration: 6.5, delay: 1.4, x: [0, 6, -8, 0], y: [0, -8, 5, 0] },
-];
 
 const Home = () => {
   const icons: Record<string, any> = { ShieldCheck, Search, Image, Phone };
@@ -105,27 +98,6 @@ const Home = () => {
     { title: 'Parliamo' },
     { title: 'Progetto' },
     { title: 'Online' },
-  ];
-
-  const offers = [
-    {
-      pages: '1 Landing Page',
-      activation: 599,
-      popular: false,
-      features: ['Assistenza personale', 'Dominio personalizzato', 'Hosting incluso', 'SEO ottimizzato', 'Design su misura'],
-    },
-    {
-      pages: '3 Pagine',
-      activation: 899,
-      popular: true,
-      features: ['Assistenza personale', 'Dominio personalizzato', 'Hosting incluso', 'SEO ottimizzato', 'Design su misura'],
-    },
-    {
-      pages: '5 Pagine',
-      activation: 1199,
-      popular: false,
-      features: ['Assistenza personale', 'Dominio personalizzato', 'Hosting incluso', 'SEO ottimizzato', 'Design su misura'],
-    },
   ];
 
   return (
@@ -412,7 +384,7 @@ const Home = () => {
         <div
           className="hidden lg:block absolute top-0 right-0 w-[550px] h-[550px] bg-brand-accent/[0.07] rounded-full blur-[130px] pointer-events-none"
         />
-        <div className="container-custom relative z-10 max-w-3xl">
+        <div className="container-custom relative z-10 max-w-3xl lg:max-w-5xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -420,43 +392,48 @@ const Home = () => {
             transition={{ duration: 0.8 }}
           >
             <span className="eyebrow mb-6 block">Chi sono</span>
-            <h2 className="text-4xl md:text-6xl mb-8 leading-tight text-white font-bold">
+            <h2 className="text-4xl md:text-6xl mb-8 lg:mb-12 leading-tight text-white font-bold">
               Andrea Scardaci
             </h2>
 
-            <div className="relative max-w-md aspect-[7/5] rounded-3xl overflow-hidden border border-white/10 mb-10">
-              <img
-                src="/imageme1.png.png"
-                alt="Andrea Scardaci"
-                className="w-full h-full object-cover"
-                style={{ objectPosition: '50% 18%' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
-            </div>
+            {/* Desktop: photo on the left, text on the right. Mobile: stacked, photo first (unchanged). */}
+            <div className="lg:grid lg:grid-cols-[400px_1fr] lg:gap-12 lg:items-start">
+              <div className="relative max-w-md aspect-[7/5] rounded-3xl overflow-hidden border border-white/10 mb-10 lg:mb-0">
+                <img
+                  src="/imageme1.png.png"
+                  alt="Andrea Scardaci"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: '50% 18%' }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent" />
+              </div>
 
-            <div className="space-y-5 text-white/85 text-lg font-luxury leading-relaxed mb-10">
-              <p>
-                Sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con{' '}
-                <span className="text-white italic">eleganza e professionalità</span>.
-              </p>
-              <p>
-                Non mi limito a "fare siti". Creo vetrine digitali che riflettono l'anima della tua attività, che sia una palestra storica, un moderno studio di personal training o un centro yoga.
-              </p>
+              <div>
+                <div className="space-y-5 text-white/85 text-lg font-luxury leading-relaxed mb-10">
+                  <p>
+                    Sono un web designer freelance con una missione chiara: portare le attività locali italiane nel mondo digitale con{' '}
+                    <span className="text-white italic">eleganza e professionalità</span>.
+                  </p>
+                  <p>
+                    Non mi limito a "fare siti". Creo vetrine digitali che riflettono l'anima della tua attività, che sia una palestra storica, un moderno studio di personal training o un centro yoga.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 mb-10">
+                  {['Web Design', 'UI/UX', 'SEO', 'Mobile First', 'Performance'].map((tag) => (
+                    <span key={tag} className="px-4 py-1.5 rounded-full border border-white/10 text-white/40 text-xs tracking-wider font-light">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  to="/chi-sono"
+                  className="inline-flex items-center gap-2 text-white font-medium text-base group"
+                >
+                  Scopri di più su di me
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform text-brand-accent" />
+                </Link>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-2 mb-10">
-              {['Web Design', 'UI/UX', 'SEO', 'Mobile First', 'Performance'].map((tag) => (
-                <span key={tag} className="px-4 py-1.5 rounded-full border border-white/10 text-white/40 text-xs tracking-wider font-light">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <Link
-              to="/chi-sono"
-              className="inline-flex items-center gap-2 text-white font-medium text-base group"
-            >
-              Scopri di più su di me
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform text-brand-accent" />
-            </Link>
           </motion.div>
         </div>
       </section>
@@ -470,7 +447,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
-            className="text-center max-w-2xl mx-auto mb-20"
+            className="text-center max-w-2xl mx-auto mb-10"
           >
             <span className="eyebrow mb-4 block">Come lavoro</span>
             <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] text-white">
@@ -478,51 +455,42 @@ const Home = () => {
             </h2>
           </motion.div>
 
-          <div className="relative mx-auto max-w-md h-[480px] sm:h-[640px] md:h-[680px]">
-            {/* soft ambient glow tying the three orbs into one cluster */}
+          {/* Infinite scrolling line of steps — centered, no float, just a continuous loop.
+              Pure CSS animation (not Framer Motion) so the loop reset never twitches, and a
+              mask-image edge fade (not a painted overlay) so no box is visible against the
+              animated background behind it. */}
+          <div
+            className="relative overflow-hidden py-4"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+              maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            }}
+          >
             <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ background: 'radial-gradient(circle at 50% 45%, rgba(34,197,94,0.1), transparent 60%)' }}
-            />
-
-            {process.map((item, i) => {
-              const pos = PROCESS_FLOAT[i];
-              const visual = PROCESS_VISUALS[i];
-              return (
-                <motion.div
-                  key={i}
-                  className="absolute"
-                  style={{ top: pos.top, left: pos.left }}
-                  initial={{ opacity: 0, scale: 0.4, y: -30 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, delay: 0.15 * i, ease: 'easeOut' }}
-                >
-                  <motion.div
-                    className="relative"
-                    animate={{ x: pos.x, y: pos.y }}
-                    transition={{ duration: pos.duration, delay: pos.delay, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    <h3 className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 whitespace-nowrap text-white font-black text-xl sm:text-2xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+              className="animate-marquee-x flex items-start gap-12 sm:gap-20 w-max"
+              style={{ animationDuration: '16s' }}
+            >
+              {[...process, ...process].map((item, i) => {
+                const visual = PROCESS_VISUALS[i % process.length];
+                return (
+                  <div key={i} className="flex flex-col items-center gap-4 shrink-0">
+                    <h3 className="text-white font-black text-lg sm:text-xl whitespace-nowrap drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                       {item.title}
                     </h3>
-
-                    <div className={`relative ${pos.size}`}>
-                      <div
-                        className="absolute inset-0 rounded-full overflow-hidden"
-                        style={{ boxShadow: '0 0 0 3px rgba(34,197,94,0.6), 0 18px 40px rgba(0,0,0,0.5)' }}
-                      >
-                        <img
-                          src={visual.src}
-                          alt={visual.alt}
-                          className="absolute inset-0 w-full h-full object-cover"
-                        />
-                      </div>
+                    <div
+                      className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden shrink-0"
+                      style={{ boxShadow: '0 0 0 3px rgba(34,197,94,0.6), 0 18px 40px rgba(0,0,0,0.5)' }}
+                    >
+                      <img
+                        src={visual.src}
+                        alt={visual.alt}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
                     </div>
-                  </motion.div>
-                </motion.div>
-              );
-            })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -610,6 +578,42 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ── PREVIEW GRATUITA (big standalone CTA) ─────── */}
+      <section data-animated-bg-region className="section-padding text-white relative overflow-hidden">
+        {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-accent/[0.12] rounded-full blur-[140px] pointer-events-none"
+        />
+        <div className="container-custom relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            className="relative max-w-3xl mx-auto text-center rounded-[2.5rem] border border-brand-accent/25 bg-brand-accent/[0.06] px-8 py-16 sm:px-16 sm:py-20"
+            style={{ boxShadow: '0 40px 100px -30px rgba(34,197,94,0.25)' }}
+          >
+            <span className="eyebrow mb-5 block">Prova senza impegno</span>
+            <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] mb-6 text-white">
+              Ottieni la tua <span className="italic text-brand-accent">preview gratuita</span>.
+            </h2>
+            <p className="text-white/50 text-lg leading-relaxed font-light max-w-xl mx-auto mb-10">
+              Ti mostro in anteprima un sito pensato per la tua attività, così vedi con i tuoi occhi come potrebbe diventare. Nessun impegno, nessun costo: né tu né la tua palestra dovete nulla in anticipo.
+            </p>
+            <button
+              type="button"
+              onClick={() => openModal('preview-gratuita')}
+              className="group relative inline-flex items-center gap-3 bg-brand-accent text-white px-10 py-5 rounded-full font-medium text-base overflow-hidden"
+              style={{ boxShadow: '0 0 30px rgba(34,197,94,0.35), 0 4px 15px rgba(34,197,94,0.2)' }}
+            >
+              <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300" />
+              Ottienila ora
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── OFFERTE / PRICING ─────────────────────────── */}
       <section data-animated-bg-region className="section-padding text-white overflow-hidden relative">
         {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
@@ -618,82 +622,6 @@ const Home = () => {
           className="hidden lg:block absolute bottom-0 left-0 w-[420px] h-[420px] bg-brand-accent/10 rounded-full blur-[110px] pointer-events-none"
         />
         <div className="container-custom relative z-10">
-
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            className="text-center max-w-2xl mx-auto mb-16"
-          >
-            <span className="eyebrow mb-4 block">Offerte</span>
-            <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] mb-6">
-              <span className="text-white">Un progetto</span><br />
-              <span className="text-white">pensato su misura</span><br />
-              <span className="italic text-brand-accent">per te.</span>
-            </h2>
-            <p className="text-white/40 text-xl leading-relaxed font-light">
-              Scegli il piano più adatto alla tua attività.
-            </p>
-          </motion.div>
-
-          {/* Offers grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10"
-          >
-            {offers.map((offer, i) => (
-              <div
-                key={i}
-                className={`relative rounded-3xl p-8 flex flex-col transition-colors ${
-                  offer.popular
-                    ? 'bg-brand-accent/[0.12] border border-brand-accent/40'
-                    : 'card-bento'
-                }`}
-              >
-                {offer.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-accent text-white text-xs px-4 py-1 rounded-full whitespace-nowrap">
-                    Più consigliato
-                  </div>
-                )}
-                <p className={`text-xs uppercase tracking-widest mb-4 font-light ${offer.popular ? 'text-brand-accent' : 'text-white/40'}`}>
-                  {offer.pages}
-                </p>
-                <div className="mb-6">
-                  <span className="text-4xl font-black text-white">€{offer.activation}</span>
-                  <span className="text-white/40 text-sm ml-1 font-light">prezzo unico</span>
-                </div>
-
-                <p className={`text-xs uppercase tracking-widest mb-3 font-light ${offer.popular ? 'text-brand-accent/80' : 'text-white/30'}`}>
-                  Cosa include
-                </p>
-                <ul className="space-y-2.5 mb-8 flex-1">
-                  {offer.features.map((feat) => (
-                    <li key={feat} className="flex items-center gap-3 text-sm text-white/60 font-light">
-                      <span className="w-4 h-4 rounded-full bg-brand-accent/15 flex items-center justify-center shrink-0">
-                        <Check className="w-2.5 h-2.5 text-brand-accent" />
-                      </span>
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  type="button"
-                  onClick={() => openModal(`offerta-${offer.pages}`)}
-                  className={`text-center py-3 rounded-full font-medium text-sm transition-all ${
-                    offer.popular
-                      ? 'bg-brand-accent text-white hover:bg-white hover:text-brand-dark'
-                      : 'border border-white/15 text-white hover:bg-white/5'
-                  }`}
-                >
-                  Inizia ora
-                </button>
-              </div>
-            ))}
-          </motion.div>
 
           {/* Custom offer — faceted, cut-corner polygon instead of a plain rounded box */}
           <div
