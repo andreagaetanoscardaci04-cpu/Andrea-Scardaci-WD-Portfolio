@@ -11,6 +11,7 @@ import StartWorking from './pages/StartWorking';
 import Contact from './pages/Contact';
 import Supporto from './pages/Supporto';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Feedback from './pages/Feedback';
 
 // On a real page change, land instantly in the right spot (top, or the target
 // section if the URL has a hash) — no visible scroll animation "through" the
@@ -36,27 +37,42 @@ const ScrollToTop = () => {
   return null;
 };
 
+// The feedback page is a hidden, link-only questionnaire — it skips the
+// marketing Navbar/Footer entirely so it reads as a standalone form, not a
+// page of the main site.
+const AppShell = () => {
+  const { pathname } = useLocation();
+  const isStandalone = pathname === '/feedback';
+
+  return (
+    <>
+      <ScrollToTop />
+      <div className="min-h-screen flex flex-col">
+        {!isStandalone && <Navbar />}
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/chi-sono" element={<About />} />
+            <Route path="/esempi" element={<Portfolio />} />
+            <Route path="/lavoriamo-insieme" element={<StartWorking />} />
+            <Route path="/supporto" element={<Supporto />} />
+            <Route path="/contatti" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/feedback" element={<Feedback />} />
+          </Routes>
+        </main>
+        {!isStandalone && <Footer />}
+      </div>
+      {!isStandalone && <ContactModal />}
+    </>
+  );
+};
+
 export default function App() {
   return (
     <Router>
       <ContactModalProvider>
-        <ScrollToTop />
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/chi-sono" element={<About />} />
-              <Route path="/esempi" element={<Portfolio />} />
-              <Route path="/lavoriamo-insieme" element={<StartWorking />} />
-              <Route path="/supporto" element={<Supporto />} />
-              <Route path="/contatti" element={<Contact />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-        <ContactModal />
+        <AppShell />
       </ContactModalProvider>
     </Router>
   );
