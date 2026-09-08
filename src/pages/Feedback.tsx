@@ -61,6 +61,7 @@ type FormState = {
   knowsOthers: string;
   referralDetails: string;
   affiliateEmail: string;
+  websiteCredit: string;
 };
 
 const INITIAL_STATE: FormState = {
@@ -78,6 +79,7 @@ const INITIAL_STATE: FormState = {
   knowsOthers: '',
   referralDetails: '',
   affiliateEmail: '',
+  websiteCredit: '',
 };
 
 const label = (options: { value: string; label: string }[], value: string) =>
@@ -272,6 +274,7 @@ const Feedback: React.FC = () => {
         'Nuovi contatti dal sito': label(NEW_CONTACTS_OPTIONS, form.newContacts),
         'Cosa è piaciuto di più': form.liked || '—',
         'Cosa avrei potuto fare meglio': form.improve || '—',
+        'Ok firma/credit in fondo al sito': label(REVIEW_OPTIONS, form.websiteCredit),
         'Disponibile a recensione pubblica': label(REVIEW_OPTIONS, form.wantsReview),
         'Bisogno di assistenza': label(NEEDS_HELP_OPTIONS, form.needsHelp),
         'Quando (se più avanti)': form.needsHelp === 'piu_avanti' ? label(WHEN_OPTIONS, form.whenLater) : '—',
@@ -385,6 +388,16 @@ const Feedback: React.FC = () => {
                       value={form.improve}
                       onChange={(v) => set('improve', v)}
                       placeholder="Facoltativo"
+                    />
+                  </div>
+                  <div>
+                    <FieldLabel>
+                      Sto considerando di inserire la mia firma all'interno del tuo sito, in piccolo, in basso, così che chi guarda il sito, se gli capita di scorrere fino in fondo, possa vedere chi l'ha realizzato e il mio portfolio.
+                    </FieldLabel>
+                    <ChoiceField
+                      options={REVIEW_OPTIONS}
+                      value={form.websiteCredit}
+                      onChange={(v) => set('websiteCredit', v)}
                     />
                   </div>
                 </div>
