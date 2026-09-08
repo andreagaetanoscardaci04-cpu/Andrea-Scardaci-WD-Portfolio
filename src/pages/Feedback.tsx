@@ -19,6 +19,11 @@ const REVIEW_OPTIONS = [
   { value: 'no', label: 'Preferisco di no' },
 ];
 
+const WEBSITE_CREDIT_OPTIONS = [
+  { value: 'si', label: 'Va bene' },
+  { value: 'no', label: 'Preferisco di no' },
+];
+
 const NEEDS_HELP_OPTIONS = [
   { value: 'si_adesso', label: 'Sì, adesso' },
   { value: 'piu_avanti', label: 'Non adesso ma più avanti' },
@@ -274,7 +279,7 @@ const Feedback: React.FC = () => {
         'Nuovi contatti dal sito': label(NEW_CONTACTS_OPTIONS, form.newContacts),
         'Cosa è piaciuto di più': form.liked || '—',
         'Cosa avrei potuto fare meglio': form.improve || '—',
-        'Ok firma/credit in fondo al sito': label(REVIEW_OPTIONS, form.websiteCredit),
+        'Ok firma/credit in fondo al sito': label(WEBSITE_CREDIT_OPTIONS, form.websiteCredit),
         'Disponibile a recensione pubblica': label(REVIEW_OPTIONS, form.wantsReview),
         'Bisogno di assistenza': label(NEEDS_HELP_OPTIONS, form.needsHelp),
         'Quando (se più avanti)': form.needsHelp === 'piu_avanti' ? label(WHEN_OPTIONS, form.whenLater) : '—',
@@ -388,16 +393,6 @@ const Feedback: React.FC = () => {
                       value={form.improve}
                       onChange={(v) => set('improve', v)}
                       placeholder="Facoltativo"
-                    />
-                  </div>
-                  <div>
-                    <FieldLabel>
-                      Sto considerando di inserire la mia firma all'interno del tuo sito, in piccolo, in basso, così che chi guarda il sito, se gli capita di scorrere fino in fondo, possa vedere chi l'ha realizzato e il mio portfolio.
-                    </FieldLabel>
-                    <ChoiceField
-                      options={REVIEW_OPTIONS}
-                      value={form.websiteCredit}
-                      onChange={(v) => set('websiteCredit', v)}
                     />
                   </div>
                 </div>
@@ -528,6 +523,14 @@ const Feedback: React.FC = () => {
                       />
                     </motion.div>
                   )}
+                  <div>
+                    <FieldLabel>Posso mettere una piccola firma in fondo al tuo sito, con link al mio portfolio?</FieldLabel>
+                    <ChoiceField
+                      options={WEBSITE_CREDIT_OPTIONS}
+                      value={form.websiteCredit}
+                      onChange={(v) => set('websiteCredit', v)}
+                    />
+                  </div>
                 </div>
               </div>
 
