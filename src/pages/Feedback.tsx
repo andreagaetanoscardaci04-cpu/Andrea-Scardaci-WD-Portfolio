@@ -60,6 +60,7 @@ type FormState = {
   addSomething: string;
   knowsOthers: string;
   referralDetails: string;
+  affiliateEmail: string;
 };
 
 const INITIAL_STATE: FormState = {
@@ -76,6 +77,7 @@ const INITIAL_STATE: FormState = {
   addSomething: '',
   knowsOthers: '',
   referralDetails: '',
+  affiliateEmail: '',
 };
 
 const label = (options: { value: string; label: string }[], value: string) =>
@@ -279,6 +281,7 @@ const Feedback: React.FC = () => {
         'Altro da aggiungere': form.addSomething || '—',
         'Conosce altri titolari da segnalare': label(REFERRAL_OPTIONS, form.knowsOthers),
         'Dettagli segnalazione': form.knowsOthers === 'si' ? form.referralDetails || '—' : '—',
+        'Email per info programma affiliati': form.knowsOthers === 'non_al_momento' ? form.affiliateEmail || '—' : '—',
       };
       const res = await fetch(ENDPOINT, {
         method: 'POST',
@@ -421,7 +424,15 @@ const Feedback: React.FC = () => {
                     <ChoiceField
                       options={NEEDS_HELP_OPTIONS}
                       value={form.needsHelp}
-                      onChange={(v) => set('needsHelp', v)}
+                      onChange={(v) =>
+                        setForm((f) => ({
+                          ...f,
+                          needsHelp: v,
+                          whenLater: v === 'piu_avanti' ? f.whenLater : '',
+                          helpTopics: v === 'si_adesso' || v === 'piu_avanti' ? f.helpTopics : [],
+                          addSomething: v === 'si_adesso' || v === 'piu_avanti' ? f.addSomething : '',
+                        }))
+                      }
                     />
                   </div>
                   {form.needsHelp === 'piu_avanti' && (
@@ -434,22 +445,26 @@ const Feedback: React.FC = () => {
                       />
                     </motion.div>
                   )}
-                  <div>
-                    <FieldLabel>Su cosa potrebbe servirti una mano?</FieldLabel>
-                    <MultiChoiceField
-                      options={HELP_TOPICS}
-                      values={form.helpTopics}
-                      onToggle={toggleHelpTopic}
-                    />
-                  </div>
-                  <div>
-                    <FieldLabel>Vuoi aggiungere qualcosa?</FieldLabel>
-                    <TextField
-                      value={form.addSomething}
-                      onChange={(v) => set('addSomething', v)}
-                      placeholder="Facoltativo"
-                    />
-                  </div>
+                  {(form.needsHelp === 'si_adesso' || form.needsHelp === 'piu_avanti') && (
+                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+                      <FieldLabel>Su cosa potrebbe servirti una mano?</FieldLabel>
+                      <MultiChoiceField
+                        options={HELP_TOPICS}
+                        values={form.helpTopics}
+                        onToggle={toggleHelpTopic}
+                      />
+                    </motion.div>
+                  )}
+                  {(form.needsHelp === 'si_adesso' || form.needsHelp === 'piu_avanti') && (
+                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+                      <FieldLabel>Vuoi aggiungere qualcosa?</FieldLabel>
+                      <TextField
+                        value={form.addSomething}
+                        onChange={(v) => set('addSomething', v)}
+                        placeholder="Facoltativo"
+                      />
+                    </motion.div>
+                  )}
                 </div>
               </div>
 
@@ -466,7 +481,14 @@ const Feedback: React.FC = () => {
                     <ChoiceField
                       options={REFERRAL_OPTIONS}
                       value={form.knowsOthers}
-                      onChange={(v) => set('knowsOthers', v)}
+                      onChange={(v) =>
+                        setForm((f) => ({
+                          ...f,
+                          knowsOthers: v,
+                          referralDetails: v === 'si' ? f.referralDetails : '',
+                          affiliateEmail: v === 'non_al_momento' ? f.affiliateEmail : '',
+                        }))
+                      }
                     />
                   </div>
                   {form.knowsOthers === 'si' && (
@@ -479,6 +501,20 @@ const Feedback: React.FC = () => {
                       />
                     </motion.div>
                   )}
+                  {form.knowsOthers === 'non_al_momento' && (
+                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+                      <FieldLabel>
+                        Vuoi avere più informazioni sul programma affiliati, anche se non hai contatti al momento? Inserisci qui la tua email: ti invierò più informazioni, che potrai usare in futuro se avrai dei contatti che hanno bisogno o cercavano un sito web.
+                      </FieldLabel>
+                      <input
+                        type="email"
+                        value={form.affiliateEmail}
+                        onChange={(e) => set('affiliateEmail', e.target.value)}
+                        placeholder="La tua email (facoltativo)"
+                        className="w-full px-4 py-3.5 text-sm rounded-xl bg-brand-paper border border-transparent focus:bg-white focus:border-[var(--fb-accent)] focus:ring-0 transition-all"
+                      />
+                    </motion.div>
+                  )}
                 </div>
               </div>
 
@@ -487,10 +523,10 @@ const Feedback: React.FC = () => {
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full bg-brand-dark text-white py-4 rounded-xl font-medium text-base hover:bg-[var(--fb-accent)] hover:text-brand-dark transition-all shadow-xl shadow-brand-dark/10 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full bg-brand-dark text-white py-6 rounded-xl font-bold text-lg uppercase tracking-wide hover:bg-[var(--fb-accent)] hover:text-brand-dark transition-all shadow-xl shadow-brand-dark/10 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {sending ? 'Invio in corso...' : 'Invia risposte'}
-                {!sending && <Send className="w-4 h-4" />}
+                {!sending && <Send className="w-5 h-5" />}
               </button>
             </form>
           )}
