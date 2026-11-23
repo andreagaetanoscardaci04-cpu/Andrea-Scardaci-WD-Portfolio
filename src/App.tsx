@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import Supporto from './pages/Supporto';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Feedback from './pages/Feedback';
+import Newsletter from './pages/Newsletter';
 
 // On a real page change, land instantly in the right spot (top, or the target
 // section if the URL has a hash) — no visible scroll animation "through" the
@@ -59,6 +60,7 @@ const AppShell = () => {
             <Route path="/contatti" element={<Contact />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/feedback" element={<Feedback />} />
+            <Route path="/newsletter" element={<Newsletter />} />
           </Routes>
         </main>
         {!isStandalone && <Footer />}

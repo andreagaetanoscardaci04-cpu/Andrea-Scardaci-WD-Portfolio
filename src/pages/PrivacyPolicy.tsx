@@ -75,7 +75,7 @@ const PrivacyPolicy = () => {
               <div>
                 <h3 className="text-lg font-bold text-white mb-2">Quali dati raccogliamo</h3>
                 <p>
-                  Questo sito non richiede registrazione né raccoglie dati personali durante la normale navigazione. Alcuni dati personali vengono raccolti solo quando compili volontariamente il modulo di contatto o di richiesta informazioni, in particolare: nome, nome dell'attività, indirizzo email e il contenuto del messaggio inviato.
+                  Questo sito non richiede registrazione né raccoglie dati personali durante la normale navigazione. Alcuni dati personali vengono raccolti solo quando compili volontariamente il modulo di contatto o di richiesta informazioni, in particolare: nome, nome dell'attività, indirizzo email e il contenuto del messaggio inviato, oppure quando ti iscrivi alla newsletter (solo indirizzo email).
                 </p>
               </div>
 
@@ -104,6 +104,13 @@ const PrivacyPolicy = () => {
                 <h3 className="text-lg font-bold text-white mb-2">Comunicazione dei dati a terzi</h3>
                 <p>
                   Il modulo di contatto del sito è gestito attraverso il servizio EmailJS, utilizzato esclusivamente per l'invio tecnico delle email e che agisce in qualità di responsabile del trattamento. I dati non vengono venduti, ceduti o comunicati a terzi per finalità commerciali o di marketing.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-bold text-white mb-2">Newsletter</h3>
+                <p>
+                  Se ti iscrivi alla newsletter, raccogliamo il tuo indirizzo email per inviarti periodicamente contenuti informativi e promozionali sui servizi offerti. Il trattamento si basa sul tuo consenso (art. 6.1.a GDPR), confermato tramite un link inviato via email (doppio opt-in). L'invio è gestito tramite Brevo (Sendinblue SAS, Francia), che agisce in qualità di responsabile del trattamento e conserva i dati nell'Unione Europea. Puoi revocare il consenso in qualsiasi momento tramite il link di disiscrizione presente in ogni email: il tuo indirizzo verrà rimosso dalla lista.
                 </p>
               </div>
 

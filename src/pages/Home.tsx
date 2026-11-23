@@ -7,6 +7,7 @@ import PortfolioTile from '../components/PortfolioTile';
 import BenefitsStepper from '../components/BenefitsStepper';
 import { GoogleListingCompare, SeoRankingGraphic, PerceivedValueGraphic, CompetitorReactionCompare, PerformanceMetricsCompare, BrandImageCompare } from '../components/ReasonGraphics';
 import HeroBackground from '../components/HeroBackground';
+import NewsletterSignup from '../components/NewsletterSignup';
 import { useContactModal } from '../context/ContactModalContext';
 
 /** Glossy sphere-and-ring icon medallion — a Saturn-like signature detail. */
@@ -584,6 +585,28 @@ const Home = () => {
               Ottienila ora
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
             </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── NEWSLETTER ─────── */}
+      <section data-animated-bg-region className="section-padding text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+        <div className="container-custom relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            className="max-w-2xl mx-auto text-center"
+          >
+            <span className="eyebrow mb-5 block">Newsletter</span>
+            <h2 className="font-luxury text-3xl sm:text-4xl md:text-5xl leading-[1.15] mb-5 text-white">
+              Non sei ancora pronto? <span className="italic text-brand-accent">Restiamo in contatto</span>.
+            </h2>
+            <p className="text-white/50 text-lg leading-relaxed font-light mb-10">
+              Un consiglio pratico al mese per portare più clienti alla tua palestra grazie al web. Niente spam.
+            </p>
+            <NewsletterSignup compact />
           </motion.div>
         </div>
       </section>

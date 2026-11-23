@@ -3,6 +3,7 @@ import express from 'express';
 import nodemailer from 'nodemailer';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { POST as newsletterSignup } from './api/newsletter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -45,6 +46,18 @@ app.post('/api/send-email', async (req, res) => {
     console.error('send-email failed:', err);
     res.status(500).json({ error: 'Invio email fallito.' });
   }
+});
+
+app.post('/api/newsletter', async (req, res) => {
+  // Reuse the Vercel Function handler so local dev and production behave the same.
+  const response = await newsletterSignup(
+    new Request('http://localhost/api/newsletter', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(req.body ?? {}),
+    }),
+  );
+  res.status(response.status).type('application/json').send(await response.text());
 });
 
 if (process.env.NODE_ENV === 'production') {
