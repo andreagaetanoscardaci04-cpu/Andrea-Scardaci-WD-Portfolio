@@ -1,64 +1,30 @@
 import 'dotenv/config';
 import express from 'express';
-import nodemailer from 'nodemailer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { POST as newsletterSignup } from './api/newsletter';
+import { POST as sendEmail } from './api/send-email';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 app.use(express.json());
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-});
+// Both API routes reuse the Vercel Function handlers so local dev and production behave the same.
+const forward = (handler: (req: Request) => Promise<Response>, url: string) =>
+  async (req: express.Request, res: express.Response) => {
+    const response = await handler(
+      new Request(`http://localhost${url}`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(req.body ?? {}),
+      }),
+    );
+    res.status(response.status).type('application/json').send(await response.text());
+  };
 
-app.post('/api/send-email', async (req, res) => {
-  const { name, email, businessName, businessType, message, source } = req.body ?? {};
-
-  if (!name || !email) {
-    res.status(400).json({ error: 'Nome ed email sono obbligatori.' });
-    return;
-  }
-
-  try {
-    await transporter.sendMail({
-      from: `"${name}" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER,
-      replyTo: email,
-      subject: `Nuova richiesta dal sito${businessType ? ` — ${businessType}` : ''}`,
-      text: [
-        `Nome: ${name}`,
-        `Email: ${email}`,
-        businessName ? `Attività: ${businessName}` : null,
-        businessType ? `Tipo attività: ${businessType}` : null,
-        source ? `Origine: ${source}` : null,
-        message ? `\nMessaggio:\n${message}` : null,
-      ].filter(Boolean).join('\n'),
-    });
-    res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error('send-email failed:', err);
-    res.status(500).json({ error: 'Invio email fallito.' });
-  }
-});
-
-app.post('/api/newsletter', async (req, res) => {
-  // Reuse the Vercel Function handler so local dev and production behave the same.
-  const response = await newsletterSignup(
-    new Request('http://localhost/api/newsletter', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(req.body ?? {}),
-    }),
-  );
-  res.status(response.status).type('application/json').send(await response.text());
-});
+app.post('/api/send-email', forward(sendEmail, '/api/send-email'));
+app.post('/api/newsletter', forward(newsletterSignup, '/api/newsletter'));
 
 if (process.env.NODE_ENV === 'production') {
   const distDir = path.resolve(__dirname, 'dist');

@@ -553,7 +553,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ── PREVIEW GRATUITA (big standalone CTA) ─────── */}
+      {/* ── PREVENTIVO GRATUITO (big standalone CTA) ─────── */}
       <section data-animated-bg-region className="section-padding text-white relative overflow-hidden">
         {/* Slightly darkens the shared background (kept lighter in the hero) for text contrast */}
         <div className="absolute inset-0 bg-black/40 pointer-events-none" />
@@ -568,21 +568,21 @@ const Home = () => {
             className="relative max-w-3xl mx-auto text-center rounded-[2.5rem] border border-brand-accent/25 bg-brand-accent/[0.06] px-8 py-16 sm:px-16 sm:py-20"
             style={{ boxShadow: '0 40px 100px -30px rgba(34,197,94,0.25)' }}
           >
-            <span className="eyebrow mb-5 block">Prova senza impegno</span>
+            <span className="eyebrow mb-5 block">Senza impegno</span>
             <h2 className="font-luxury text-4xl sm:text-5xl md:text-6xl leading-[1.15] mb-6 text-white">
-              Ottieni la tua <span className="italic text-brand-accent">preview gratuita</span>.
+              Richiedi un <span className="italic text-brand-accent">preventivo gratuito</span>.
             </h2>
             <p className="text-white/50 text-lg leading-relaxed font-light max-w-xl mx-auto mb-10">
-              Ti mostro in anteprima un sito pensato per la tua attività, così vedi con i tuoi occhi come potrebbe diventare. Nessun impegno, nessun costo: né tu né la tua palestra dovete nulla in anticipo.
+              Raccontami la tua attività e cosa ti serve: ti rispondo entro 48 ore con un preventivo chiaro, senza sorprese e senza alcun obbligo.
             </p>
             <button
               type="button"
-              onClick={() => openModal('preview-gratuita')}
+              onClick={() => openModal('preventivo-gratuito')}
               className="group relative inline-flex items-center gap-3 bg-brand-accent text-white px-10 py-5 rounded-full font-medium text-base overflow-hidden"
               style={{ boxShadow: '0 0 30px rgba(34,197,94,0.35), 0 4px 15px rgba(34,197,94,0.2)' }}
             >
               <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300" />
-              Ottienila ora
+              Richiedi il preventivo
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
             </button>
           </motion.div>
@@ -599,14 +599,21 @@ const Home = () => {
             viewport={{ once: true, amount: 0.4 }}
             className="max-w-2xl mx-auto text-center"
           >
-            <span className="eyebrow mb-5 block">Newsletter</span>
+            <span className="eyebrow mb-5 block">Anteprime gratuite · posti limitati</span>
             <h2 className="font-luxury text-3xl sm:text-4xl md:text-5xl leading-[1.15] mb-5 text-white">
-              Non sei ancora pronto? <span className="italic text-brand-accent">Restiamo in contatto</span>.
+              Non sei ancora pronto? <span className="italic text-brand-accent">Vedi il tuo sito gratis</span>.
             </h2>
             <p className="text-white/50 text-lg leading-relaxed font-light mb-10">
-              Un consiglio pratico al mese per portare più clienti alla tua palestra grazie al web. Niente spam.
+              Solo in alcuni periodi dell'anno realizzo gratuitamente l'anteprima del sito per la tua attività: la vedi, la valuti e decidi solo dopo se andare avanti. Iscriviti e sarai tra i primi a sapere quando apre la prossima finestra.
             </p>
             <NewsletterSignup compact />
+            <Link
+              to="/anteprima-gratuita"
+              className="group mt-8 inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+            >
+              Come funzionano le anteprime gratuite
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </motion.div>
         </div>
       </section>

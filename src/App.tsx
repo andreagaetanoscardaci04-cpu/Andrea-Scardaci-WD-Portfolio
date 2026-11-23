@@ -38,12 +38,14 @@ const ScrollToTop = () => {
   return null;
 };
 
-// The feedback page is a hidden, link-only questionnaire — it skips the
-// marketing Navbar/Footer entirely so it reads as a standalone form, not a
-// page of the main site.
+// Link-only pages (the hidden feedback questionnaire and the free-preview
+// landing page sent to leads) skip the marketing Navbar/Footer so they read
+// as standalone pages, not pages of the main site.
+const STANDALONE_PATHS = ['/feedback', '/anteprima-gratuita', '/newsletter'];
+
 const AppShell = () => {
   const { pathname } = useLocation();
-  const isStandalone = pathname === '/feedback';
+  const isStandalone = STANDALONE_PATHS.includes(pathname);
 
   return (
     <>
@@ -60,6 +62,7 @@ const AppShell = () => {
             <Route path="/contatti" element={<Contact />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/feedback" element={<Feedback />} />
+            <Route path="/anteprima-gratuita" element={<Newsletter />} />
             <Route path="/newsletter" element={<Newsletter />} />
           </Routes>
         </main>

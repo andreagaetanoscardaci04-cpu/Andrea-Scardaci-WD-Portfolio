@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, MailCheck } from 'lucide-react';
@@ -7,7 +7,8 @@ type Status = 'idle' | 'sending' | 'done' | 'error';
 
 // Email signup form for the Brevo newsletter (POST /api/newsletter).
 // Brevo then sends a confirmation email (double opt-in).
-const NewsletterSignup = ({ compact = false }: { compact?: boolean }) => {
+const NewsletterSignup = ({ compact = false, cta = 'Iscriviti' }: { compact?: boolean; cta?: string }) => {
+  const inputId = useId(); // unique per form, so the page can show more than one
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState(''); // honeypot
   const [status, setStatus] = useState<Status>('idle');
@@ -55,9 +56,9 @@ const NewsletterSignup = ({ compact = false }: { compact?: boolean }) => {
   return (
     <form onSubmit={handleSubmit} className={`w-full ${compact ? 'max-w-lg' : 'max-w-xl'} mx-auto`}>
       <div className="flex flex-col sm:flex-row gap-3">
-        <label htmlFor="newsletter-email" className="sr-only">Indirizzo email</label>
+        <label htmlFor={inputId} className="sr-only">Indirizzo email</label>
         <input
-          id="newsletter-email"
+          id={inputId}
           type="email"
           required
           autoComplete="email"
@@ -83,7 +84,7 @@ const NewsletterSignup = ({ compact = false }: { compact?: boolean }) => {
           className="group inline-flex items-center justify-center gap-2 bg-brand-accent text-white px-8 py-4 rounded-full font-medium disabled:opacity-60 transition-opacity"
           style={{ boxShadow: '0 0 24px rgba(34,197,94,0.3)' }}
         >
-          {status === 'sending' ? 'Invio…' : 'Iscriviti'}
+          {status === 'sending' ? 'Invio…' : cta}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
